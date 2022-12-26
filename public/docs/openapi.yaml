@@ -1,0 +1,1372 @@
+openapi: 3.0.3
+info:
+  title: YUJ
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8000'
+paths:
+  /api/v1/user/login:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: ''
+                  example: quos
+                device_id:
+                  type: string
+                  description: ''
+                  example: delectus
+              required:
+                - token
+                - device_id
+      security: []
+  /api/v1/employer/login:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: ''
+                  example: sunt
+                device_id:
+                  type: string
+                  description: ''
+                  example: omnis
+              required:
+                - token
+                - device_id
+      security: []
+  /api/v1/metadata:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  educations:
+                    -
+                      id: 1
+                      name: 'B.sc I.T'
+                      status: active
+                      created_at: '2022-06-30T09:31:13.000000Z'
+                      updated_at: '2022-07-04T04:59:14.000000Z'
+                    -
+                      id: 2
+                      name: B.A
+                      status: active
+                      created_at: '2022-07-26T10:11:24.000000Z'
+                      updated_at: '2022-07-26T10:11:24.000000Z'
+                  experiences:
+                    -
+                      id: 2
+                      name: '2 Yr.'
+                      value: 2
+                      status: active
+                      created_at: '2022-06-30T09:07:27.000000Z'
+                      updated_at: '2022-07-01T08:42:54.000000Z'
+                  industries:
+                    -
+                      id: 3
+                      name: Test
+                      status: active
+                      created_at: '2022-07-01T07:14:49.000000Z'
+                      updated_at: '2022-07-01T07:14:49.000000Z'
+                    -
+                      id: 4
+                      name: Test2
+                      status: active
+                      created_at: '2022-07-01T07:39:32.000000Z'
+                      updated_at: '2022-07-01T07:43:09.000000Z'
+                    -
+                      id: 6
+                      name: helo
+                      status: active
+                      created_at: '2022-07-01T11:20:46.000000Z'
+                      updated_at: '2022-07-01T11:20:46.000000Z'
+                    -
+                      id: 7
+                      name: Hello
+                      status: active
+                      created_at: '2022-07-01T11:21:42.000000Z'
+                      updated_at: '2022-07-01T11:21:42.000000Z'
+                  salary_brackets:
+                    -
+                      id: 2
+                      name: '10000 - 15000'
+                      min_salary: 10000
+                      max_salary: 15000
+                      status: active
+                      created_at: '2022-07-04T04:39:27.000000Z'
+                      updated_at: '2022-07-04T04:39:27.000000Z'
+                  skill_types:
+                    -
+                      id: 1
+                      name: IT
+                      status: active
+                      created_at: '2022-06-30T09:16:15.000000Z'
+                      updated_at: '2022-06-30T09:16:15.000000Z'
+                    -
+                      id: 2
+                      name: Chemicals
+                      status: active
+                      created_at: '2022-07-06T05:35:32.000000Z'
+                      updated_at: '2022-07-27T10:48:51.000000Z'
+                    -
+                      id: 3
+                      name: HR
+                      status: active
+                      created_at: '2022-07-27T10:49:01.000000Z'
+                      updated_at: '2022-07-27T10:49:01.000000Z'
+                  document_types:
+                    -
+                      id: 1
+                      name: Aadhar
+                      description: null
+                      status: active
+                      created_at: '2022-07-06T07:00:21.000000Z'
+                      updated_at: null
+                    -
+                      id: 2
+                      name: Pan
+                      description: null
+                      status: active
+                      created_at: '2022-07-06T07:00:21.000000Z'
+                      updated_at: null
+                properties:
+                  educations:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'B.sc I.T'
+                        status: active
+                        created_at: '2022-06-30T09:31:13.000000Z'
+                        updated_at: '2022-07-04T04:59:14.000000Z'
+                      -
+                        id: 2
+                        name: B.A
+                        status: active
+                        created_at: '2022-07-26T10:11:24.000000Z'
+                        updated_at: '2022-07-26T10:11:24.000000Z'
+                    items:
+                      type: object
+                  experiences:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        name: '2 Yr.'
+                        value: 2
+                        status: active
+                        created_at: '2022-06-30T09:07:27.000000Z'
+                        updated_at: '2022-07-01T08:42:54.000000Z'
+                    items:
+                      type: object
+                  industries:
+                    type: array
+                    example:
+                      -
+                        id: 3
+                        name: Test
+                        status: active
+                        created_at: '2022-07-01T07:14:49.000000Z'
+                        updated_at: '2022-07-01T07:14:49.000000Z'
+                      -
+                        id: 4
+                        name: Test2
+                        status: active
+                        created_at: '2022-07-01T07:39:32.000000Z'
+                        updated_at: '2022-07-01T07:43:09.000000Z'
+                      -
+                        id: 6
+                        name: helo
+                        status: active
+                        created_at: '2022-07-01T11:20:46.000000Z'
+                        updated_at: '2022-07-01T11:20:46.000000Z'
+                      -
+                        id: 7
+                        name: Hello
+                        status: active
+                        created_at: '2022-07-01T11:21:42.000000Z'
+                        updated_at: '2022-07-01T11:21:42.000000Z'
+                    items:
+                      type: object
+                  salary_brackets:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        name: '10000 - 15000'
+                        min_salary: 10000
+                        max_salary: 15000
+                        status: active
+                        created_at: '2022-07-04T04:39:27.000000Z'
+                        updated_at: '2022-07-04T04:39:27.000000Z'
+                    items:
+                      type: object
+                  skill_types:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: IT
+                        status: active
+                        created_at: '2022-06-30T09:16:15.000000Z'
+                        updated_at: '2022-06-30T09:16:15.000000Z'
+                      -
+                        id: 2
+                        name: Chemicals
+                        status: active
+                        created_at: '2022-07-06T05:35:32.000000Z'
+                        updated_at: '2022-07-27T10:48:51.000000Z'
+                      -
+                        id: 3
+                        name: HR
+                        status: active
+                        created_at: '2022-07-27T10:49:01.000000Z'
+                        updated_at: '2022-07-27T10:49:01.000000Z'
+                    items:
+                      type: object
+                  document_types:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: Aadhar
+                        description: null
+                        status: active
+                        created_at: '2022-07-06T07:00:21.000000Z'
+                        updated_at: null
+                      -
+                        id: 2
+                        name: Pan
+                        description: null
+                        status: active
+                        created_at: '2022-07-06T07:00:21.000000Z'
+                        updated_at: null
+                    items:
+                      type: object
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/metadata/state:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  states:
+                    -
+                      id: 1
+                      name: Maharashtra
+                      status: active
+                      created_at: '2022-07-06T04:29:06.000000Z'
+                      updated_at: '2022-07-06T04:29:06.000000Z'
+                properties:
+                  states:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: Maharashtra
+                        status: active
+                        created_at: '2022-07-06T04:29:06.000000Z'
+                        updated_at: '2022-07-06T04:29:06.000000Z'
+                    items:
+                      type: object
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/metadata/district:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/metadata/city:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/v1/metadata/locations/{q}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  city: []
+                  district: []
+                  state: []
+                properties:
+                  city:
+                    type: array
+                    example: []
+                  district:
+                    type: array
+                    example: []
+                  state:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: q
+        description: ''
+        example: in
+        required: true
+        schema:
+          type: string
+  /api/v1/extra:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  about_us: '<ol><li><strong>Vitae magni ea itaqu.</strong></li></ol>'
+                  contact_us: 'Dolore adipisci veli'
+                  twitter_link: 'Nisi nisi deserunt r'
+                  facebook_link: 'Temporibus blanditii'
+                  instagram_link: 'Ut vel ut eum sint c'
+                  id: 1
+                  android_version: 2
+                  ios_version: 1
+                  android_force_update: active
+                  ios_force_update: active
+                  maintenance: inactive
+                  created_at: '2022-07-29T05:03:35.000000Z'
+                  updated_at: '2022-07-29T05:04:47.000000Z'
+                properties:
+                  about_us:
+                    type: string
+                    example: '<ol><li><strong>Vitae magni ea itaqu.</strong></li></ol>'
+                  contact_us:
+                    type: string
+                    example: 'Dolore adipisci veli'
+                  twitter_link:
+                    type: string
+                    example: 'Nisi nisi deserunt r'
+                  facebook_link:
+                    type: string
+                    example: 'Temporibus blanditii'
+                  instagram_link:
+                    type: string
+                    example: 'Ut vel ut eum sint c'
+                  id:
+                    type: integer
+                    example: 1
+                  android_version:
+                    type: integer
+                    example: 2
+                  ios_version:
+                    type: integer
+                    example: 1
+                  android_force_update:
+                    type: string
+                    example: active
+                  ios_force_update:
+                    type: string
+                    example: active
+                  maintenance:
+                    type: string
+                    example: inactive
+                  created_at:
+                    type: string
+                    example: '2022-07-29T05:03:35.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2022-07-29T05:04:47.000000Z'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user/update:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: oqjmjnddwwxbweprrdkkcuzkrrumncalnryndvhvtrhtdktwjyisrrphypcxzigjnpfpysdfddycs
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jrgcnvhyjetquehginqtmmvkmfbnqeafiznyziwzngswkopwubzsebunpvuxejspolnexslgfeydqjtndtkerjbihlrqqibxccxeynvtznxfchmakuuntgmxogaoypjaiiqmibnxbtuutdmmxuvvdroaaesdbpmcvzntjzdgelrrshmondkgeceapsogvamqdwawnotbomdmkljnxzcmxhpwcgyplilbtvavkr
+                email:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: lowkoozaslgmlpvo
+                disability:
+                  type: string
+                  description: ''
+                  example: null
+                image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                current_ctc:
+                  type: number
+                  description: ''
+                  example: 688422.170183
+                gender:
+                  type: string
+                  description: 'Must be one of <code>male</code>, <code>female</code>, or <code>other</code>.'
+                  example: female
+                education:
+                  type: array
+                  description: ''
+                  example:
+                    - sunt
+                  items:
+                    type: string
+                experience:
+                  type: array
+                  description: ''
+                  example:
+                    - sunt
+                  items:
+                    type: string
+                skill_type:
+                  type: array
+                  description: ''
+                  example:
+                    - ut
+                  items:
+                    type: string
+                industry:
+                  type: array
+                  description: ''
+                  example:
+                    - consequuntur
+                  items:
+                    type: string
+                salary_bracket:
+                  type: array
+                  description: ''
+                  example:
+                    - totam
+                  items:
+                    type: string
+                address:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      city:
+                        type: string
+                        description: ''
+                        example: quia
+                      district:
+                        type: string
+                        description: ''
+                        example: asperiores
+                      state:
+                        type: string
+                        description: ''
+                        example: repudiandae
+                      street:
+                        type: string
+                        description: 'Must not be greater than 250 characters.'
+                        example: aqdqkrzkigatdyadqqidcmgsbtdzhimdpnyvbsegwjxijpqehosnryolklsipbjmcbqnczrzbvpgbasxboafwomcvxitsbrslzpfvgrskerjtfwkisigtbgdpdadqldrvlqnwqiuqmxhaflaitckycrlzqvyoxcqmfrxudrgqtikwitsnvemdtqrhz
+                      type:
+                        type: string
+                        description: 'Must be one of <code>corresponding</code>, <code>permanent</code>, or <code>other</code>.'
+                        example: permanent
+                    required:
+                      - city
+                      - district
+                      - state
+              required:
+                - first_name
+                - last_name
+                - email
+                - education
+                - experience
+                - skill_type
+                - industry
+                - salary_bracket
+      security: []
+  /api/v1/user/jobs:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user/jobs/apply:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job:
+                  type: string
+                  description: ''
+                  example: voluptatum
+              required:
+                - job
+      security: []
+  /api/v1/user/jobs/list:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/v1/user/jobs/like/{id}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the like.'
+        example: repellat
+        required: true
+        schema:
+          type: string
+  /api/v1/user/jobs/like:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user/jobs/filtered:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/employer/initial-update:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: laboriosam
+                email:
+                  type: string
+                  description: ''
+                  example: null
+                document:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      document_type:
+                        type: integer
+                        description: ''
+                        example: 3
+                      document_number:
+                        type: string
+                        description: ''
+                        example: optio
+                      images:
+                        type: array
+                        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                        items:
+                          type: string
+                          format: binary
+                    required:
+                      - document_type
+                      - document_number
+                      - images
+                state:
+                  type: string
+                  description: ''
+                  example: deleniti
+                district:
+                  type: string
+                  description: ''
+                  example: quos
+                city:
+                  type: string
+                  description: ''
+                  example: cum
+                company_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: txtwitqtenxpyjyinkfctjpcigqwurmorbwcybybryokvkcffbyuohkcjvvptkywdjjwbhzzjgueirwrjqqptgatiujhbcxbmozksffeajdpxpsuwkynfeuqdsvptonrxglvdpsgbpwtnzxvllrvymtybycuwbdwmhmkncronidfzrvtdbzluubodirzbisrbgotsxfaywaaevyqulqpoqgxohtxmiclutkddfovfeluthzjjadxpsvuovy
+                strength:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: yurvkbtqmiokmmycgtpleararswuwpkkttwyiswsahpernwtsftujkwwmzqjgnurgiaxlokgyytpgslqavddeiyfcenjspxvwutitdjgmbnufcsrtdvmiyclnunljprjspdmlylvelhkwiemgbauwvykmoqaaelobwgudjwaehmqvddeopuvl
+              required:
+                - name
+                - state
+                - district
+                - city
+                - company_name
+                - strength
+      security: []
+  /api/v1/employer:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/employer/employees:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/employer/jobs:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/employer/jobs/create:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 1000 characters.'
+                  example: gsdzhfnbwkqpetxdzdqagvmiekhxkqazkmwebffpmjqyllyqlehqbxncuoflbnkogivodqsgxzorqbpmugyenjvhkamsgzprfqtefegcewgmbxdytjucogjgdrafobsbutlgsikbphyuwholbxucrxevmxdviprjjpbfgveerxcmwphwtxoaoebvvqochqnxqyepktdyxatqbsavdyvlnrxlkaiqrtnazpyqkhgxapktxjpztrprhlbekftinlpdobrwpguzflwqkzdctbpwhyrpubvozqcjpucstpnddrsmghfrojprrpizqoihyunmwptywpsaqzkorenxwiddgasolvpimiwiycddhdkvylqgivydybtbxeasvufwasmimvdvbdcyypbhmbfcekjquvfuadqbbgldhvitmcxptontbijiiykthpyckfqjuvkylmrujebamohozlojlijwlgoenhaarpqsocmfyhqlumvbyoccnqfhpsmiucpgfzypybjsgjlbqmmmldugomfvntyiynxsmoagnkybpbvztcrwhfjbqiowqcuzmvnpzgyinlfpolybyscsakgtsoqbbfwbmikhgwdxkwsktvmripmshgdehfzktfehrzrsmvorcoewhcsxgddsigbjjlombjcxwipjjrhtwhvmoxvuprplyqexviyxqdnduseohowdnuaphfuyngacuhkxdmafjafkaadekevnydtswtxbweenbmrufxuskyhoqdukieiuagkopfjlfnbyjkuufeecianibikxrnlibjjugpxymksvwnxxuigusxrszqghttvjyknmuubwtpqmqxfgzajcypbkylakugfpfapnfxsbmhtdphbfniihasdkxuykulaemkpqhdxmdooyauwluxenhnwvsmekdddoaoxoqhwidthdzxnaywcxoufbj
+                description:
+                  type: string
+                  description: 'Must not be greater than 3000 characters.'
+                  example: zyyeedhtzqyzejyvldxdfhumecjprchdlfhafrrndfhohfoztfwufmnuhnuidgxeiroowitkvhokybyhrmniahfrfgkopyvjijmpxawhkpjxgbwnliandoqvrjrzcacgrjxixggxqvoeicwohyjquzpdtgsprgqyjqvlejyulpudkgcrcydbydzkplyajxkmepvlagvivnvrttbgfuywtparepljbfwtlfsoyqgwoydzesyvtnlmxvjnswrqunuxzaidupovsumqqmfenlbkfusdzieoqciicvbmurnferozngrerbvdgadbaczeljbyufvrjllkpruzddklnspljacthyryjonyampoouprqnujkhfshvdtvtqzpeupdpwwaioznryzaxdtenrmguwzuopqlphedllhogsfkrnoqgfkieqfyndccxvsikcantwztxlgryphtczygjtqkvogrnrfnsvgakdzduwbcjluuqtnrstvfelaiytkozmppyvuplcrfxwoazdrdzcaxculvpdwroszothrovtqljilasmogjzzglbrfiiinqrozofaugmwzmwyqshspjesrizgytmsvlbbcttgesomyyyhcrxhvsuwcqtrywglqoodwhcaxbwsgwggwbnioibjrakjmnqhhamiwngnksisrxkfqqyvqbewlqvhvdltvegtbatqugfbgbvprqczxxsctfnhynnjrskcmoqajluccakgfilszbjcbpxfcerjogsravtenntqzdltzedlbcdtupzgowvojgbrnnpiijhxiekrhinpptmomultgnnjrqfdtnbnerlrcsocmnayfhlzjjgpiqfoxqqqwoefsnsrehmrrvqnamdkjtgtclyfllcdweuptskeswvefgdnbujxtkdmjsczirflzanegkkatiyljcikqbncwotgxstscjnhqfuqzgjjjdxwcozbmaqtfrpvidddoptwknozwvavlvyxkofogbwmwocdxyaqktadsqdaodxsolcvnooynalmnkajtjsnvobuljnyppdjfjkxdbcjukkuwcfoklebvjxnzofxvbrdexwwdadgvdinervmfwbluvjvczpcdtoeckdvqovvnrdjfdoxdklrolfxajnwgrkubxoqughfxenlokmocqhjthuvxndvybbxssesfkhzytpfmtxozerzqfscquveylwdhybphkjqxgakrlbcadumcwqqxhepeodxzzdfesiunypjhcdrjqhqnfqtufcbsoufmxavgffqltshgwjnssfnevidwegnagepqpvzidoykysxdfgvgkqvnoemmrffbyfvtxrwkqwvldfnvmojnbfhfltcxvqqswfnoszqohzjdtiekesgzhhkxuaqgrzczalqpwytvzeawcvhrjnnvzxjmllyvylbkypvmemjvlysjnaiehzmcjysbfpmmtmfrwhjzupgnmrnxahlizvibllsfhyrdugjguyxbfwkgsotheeciygbjszadhgiylsqothrrtepudwdlzebhvehquuiijcdxpxjpnljrswjhujpbzpjevejqqruojexrnfhsidnjsbxpddbllstnotlzarqyoeejeswgmwtvtvbidxirxglfimcsdbyhdwfllgaraxorwjomozawyadbwljuwzuiiqcjuewnezqxsobatkvaqyoqxtqhpatkvruaxvbcuhqkcqrakhmberffmdkkpsbongqwmjniwoavpjxoidgtznxelkgnsiexkqkwyfmeughxqyldnpsxussyqpaasdhscttaasxzmiyebezbhvsfmpilffqaqmubujttdvddxikfpvfujsicfymzmipewejztgivexgrttpgtorcrbbssegowniqevqhqmghaukjehrfwrqgmflvdweyiwasfxeoydfqliubnfvzyktipxtqonkafdnxmhpmtwzgfeahaksanfhbpxwvvqlhzynylvjpfdzprcimnfdrqatiwkjxhdkdcqsbvxhcjsdyrelskqasmvhaewsjclhvridtxvqvcvtwslybvgqidyfbulgxmkttjinrphnnsigrpdgznbljbfbrbpcbatdolutkhgxejxvtxopkuyukqgcofxqlvzsyprrjiypmojtfcbkarxpwieiamixqrkqivdfbaatojwwfdhgpebwaptyxhrvdhsecauaczddqwzeyfnnhhtxbsgwtpchvpvykzbgjvvthqcvfmejbzgwbsddbsmgklnztlpwdwrsplqxuqcplezjdygaduimpxoriqnbzpmvurouqwcqbjepqvxuxouldcevkihlpsptihxvycrwlbuyqnzaxxebjsqciqwzgoeboyavcfgaqbzaonqqedatsftrylcylnzqxjuqcyaghvkiozrhwcjjtznhovprffbgihgaexeoplcutsjiljyamldncjrpocsphzvgdfvbefawpysavzkkgmecbmhzbaucvzrzjurixfkjkiyazyhvojemfjuzczkajznhycwsdzuxofqptwnphgunvpsmcwaeihabdbxxsephvphhrudhrjjdddrsekacwkihhwavlergukeailucej
+                contact_person:
+                  type: string
+                  description: 'Must not be greater than 250 characters.'
+                  example: c
+                education:
+                  type: array
+                  description: ''
+                  example:
+                    - maxime
+                  items:
+                    type: string
+                experience:
+                  type: array
+                  description: ''
+                  example:
+                    - esse
+                  items:
+                    type: string
+                skill_type:
+                  type: array
+                  description: ''
+                  example:
+                    - dolores
+                  items:
+                    type: string
+                industry:
+                  type: array
+                  description: ''
+                  example:
+                    - ipsum
+                  items:
+                    type: string
+                salary_bracket:
+                  type: array
+                  description: ''
+                  example:
+                    - suscipit
+                  items:
+                    type: string
+                job_locations:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      city:
+                        type: string
+                        description: ''
+                        example: ut
+                      district:
+                        type: string
+                        description: ''
+                        example: sit
+                      state:
+                        type: string
+                        description: ''
+                        example: qui
+                      location:
+                        type: string
+                        description: 'Must not be greater than 250 characters.'
+                        example: fkxhj
+                      address:
+                        type: string
+                        description: 'Must not be greater than 2000 characters.'
+                        example: rfreztkbgwaoeudfgjhmmcbbcqoumkthbbbjypbcahnyeynjdnoeetjslmfvmjwiclhbhdiheyasrbtgmlvmqkthppncjehdvcswuzhxfxzupkbpyecuwpcpnuftuygjqfznlkabvchygfvjmycuadfgpbxhceotrxlppgpddjquaqmydmjsfqphwvmzqarkqpoojvivqjxuruuucxzmpwvpcvsjrfcxpwehoyuojujcwwnumaudyjdrgmbcfsqccmioqoxeuqxtugcvyejbzzzuttnmbqssczccimgsekdacdsyyqrkxcyaczpqsyqjgrlcgwmztsyuwusbwjsltpuwwzhgtwcmisqwyevsqszkwbofahxfrserbflxlrykpqvduxxizihmxewnfnmhtnlmspmnowooatfzcydayoqnfzulchufnjbbppjdrcrrjxosjsjbfljjziyfsbuffsixusitgyqakiumtwguokrszvjxvfljeoqqjzkhorwpmfqbmxzuvfzaspdagjhjvcjxwgdebxssvxctiehwgimefvdsulxgyyovzcnsjqxjozzdqykswzxitamjbmerxwoohrjplrrqqmrnsonlcoejzpluhrkqebazcjuymnypzvuvdidxkgzhuwljzppbjabuifxkstreaymbemlryxqjubhtusczbitmpxkzatutcunrvyupwzcchongxefftemafiqnzzwvztgvjlyfuzkouvpadvyzxtjqdsfarmwruujtfoqtwegtnhdgjhfbyvwekwsylndhxgoycodjpxhssahbmceevuzejwtbuejwfccdhbhnqzhiutlrgvosxohayyklrlgmychqvwgabuwqghufcmnljjzzppqrzbfqghbzfgjulswgnmdolssopsgilgcehbzirdjrdhfmxrjwduxgmaamfoftoxebtjltwiqxmcfabbkwkdxplqpunwbmjjcvaemecgclvikgbsgxyhzgkvggouqlzlhwvsmrprjyftejfpzywqtvxnehalrtoiiyopzdusspitbzqtrsaelcgrnoqikvjhvzbugamrselcqushtjaddfbbspskowbxdqgkzypdcfthmbxtbkmfkljwauxdqwsqqpmteujlafuqmeshjyahxhmfqhhvfguhbzvelafcipoxorjxxblggvoaiupgaxfgiaovbdhwvthqxsbwytglpodnquwmtxldwvhohuwvvkvejxciczpseqtngobujgnshsizpdqawqvyfhltdszmcqnntdayykqyflpuxuuzgolrqolmuabkzklxubgrgwbgcolbhhyoyalytdzr
+                    required:
+                      - city
+                      - district
+                      - state
+                      - location
+                      - address
+                job_highlights:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: 'Must not be greater than 250 characters.'
+                        example: tfnocyakhwenfowvzrgwnxcpwvlvxhaweaypeuqzzkk
+                      type:
+                        type: string
+                        description: 'Must not be greater than 250 characters.'
+                        example: jaqiuzslkziydbjuhhlwfnkinomjmcqxzmqtztrvjiigfnwbdupmcqtzdpnxxtjygtmicqexsxmfwgeimogpvtultcrgahuywhihuztbgpc
+                    required:
+                      - name
+              required:
+                - title
+                - description
+                - contact_person
+                - education
+                - experience
+                - skill_type
+                - industry
+                - salary_bracket
+      security: []
+  /api/v1/employer/jobs/applications:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: 'Must be one of <code>pending</code>, <code>accepted</code>, or <code>rejected</code>.'
+                  example: accepted
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 0
+      security: []
+  /api/v1/employer/jobs/application/action:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: 'Must be one of <code>accepted</code> or <code>rejected</code>.'
+                  example: accepted
+                application_id:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - status
+                - application_id
+      security: []
+  /api/v1/employer/jobs/employees:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_id:
+                  type: string
+                  description: ''
+                  example: expedita
+              required:
+                - job_id
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

@@ -1,0 +1,1145 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/127.0.0.1:8000"
+        }
+    ],
+    "info": {
+        "name": "YUJ",
+        "_postman_id": "de027d6a-d316-42ab-b784-c41bd4d2212e",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/v1\/user\/login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"token\":\"quos\",\"device_id\":\"delectus\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer\/login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"token\":\"sunt\",\"device_id\":\"omnis\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/metadata",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/metadata",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/metadata"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"educations\":[{\"id\":1,\"name\":\"B.sc I.T\",\"status\":\"active\",\"created_at\":\"2022-06-30T09:31:13.000000Z\",\"updated_at\":\"2022-07-04T04:59:14.000000Z\"},{\"id\":2,\"name\":\"B.A\",\"status\":\"active\",\"created_at\":\"2022-07-26T10:11:24.000000Z\",\"updated_at\":\"2022-07-26T10:11:24.000000Z\"}],\"experiences\":[{\"id\":2,\"name\":\"2 Yr.\",\"value\":2,\"status\":\"active\",\"created_at\":\"2022-06-30T09:07:27.000000Z\",\"updated_at\":\"2022-07-01T08:42:54.000000Z\"}],\"industries\":[{\"id\":3,\"name\":\"Test\",\"status\":\"active\",\"created_at\":\"2022-07-01T07:14:49.000000Z\",\"updated_at\":\"2022-07-01T07:14:49.000000Z\"},{\"id\":4,\"name\":\"Test2\",\"status\":\"active\",\"created_at\":\"2022-07-01T07:39:32.000000Z\",\"updated_at\":\"2022-07-01T07:43:09.000000Z\"},{\"id\":6,\"name\":\"helo\",\"status\":\"active\",\"created_at\":\"2022-07-01T11:20:46.000000Z\",\"updated_at\":\"2022-07-01T11:20:46.000000Z\"},{\"id\":7,\"name\":\"Hello\",\"status\":\"active\",\"created_at\":\"2022-07-01T11:21:42.000000Z\",\"updated_at\":\"2022-07-01T11:21:42.000000Z\"}],\"salary_brackets\":[{\"id\":2,\"name\":\"10000 - 15000\",\"min_salary\":10000,\"max_salary\":15000,\"status\":\"active\",\"created_at\":\"2022-07-04T04:39:27.000000Z\",\"updated_at\":\"2022-07-04T04:39:27.000000Z\"}],\"skill_types\":[{\"id\":1,\"name\":\"IT\",\"status\":\"active\",\"created_at\":\"2022-06-30T09:16:15.000000Z\",\"updated_at\":\"2022-06-30T09:16:15.000000Z\"},{\"id\":2,\"name\":\"Chemicals\",\"status\":\"active\",\"created_at\":\"2022-07-06T05:35:32.000000Z\",\"updated_at\":\"2022-07-27T10:48:51.000000Z\"},{\"id\":3,\"name\":\"HR\",\"status\":\"active\",\"created_at\":\"2022-07-27T10:49:01.000000Z\",\"updated_at\":\"2022-07-27T10:49:01.000000Z\"}],\"document_types\":[{\"id\":1,\"name\":\"Aadhar\",\"description\":null,\"status\":\"active\",\"created_at\":\"2022-07-06T07:00:21.000000Z\",\"updated_at\":null},{\"id\":2,\"name\":\"Pan\",\"description\":null,\"status\":\"active\",\"created_at\":\"2022-07-06T07:00:21.000000Z\",\"updated_at\":null}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/metadata\/state",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/metadata\/state",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/metadata\/state"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "58"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"states\":[{\"id\":1,\"name\":\"Maharashtra\",\"status\":\"active\",\"created_at\":\"2022-07-06T04:29:06.000000Z\",\"updated_at\":\"2022-07-06T04:29:06.000000Z\"}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/metadata\/district",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/metadata\/district",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/metadata\/district"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/metadata\/city",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/metadata\/city",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/metadata\/city"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/metadata\/locations\/{q}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/metadata\/locations\/:q",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/metadata\/locations\/:q",
+                            "variable": [
+                                {
+                                    "id": "q",
+                                    "key": "q",
+                                    "value": "in",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "57"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"city\":[],\"district\":[],\"state\":[]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/extra",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/extra",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/extra"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "56"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"about_us\":\"<ol><li><strong>Vitae magni ea itaqu.<\\\/strong><\\\/li><\\\/ol>\",\"contact_us\":\"Dolore adipisci veli\",\"twitter_link\":\"Nisi nisi deserunt r\",\"facebook_link\":\"Temporibus blanditii\",\"instagram_link\":\"Ut vel ut eum sint c\",\"id\":1,\"android_version\":2,\"ios_version\":1,\"android_force_update\":\"active\",\"ios_force_update\":\"active\",\"maintenance\":\"inactive\",\"created_at\":\"2022-07-29T05:03:35.000000Z\",\"updated_at\":\"2022-07-29T05:04:47.000000Z\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/user\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "first_name",
+                                    "value": "oqjmjnddwwxbweprrdkkcuzkrrumncalnryndvhvtrhtdktwjyisrrphypcxzigjnpfpysdfddycs",
+                                    "type": "text",
+                                    "description": "Must not be greater than 255 characters."
+                                },
+                                {
+                                    "key": "last_name",
+                                    "value": "jrgcnvhyjetquehginqtmmvkmfbnqeafiznyziwzngswkopwubzsebunpvuxejspolnexslgfeydqjtndtkerjbihlrqqibxccxeynvtznxfchmakuuntgmxogaoypjaiiqmibnxbtuutdmmxuvvdroaaesdbpmcvzntjzdgelrrshmondkgeceapsogvamqdwawnotbomdmkljnxzcmxhpwcgyplilbtvavkr",
+                                    "type": "text",
+                                    "description": "Must not be greater than 255 characters."
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "lowkoozaslgmlpvo",
+                                    "type": "text",
+                                    "description": "Must not be greater than 255 characters."
+                                },
+                                {
+                                    "key": "current_ctc",
+                                    "value": 688422.170183,
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "gender",
+                                    "value": "female",
+                                    "type": "text",
+                                    "description": "Must be one of <code>male<\/code>, <code>female<\/code>, or <code>other<\/code>."
+                                },
+                                {
+                                    "key": "education[0]",
+                                    "value": "sunt",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "experience[0]",
+                                    "value": "sunt",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "skill_type[0]",
+                                    "value": "ut",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "industry[0]",
+                                    "value": "consequuntur",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "salary_bracket[0]",
+                                    "value": "totam",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "address[0][city]",
+                                    "value": "quia",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "address[0][district]",
+                                    "value": "asperiores",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "address[0][state]",
+                                    "value": "repudiandae",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "address[0][street]",
+                                    "value": "aqdqkrzkigatdyadqqidcmgsbtdzhimdpnyvbsegwjxijpqehosnryolklsipbjmcbqnczrzbvpgbasxboafwomcvxitsbrslzpfvgrskerjtfwkisigtbgdpdadqldrvlqnwqiuqmxhaflaitckycrlzqvyoxcqmfrxudrgqtikwitsnvemdtqrhz",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "address[0][type]",
+                                    "value": "permanent",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "image",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/user\/jobs",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/user\/jobs\/apply",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs\/apply",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs\/apply"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"job\":\"voluptatum\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/user\/jobs\/list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/user\/jobs\/like\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs\/like\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs\/like\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "repellat",
+                                    "description": "The ID of the like."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/user\/jobs\/like",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs\/like",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs\/like"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/user\/jobs\/filtered",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user\/jobs\/filtered",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user\/jobs\/filtered"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/employer\/initial-update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/initial-update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/initial-update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "laboriosam",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "document[0][document_type]",
+                                    "value": 3,
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "document[0][document_number]",
+                                    "value": "optio",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "state",
+                                    "value": "deleniti",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "district",
+                                    "value": "quos",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "city",
+                                    "value": "cum",
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "company_name",
+                                    "value": "txtwitqtenxpyjyinkfctjpcigqwurmorbwcybybryokvkcffbyuohkcjvvptkywdjjwbhzzjgueirwrjqqptgatiujhbcxbmozksffeajdpxpsuwkynfeuqdsvptonrxglvdpsgbpwtnzxvllrvymtybycuwbdwmhmkncronidfzrvtdbzluubodirzbisrbgotsxfaywaaevyqulqpoqgxohtxmiclutkddfovfeluthzjjadxpsvuovy",
+                                    "type": "text",
+                                    "description": "Must not be greater than 255 characters."
+                                },
+                                {
+                                    "key": "strength",
+                                    "value": "yurvkbtqmiokmmycgtpleararswuwpkkttwyiswsahpernwtsftujkwwmzqjgnurgiaxlokgyytpgslqavddeiyfcenjspxvwutitdjgmbnufcsrtdvmiyclnunljprjspdmlylvelhkwiemgbauwvykmoqaaelobwgudjwaehmqvddeopuvl",
+                                    "type": "text",
+                                    "description": "Must not be greater than 255 characters."
+                                },
+                                {
+                                    "key": "document[][images][]",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/employer\/employees",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/employees",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/employees"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer\/jobs",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/jobs",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/jobs"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/employer\/jobs\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/jobs\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/jobs\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"gsdzhfnbwkqpetxdzdqagvmiekhxkqazkmwebffpmjqyllyqlehqbxncuoflbnkogivodqsgxzorqbpmugyenjvhkamsgzprfqtefegcewgmbxdytjucogjgdrafobsbutlgsikbphyuwholbxucrxevmxdviprjjpbfgveerxcmwphwtxoaoebvvqochqnxqyepktdyxatqbsavdyvlnrxlkaiqrtnazpyqkhgxapktxjpztrprhlbekftinlpdobrwpguzflwqkzdctbpwhyrpubvozqcjpucstpnddrsmghfrojprrpizqoihyunmwptywpsaqzkorenxwiddgasolvpimiwiycddhdkvylqgivydybtbxeasvufwasmimvdvbdcyypbhmbfcekjquvfuadqbbgldhvitmcxptontbijiiykthpyckfqjuvkylmrujebamohozlojlijwlgoenhaarpqsocmfyhqlumvbyoccnqfhpsmiucpgfzypybjsgjlbqmmmldugomfvntyiynxsmoagnkybpbvztcrwhfjbqiowqcuzmvnpzgyinlfpolybyscsakgtsoqbbfwbmikhgwdxkwsktvmripmshgdehfzktfehrzrsmvorcoewhcsxgddsigbjjlombjcxwipjjrhtwhvmoxvuprplyqexviyxqdnduseohowdnuaphfuyngacuhkxdmafjafkaadekevnydtswtxbweenbmrufxuskyhoqdukieiuagkopfjlfnbyjkuufeecianibikxrnlibjjugpxymksvwnxxuigusxrszqghttvjyknmuubwtpqmqxfgzajcypbkylakugfpfapnfxsbmhtdphbfniihasdkxuykulaemkpqhdxmdooyauwluxenhnwvsmekdddoaoxoqhwidthdzxnaywcxoufbj\",\"description\":\"zyyeedhtzqyzejyvldxdfhumecjprchdlfhafrrndfhohfoztfwufmnuhnuidgxeiroowitkvhokybyhrmniahfrfgkopyvjijmpxawhkpjxgbwnliandoqvrjrzcacgrjxixggxqvoeicwohyjquzpdtgsprgqyjqvlejyulpudkgcrcydbydzkplyajxkmepvlagvivnvrttbgfuywtparepljbfwtlfsoyqgwoydzesyvtnlmxvjnswrqunuxzaidupovsumqqmfenlbkfusdzieoqciicvbmurnferozngrerbvdgadbaczeljbyufvrjllkpruzddklnspljacthyryjonyampoouprqnujkhfshvdtvtqzpeupdpwwaioznryzaxdtenrmguwzuopqlphedllhogsfkrnoqgfkieqfyndccxvsikcantwztxlgryphtczygjtqkvogrnrfnsvgakdzduwbcjluuqtnrstvfelaiytkozmppyvuplcrfxwoazdrdzcaxculvpdwroszothrovtqljilasmogjzzglbrfiiinqrozofaugmwzmwyqshspjesrizgytmsvlbbcttgesomyyyhcrxhvsuwcqtrywglqoodwhcaxbwsgwggwbnioibjrakjmnqhhamiwngnksisrxkfqqyvqbewlqvhvdltvegtbatqugfbgbvprqczxxsctfnhynnjrskcmoqajluccakgfilszbjcbpxfcerjogsravtenntqzdltzedlbcdtupzgowvojgbrnnpiijhxiekrhinpptmomultgnnjrqfdtnbnerlrcsocmnayfhlzjjgpiqfoxqqqwoefsnsrehmrrvqnamdkjtgtclyfllcdweuptskeswvefgdnbujxtkdmjsczirflzanegkkatiyljcikqbncwotgxstscjnhqfuqzgjjjdxwcozbmaqtfrpvidddoptwknozwvavlvyxkofogbwmwocdxyaqktadsqdaodxsolcvnooynalmnkajtjsnvobuljnyppdjfjkxdbcjukkuwcfoklebvjxnzofxvbrdexwwdadgvdinervmfwbluvjvczpcdtoeckdvqovvnrdjfdoxdklrolfxajnwgrkubxoqughfxenlokmocqhjthuvxndvybbxssesfkhzytpfmtxozerzqfscquveylwdhybphkjqxgakrlbcadumcwqqxhepeodxzzdfesiunypjhcdrjqhqnfqtufcbsoufmxavgffqltshgwjnssfnevidwegnagepqpvzidoykysxdfgvgkqvnoemmrffbyfvtxrwkqwvldfnvmojnbfhfltcxvqqswfnoszqohzjdtiekesgzhhkxuaqgrzczalqpwytvzeawcvhrjnnvzxjmllyvylbkypvmemjvlysjnaiehzmcjysbfpmmtmfrwhjzupgnmrnxahlizvibllsfhyrdugjguyxbfwkgsotheeciygbjszadhgiylsqothrrtepudwdlzebhvehquuiijcdxpxjpnljrswjhujpbzpjevejqqruojexrnfhsidnjsbxpddbllstnotlzarqyoeejeswgmwtvtvbidxirxglfimcsdbyhdwfllgaraxorwjomozawyadbwljuwzuiiqcjuewnezqxsobatkvaqyoqxtqhpatkvruaxvbcuhqkcqrakhmberffmdkkpsbongqwmjniwoavpjxoidgtznxelkgnsiexkqkwyfmeughxqyldnpsxussyqpaasdhscttaasxzmiyebezbhvsfmpilffqaqmubujttdvddxikfpvfujsicfymzmipewejztgivexgrttpgtorcrbbssegowniqevqhqmghaukjehrfwrqgmflvdweyiwasfxeoydfqliubnfvzyktipxtqonkafdnxmhpmtwzgfeahaksanfhbpxwvvqlhzynylvjpfdzprcimnfdrqatiwkjxhdkdcqsbvxhcjsdyrelskqasmvhaewsjclhvridtxvqvcvtwslybvgqidyfbulgxmkttjinrphnnsigrpdgznbljbfbrbpcbatdolutkhgxejxvtxopkuyukqgcofxqlvzsyprrjiypmojtfcbkarxpwieiamixqrkqivdfbaatojwwfdhgpebwaptyxhrvdhsecauaczddqwzeyfnnhhtxbsgwtpchvpvykzbgjvvthqcvfmejbzgwbsddbsmgklnztlpwdwrsplqxuqcplezjdygaduimpxoriqnbzpmvurouqwcqbjepqvxuxouldcevkihlpsptihxvycrwlbuyqnzaxxebjsqciqwzgoeboyavcfgaqbzaonqqedatsftrylcylnzqxjuqcyaghvkiozrhwcjjtznhovprffbgihgaexeoplcutsjiljyamldncjrpocsphzvgdfvbefawpysavzkkgmecbmhzbaucvzrzjurixfkjkiyazyhvojemfjuzczkajznhycwsdzuxofqptwnphgunvpsmcwaeihabdbxxsephvphhrudhrjjdddrsekacwkihhwavlergukeailucej\",\"contact_person\":\"c\",\"education\":[\"maxime\"],\"experience\":[\"esse\"],\"skill_type\":[\"dolores\"],\"industry\":[\"ipsum\"],\"salary_bracket\":[\"suscipit\"],\"job_locations\":[{\"city\":\"ut\",\"district\":\"sit\",\"state\":\"qui\",\"location\":\"fkxhj\",\"address\":\"rfreztkbgwaoeudfgjhmmcbbcqoumkthbbbjypbcahnyeynjdnoeetjslmfvmjwiclhbhdiheyasrbtgmlvmqkthppncjehdvcswuzhxfxzupkbpyecuwpcpnuftuygjqfznlkabvchygfvjmycuadfgpbxhceotrxlppgpddjquaqmydmjsfqphwvmzqarkqpoojvivqjxuruuucxzmpwvpcvsjrfcxpwehoyuojujcwwnumaudyjdrgmbcfsqccmioqoxeuqxtugcvyejbzzzuttnmbqssczccimgsekdacdsyyqrkxcyaczpqsyqjgrlcgwmztsyuwusbwjsltpuwwzhgtwcmisqwyevsqszkwbofahxfrserbflxlrykpqvduxxizihmxewnfnmhtnlmspmnowooatfzcydayoqnfzulchufnjbbppjdrcrrjxosjsjbfljjziyfsbuffsixusitgyqakiumtwguokrszvjxvfljeoqqjzkhorwpmfqbmxzuvfzaspdagjhjvcjxwgdebxssvxctiehwgimefvdsulxgyyovzcnsjqxjozzdqykswzxitamjbmerxwoohrjplrrqqmrnsonlcoejzpluhrkqebazcjuymnypzvuvdidxkgzhuwljzppbjabuifxkstreaymbemlryxqjubhtusczbitmpxkzatutcunrvyupwzcchongxefftemafiqnzzwvztgvjlyfuzkouvpadvyzxtjqdsfarmwruujtfoqtwegtnhdgjhfbyvwekwsylndhxgoycodjpxhssahbmceevuzejwtbuejwfccdhbhnqzhiutlrgvosxohayyklrlgmychqvwgabuwqghufcmnljjzzppqrzbfqghbzfgjulswgnmdolssopsgilgcehbzirdjrdhfmxrjwduxgmaamfoftoxebtjltwiqxmcfabbkwkdxplqpunwbmjjcvaemecgclvikgbsgxyhzgkvggouqlzlhwvsmrprjyftejfpzywqtvxnehalrtoiiyopzdusspitbzqtrsaelcgrnoqikvjhvzbugamrselcqushtjaddfbbspskowbxdqgkzypdcfthmbxtbkmfkljwauxdqwsqqpmteujlafuqmeshjyahxhmfqhhvfguhbzvelafcipoxorjxxblggvoaiupgaxfgiaovbdhwvthqxsbwytglpodnquwmtxldwvhohuwvvkvejxciczpseqtngobujgnshsizpdqawqvyfhltdszmcqnntdayykqyflpuxuuzgolrqolmuabkzklxubgrgwbgcolbhhyoyalytdzr\"}],\"job_highlights\":[{\"name\":\"tfnocyakhwenfowvzrgwnxcpwvlvxhaweaypeuqzzkk\",\"type\":\"jaqiuzslkziydbjuhhlwfnkinomjmcqxzmqtztrvjiigfnwbdupmcqtzdpnxxtjygtmicqexsxmfwgeimogpvtultcrgahuywhihuztbgpc\"}]}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer\/jobs\/applications",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/jobs\/applications",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/jobs\/applications"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"status\":\"accepted\",\"page\":0}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer\/jobs\/application\/action",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/jobs\/application\/action",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/jobs\/application\/action"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"status\":\"accepted\",\"application_id\":\"et\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/employer\/jobs\/employees",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/employer\/jobs\/employees",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/employer\/jobs\/employees"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"job_id\":\"expedita\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

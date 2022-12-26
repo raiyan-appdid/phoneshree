@@ -1,0 +1,47 @@
+{
+  "menu": [
+    {
+      "url": "admin/",
+      "name": "Dashboard",
+      "icon": "<i data-feather='home'></i>",
+      "slug": "admin.home.index"
+    },
+    {
+      "url": "admin/sellers",
+      "name": "Seller Management",
+      "icon": "<i data-feather='home'></i>",
+      "slug": "admin.sellers.index"
+    },
+    {
+      "url": "admin/memberships",
+      "name": "Membership Management",
+      "icon": "<i data-feather='home'></i>",
+      "slug": "admin.memberships.index"
+    },
+    {
+      "url": "admin/products",
+      "name": "Products Management",
+      "icon": "<i data-feather='home'></i>",
+      "slug": "admin.products.index"
+    },
+    {
+      "name": "Seller Management",
+      "icon": "<i data-feather='user'></i>",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "admin",
+          "name": "Active Users",
+          "icon": "eye",
+          "slug": "admin"
+        },
+        {
+          "url": "admin/users",
+          "name": "Inactive Users",
+          "icon": "circle",
+          "slug": "admin"
+        }
+      ]
+    }
+  ]
+}
