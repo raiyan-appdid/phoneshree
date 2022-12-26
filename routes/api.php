@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::controller(BasicController::class)->group(function () {
         Route::prefix('sellers')->name('sellers.')->group(function () {
             Route::post('register', 'sellerRegister')->name('register');
-            Route::get('details', 'sellerDetails')->name('details');
+            Route::post('details', 'sellerDetails')->name('details');
             Route::post('edit', 'sellerEdit')->name('edit');
         });
         Route::prefix('products')->name('products')->group(function () {
