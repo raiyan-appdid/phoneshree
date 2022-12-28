@@ -19,7 +19,7 @@ class BasicController extends Controller
             'email' => 'required',
             'shop_name' => 'required',
             'short_description' => 'required',
-            'shop_image' => 'required',
+            // 'shop_image' => 'required',
         ]);
         $data = new Seller;
         $data->name = $request->name;
@@ -28,11 +28,11 @@ class BasicController extends Controller
         $data->shop_name = $request->shop_name;
         $data->short_description = $request->short_description;
         $data->membership_expiry_date = Carbon::now()->addDays(7);
-        if (isset($request->shop_image)) {
-            $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
-        } else {
-            $data->shop_image = "N/A";
-        }
+        // if (isset($request->shop_image)) {
+        //     $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
+        // } else {
+        //     $data->shop_image = "N/A";
+        // }
         $data->address = $request->address;
         $data->save();
         return response('Seller Registered Successfully', 200);

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\ProductController;

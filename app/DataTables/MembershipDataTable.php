@@ -89,12 +89,12 @@ class MembershipDataTable extends DataTable
             Column::make('validity'),
             Column::make('amount'),
             Column::make('created_at'),
-            Column::computed('action')
+            Column::computed('status')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::computed('status')
+            Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

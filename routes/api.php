@@ -31,5 +31,6 @@ Route::prefix('v1')->group(function () {
             Route::post('add', 'addProducts')->name('add');
             Route::post('sold', 'soldProduct')->name('sold');
         });
+        Route::get('city', 'getCity')->name('city');
     });
 });
