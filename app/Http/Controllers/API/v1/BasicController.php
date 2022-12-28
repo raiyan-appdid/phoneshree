@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class BasicController extends Controller
 {
+    //----------------------Seller Section------------------------//
     public function sellerRegister(Request $request)
     {
         $request->validate([
@@ -38,6 +39,43 @@ class BasicController extends Controller
         return response('Seller Registered Successfully', 200);
     }
 
+    public function sellerDetails(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $data = Seller::findOrFail($request->seller_id);
+        return response($data, 200);
+    }
+
+    public function sellerEdit(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+            'number' => 'required',
+            'email' => 'required',
+            'shop_name' => 'required',
+            'short_description' => 'required',
+            'shop_image' => 'required',
+            'address' => 'required',
+        ]);
+        $data = Seller::findOrFail($request->seller_id);
+        $data->name = $request->name;
+        $data->number = $request->number;
+        $data->email = $request->email;
+        $data->shop_name = $request->shop_name;
+        $data->short_description = $request->short_description;
+        if (isset($request->shop_image)) {
+            $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
+        } else {
+            $data->shop_image = "N/A";
+        }
+        $data->address = $request->address;
+        $data->save();
+        return response("Profile Updated Successfully", 200);
+    }
+
+    //------------------------------product section---------------------------------//
     public function addProducts(Request $request)
     {
         $request->validate([
@@ -114,39 +152,28 @@ class BasicController extends Controller
         return response('Product sold to ' . $request->sold_to_customer_name, 200);
     }
 
-    public function sellerDetails(Request $request)
+    public function productToLive(Request $request)
     {
         $request->validate([
-            'seller_id' => 'required',
+            'product_id' => 'required',
+            'product_selling_price' => 'required',
         ]);
-        $data = Seller::findOrFail($request->seller_id);
-        return response($data, 200);
+        $data = Product::findOrFail($request->product_id);
+        $data->product_selling_price = $request->product_selling_price;
+        $data->status = "livesell";
+        $data->save();
+        return response('Product ' . $data->product_title . 'is now live', 200);
     }
 
-    public function sellerEdit(Request $request)
+    public function productToInvetory(Request $request)
     {
         $request->validate([
-            'seller_id' => 'required',
-            'number' => 'required',
-            'email' => 'required',
-            'shop_name' => 'required',
-            'short_description' => 'required',
-            'shop_image' => 'required',
-            'address' => 'required',
+            'product_id' => 'required',
         ]);
-        $data = Seller::findOrFail($request->seller_id);
-        $data->name = $request->name;
-        $data->number = $request->number;
-        $data->email = $request->email;
-        $data->shop_name = $request->shop_name;
-        $data->short_description = $request->short_description;
-        if (isset($request->shop_image)) {
-            $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
-        } else {
-            $data->shop_image = "N/A";
-        }
-        $data->address = $request->address;
+        $data = Product::findOrFail($request->product_id);
+        $data->status = "inventory";
         $data->save();
-        return response("Profile Updated Successfully", 200);
+        return response('Product ' . $data->product_title . 'is shifted to inventory');
     }
+
 }

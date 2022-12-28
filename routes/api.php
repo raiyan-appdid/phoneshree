@@ -30,6 +30,9 @@ Route::prefix('v1')->group(function () {
         Route::prefix('products')->name('products')->group(function () {
             Route::post('add', 'addProducts')->name('add');
             Route::post('sold', 'soldProduct')->name('sold');
+            Route::post('status', 'product_status')->name('status');
+            Route::post('golive', 'productToLive')->name('golive');
+            Route::post('toinventory', 'productToInvetory')->name('golive');
         });
         Route::get('city', 'getCity')->name('city');
     });
