@@ -30,6 +30,8 @@ class SellerController extends Controller
         $data->name = $request->name;
         $data->number = $request->number;
         $data->email = $request->email;
+        $data->city_id = $request->city_id;
+        $data->state_id = $request->state_id;
         $data->shop_name = $request->shop_name;
         $data->short_description = $request->short_description;
         $data->membership_expiry_date = Carbon::now()->addDays(7);
@@ -61,6 +63,8 @@ class SellerController extends Controller
         $data = Seller::findOrFail($request->id);
         $data->name = $request->name;
         $data->number = $request->number;
+        $data->city_id = $request->city_id;
+        $data->state_id = $request->state_id;
         $data->email = $request->email;
         $data->shop_name = $request->shop_name;
         $data->short_description = $request->short_description;

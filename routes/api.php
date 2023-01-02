@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
+    Route::group(['prefix' => 'get'], function () {
+        Route::get('states', [BasicController::class, 'get_states']);
+        Route::post('cities', [BasicController::class, 'get_cities']);
+    });
     Route::controller(AuthController::class)->prefix('user')->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'loginOne');
@@ -33,6 +37,9 @@ Route::prefix('v1')->group(function () {
             Route::post('status', 'product_status')->name('status');
             Route::post('golive', 'productToLive')->name('golive');
             Route::post('toinventory', 'productToInvetory')->name('golive');
+            Route::get('getliveproducts', 'getLiveProducts')->name('getliveproducts');
+            Route::get('getProduct', 'getProduct')->name('getProduct');
+            Route::get('getInventoryProducts', 'getInventoryProducts')->name('getInventoryProducts');
         });
         Route::get('city', 'getCity')->name('city');
     });

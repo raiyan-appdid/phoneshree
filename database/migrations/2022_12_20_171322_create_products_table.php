@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('product_image')->nullable();
             $table->string('product_title')->nullable();
             $table->text('product_description')->nullable();
-            $table->string('product_selling_price');
+            $table->string('product_selling_price')->nullable();
             $table->string('sold_to_customer_name')->nullable();
             $table->string('sold_to_customer_number')->nullable();
             $table->string('product_sold_price')->nullable();

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Product;
 use App\Models\Seller;
+use App\Models\State;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -15,25 +17,28 @@ class BasicController extends Controller
     public function sellerRegister(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'number' => 'required',
-            'email' => 'required',
-            'shop_name' => 'required',
-            'short_description' => 'required',
-            // 'shop_image' => 'required',
+            // 'name' => 'required',
+            // 'number' => 'required',
+            // 'email' => 'required',
+            // 'shop_name' => 'required',
+            // 'short_description' => 'required',
+            // 'city_id' => 'required',
+            // 'state_id' => 'required',
         ]);
         $data = new Seller;
         $data->name = $request->name;
         $data->number = $request->number;
         $data->email = $request->email;
+        $data->city_id = $request->city_id;
+        $data->state_id = $request->state_id;
         $data->shop_name = $request->shop_name;
         $data->short_description = $request->short_description;
         $data->membership_expiry_date = Carbon::now()->addDays(7);
-        // if (isset($request->shop_image)) {
-        //     $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
-        // } else {
-        //     $data->shop_image = "N/A";
-        // }
+        if (isset($request->shop_image)) {
+            $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
+        } else {
+            $data->shop_image = "N/A";
+        }
         $data->address = $request->address;
         $data->save();
         return response('Seller Registered Successfully', 200);
@@ -51,24 +56,24 @@ class BasicController extends Controller
     public function sellerEdit(Request $request)
     {
         $request->validate([
-            'seller_id' => 'required',
-            'number' => 'required',
-            'email' => 'required',
-            'shop_name' => 'required',
-            'short_description' => 'required',
-            'shop_image' => 'required',
-            'address' => 'required',
+            // 'seller_id' => 'required',
+            // 'number' => 'required',
+            // 'email' => 'required',
+            // 'shop_name' => 'required',
+            // 'short_description' => 'required',
+            // 'shop_image' => 'required',
+            // 'address' => 'required',
         ]);
         $data = Seller::findOrFail($request->seller_id);
         $data->name = $request->name;
         $data->number = $request->number;
         $data->email = $request->email;
+        $data->city_id = $request->city_id;
+        $data->state_id = $request->state_id;
         $data->shop_name = $request->shop_name;
         $data->short_description = $request->short_description;
         if (isset($request->shop_image)) {
             $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
-        } else {
-            $data->shop_image = "N/A";
         }
         $data->address = $request->address;
         $data->save();
@@ -84,16 +89,12 @@ class BasicController extends Controller
             'customer_number' => 'required',
             'customer_pic' => 'required',
             'documents' => 'required',
-            'documents' => 'required',
             'product_image' => 'required',
             'imei_number' => 'required',
             'customer_buy_price' => 'required',
             'product_title' => 'required',
             'product_description' => 'required',
             'product_selling_price' => 'required',
-            'sold_to_customer_name' => 'required',
-            'sold_to_customer_number' => 'required',
-            'product_sold_price' => 'required',
         ]);
         $data = new Product;
         $data->seller_id = $request->seller_id;
@@ -122,7 +123,7 @@ class BasicController extends Controller
         } else {
             $data->product_image = "N/A";
         }
-        $data->emei_number = $request->imei_number;
+        $data->imei_number = $request->imei_number;
         $data->customer_buy_price = $request->customer_buy_price;
         $data->product_image = $request->product_image;
         $data->product_title = $request->product_title;
@@ -135,13 +136,19 @@ class BasicController extends Controller
         return response('Products added Successfully', 200);
     }
 
+    public function getProduct()
+    {
+        $data = Product::all();
+        return response($data, 200);
+    }
+
     public function soldProduct(Request $request)
     {
         $request->validate([
-            'product_id' => 'required',
-            'sold_to_customer_name' => 'required',
-            'sold_to_customer_number' => 'required',
-            'product_sold_price' => 'required',
+            // 'product_id' => 'required',
+            // 'sold_to_customer_name' => 'required',
+            // 'sold_to_customer_number' => 'required',
+            // 'product_sold_price' => 'required',
         ]);
         $data = Product::findOrFail($request->product_id);
         $data->sold_to_customer_name = $request->sold_to_customer_name;
@@ -164,7 +171,6 @@ class BasicController extends Controller
         $data->save();
         return response('Product ' . $data->product_title . 'is now live', 200);
     }
-
     public function productToInvetory(Request $request)
     {
         $request->validate([
@@ -174,6 +180,33 @@ class BasicController extends Controller
         $data->status = "inventory";
         $data->save();
         return response('Product ' . $data->product_title . 'is shifted to inventory');
+    }
+    public function getLiveProducts()
+    {
+        $data = Product::where('status', 'livesell')->get();
+        return response($data, 200);
+    }
+
+    public function getInventoryProducts()
+    {
+        $data = Product::where('status', 'inventory')->get();
+        return response($data, 200);
+    }
+
+    //states and cities
+    public function get_states(Request $request)
+    {
+        $states = State::india()->orderBy('name', 'ASC')->get(['id', 'name']);
+        return response($states, 200);
+    }
+
+    public function get_cities(Request $request)
+    {
+        $request->validate([
+            'state_id' => 'required',
+        ]);
+        $cities = City::india()->where('state_id', $request->state_id)->orderBy('name', 'ASC')->get(['id', 'name']);
+        return response($cities, 200);
     }
 
 }
