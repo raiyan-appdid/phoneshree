@@ -23,6 +23,12 @@
       "name": "Products Management",
       "icon": "<i data-feather='home'></i>",
       "slug": "admin.products.index"
+    },
+    {
+      "url": "admin/referscheme",
+      "name": "Refer Scheme SetUP",
+      "icon": "<i data-feather='home'></i>",
+      "slug": "admin.referscheme.index"
     }
   ]
 }

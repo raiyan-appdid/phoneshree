@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
 
-class Seller extends Model
+class ReferScheme extends Model
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory;
     protected $guarded = [];
 }

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sellers', function (Blueprint $table) {
-            $table->foreignId('state_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('city_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('referred_by', 'seller_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('my_referral_code')->nullable();
         });
     }
 

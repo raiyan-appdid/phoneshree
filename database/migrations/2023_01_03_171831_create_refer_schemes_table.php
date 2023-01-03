@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('sellers', function (Blueprint $table) {
-            $table->foreignId('state_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('city_id')->nullable()->constrained()->nullOnDelete();
+        Schema::create('refer_schemes', function (Blueprint $table) {
+            $table->id();
+            $table->string('referred_person_reward_amount')->nullable();
+            $table->string('referred_by_reward_amount')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::dropIfExists('refer_schemes');
     }
 };
