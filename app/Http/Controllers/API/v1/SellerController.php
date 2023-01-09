@@ -53,7 +53,10 @@ class SellerController extends Controller
             }
             $data->address = $request->address;
             $data->save();
-            return response('Seller Registered Successfully', 200);
+            return response([
+                'message' => "Seller Registered Successfully",
+                'seller_id' => $data->id,
+            ], 200);
         } else {
             return response("Seller is already registered", 200);
         }
@@ -68,6 +71,7 @@ class SellerController extends Controller
         if ($returnValue != "empty") {
             return response([
                 'message' => 'old',
+                'id' => $returnValue->id,
             ], 200);
         } else {
             return response([

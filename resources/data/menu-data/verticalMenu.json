@@ -9,26 +9,45 @@
     {
       "url": "admin/sellers",
       "name": "Seller Management",
-      "icon": "<i data-feather='home'></i>",
+      "icon": "<i data-feather='log-in'></i>",
       "slug": "admin.sellers.index"
     },
     {
       "url": "admin/memberships",
       "name": "Membership Management",
-      "icon": "<i data-feather='home'></i>",
+      "icon": "<i data-feather='folder-plus'></i>",
       "slug": "admin.memberships.index"
     },
     {
       "url": "admin/products",
       "name": "Products Management",
-      "icon": "<i data-feather='home'></i>",
+      "icon": "<i data-feather='shopping-cart'></i>",
       "slug": "admin.products.index"
     },
     {
       "url": "admin/referscheme",
       "name": "Refer Scheme SetUP",
-      "icon": "<i data-feather='home'></i>",
+      "icon": "<i data-feather='git-merge'></i>",
       "slug": "admin.referscheme.index"
+    },
+    {
+      "name": "Advertise Management",
+      "icon": "<i data-feather='package'></i>",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "admin/tickets?status=active",
+          "name": "Banner Pricing",
+          "icon": "circle",
+          "slug": "admin.tickets.index"
+        },  
+        {
+          "url": "admin/tickets/blocked?status=blocked",
+          "name": "Featured Product Pricing",
+          "icon": "circle",
+          "slug": "admin.tickets.blocked"
+        }
+      ]
     }
   ]
 }

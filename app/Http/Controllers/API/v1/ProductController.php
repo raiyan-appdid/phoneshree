@@ -16,8 +16,8 @@ class ProductController extends Controller
             'customer_name' => 'required',
             'customer_number' => 'required',
             'customer_pic' => 'required',
-            'documents' => 'required',
-            'product_image' => 'required',
+            // 'documents' => 'required',
+            // 'product_image' => 'required',
             'imei_number' => 'required',
             'customer_buy_price' => 'required',
             'product_title' => 'required',
@@ -64,19 +64,22 @@ class ProductController extends Controller
         return response('Products added Successfully', 200);
     }
 
-    public function getProduct()
+    public function getProduct(Request $request)
     {
-        $data = Product::all();
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $data = Product::where('seller_id', $request->seller_id)->get();
         return response($data, 200);
     }
 
     public function soldProduct(Request $request)
     {
         $request->validate([
-            // 'product_id' => 'required',
-            // 'sold_to_customer_name' => 'required',
-            // 'sold_to_customer_number' => 'required',
-            // 'product_sold_price' => 'required',
+            'product_id' => 'required',
+            'sold_to_customer_name' => 'required',
+            'sold_to_customer_number' => 'required',
+            'product_sold_price' => 'required',
         ]);
         $data = Product::findOrFail($request->product_id);
         $data->sold_to_customer_name = $request->sold_to_customer_name;
@@ -84,7 +87,10 @@ class ProductController extends Controller
         $data->product_sold_price = $request->product_sold_price;
         $data->status = "sold";
         $data->save();
-        return response('Product sold to ' . $request->sold_to_customer_name, 200);
+        return response([
+            'message' => 'Success',
+            'data' => "sold to " . $request->sold_to_customer_name,
+        ], 200);
     }
 
     public function productToLive(Request $request)
@@ -109,21 +115,30 @@ class ProductController extends Controller
         $data->save();
         return response('Product ' . $data->product_title . 'is shifted to inventory');
     }
-    public function getLiveProducts()
+    public function getLiveProducts(Request $request)
     {
-        $data = Product::where('status', 'livesell')->get();
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $data = Product::where('status', 'livesell')->where('seller_id', $request->seller_id)->get();
         return response($data, 200);
     }
 
-    public function getInventoryProducts()
+    public function getInventoryProducts(Request $request)
     {
-        $data = Product::where('status', 'inventory')->get();
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $data = Product::where('status', 'inventory')->where('seller_id', $request->seller_id)->get();
         return response($data, 200);
     }
 
-    public function getsoldproducts()
+    public function getsoldproducts(Request $request)
     {
-        $data = Product::where('status', 'sold')->get();
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $data = Product::where('status', 'sold')->where('seller_id', $request->seller_id)->get();
         return response($data, 200);
     }
 

@@ -43,10 +43,10 @@ Route::prefix('v1')->group(function () {
             Route::post('status', 'product_status')->name('status');
             Route::post('golive', 'productToLive')->name('golive');
             Route::post('toinventory', 'productToInvetory')->name('toinventory');
-            Route::get('getliveproducts', 'getLiveProducts')->name('getliveproducts');
-            Route::get('getproduct', 'getProduct')->name('getproduct');
-            Route::get('getinventoryproducts', 'getInventoryProducts')->name('getinventoryproducts');
-            Route::get('getsoldproducts', 'getsoldproducts')->name('getsoldproducts');
+            Route::post('getliveproducts', 'getLiveProducts')->name('getliveproducts');
+            Route::post('getproduct', 'getProduct')->name('getproduct');
+            Route::post('getinventoryproducts', 'getInventoryProducts')->name('getinventoryproducts');
+            Route::post('getsoldproducts', 'getsoldproducts')->name('getsoldproducts');
         });
     });
 
