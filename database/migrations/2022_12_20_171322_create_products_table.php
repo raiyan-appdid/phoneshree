@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->string('customer_number')->nullable();
             $table->string('customer_pic')->nullable();
-            $table->string('documents')->nullable();
             $table->string('imei_number')->nullable();
             $table->string('customer_buy_price')->nullable();
-            $table->string('product_image')->nullable();
             $table->string('product_title')->nullable();
             $table->text('product_description')->nullable();
             $table->string('product_selling_price')->nullable();

@@ -95,7 +95,7 @@ class SellerController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Seller::findOrFail($request->seller_id);
+        $data = Seller::where('id', $request->seller_id)->with(['city', 'state'])->first();
         return response($data, 200);
     }
 
