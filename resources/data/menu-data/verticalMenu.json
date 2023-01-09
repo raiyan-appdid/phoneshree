@@ -36,13 +36,13 @@
       "slug": "",
       "submenu": [
         {
-          "url": "admin/tickets?status=active",
+          "url": "admin/banner-pricing",
           "name": "Banner Pricing",
           "icon": "circle",
-          "slug": "admin.tickets.index"
+          "slug": "admin.banner-pricing.index"
         },  
         {
-          "url": "admin/tickets/blocked?status=blocked",
+          "url": "admin/banner-pricing",
           "name": "Featured Product Pricing",
           "icon": "circle",
           "slug": "admin.tickets.blocked"

@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('sellers', function (Blueprint $table) {
-            $table->foreignId('referred_by', 'seller_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('my_referral_code')->nullable();
+        Schema::create('banner_pricings', function (Blueprint $table) {
+            $table->id();
+            $table->string('price')->nullable();
+            $table->string('number_of_days')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::dropIfExists('banner_pricings');
     }
 };

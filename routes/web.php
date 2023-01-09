@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\Admin\BannerPricingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\ProductController;
@@ -79,6 +80,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     Route::name('referscheme.')
         ->prefix('referscheme')
         ->controller(AdminReferSchemeController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('blocked', 'index')->name('blocked');
+        Route::get('deleted', 'index')->name('deleted');
+        Route::post('store', 'store')->name('store');
+        Route::get('{id}/edit', "edit")->name('edit');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::post('update', 'update')->name('update');
+        Route::put('status', 'status')->name('status');
+    });
+    Route::name('banner-pricing.')
+        ->prefix('banner-pricing')
+        ->controller(BannerPricingController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('blocked', 'index')->name('blocked');
         Route::get('deleted', 'index')->name('deleted');
