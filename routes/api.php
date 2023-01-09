@@ -52,6 +52,8 @@ Route::prefix('v1')->group(function () {
 
     Route::controller(BasicController::class)->group(function () {
         Route::post('checkreferralcode', 'checkReferralCode')->name('checkreferralcode');
+        Route::get('getBannerPricing', 'getBannerPricing')->name('getBannerPricing');
+        Route::get('getFeaturedProductPricing', 'getFeaturedProductPricing')->name('getFeaturedProductPricing');
 
     });
 

@@ -42,10 +42,10 @@
           "slug": "admin.banner-pricing.index"
         },  
         {
-          "url": "admin/banner-pricing",
+          "url": "admin/featuredproduct-pricing",
           "name": "Featured Product Pricing",
           "icon": "circle",
-          "slug": "admin.tickets.blocked"
+          "slug": "admin.featuredproduct-pricing.index"
         }
       ]
     }

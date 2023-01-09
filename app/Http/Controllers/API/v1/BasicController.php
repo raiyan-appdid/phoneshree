@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API\v1;
 
-use App\Models\City;
-use App\Models\State;
-use App\Models\Seller;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BannerPricing;
+use App\Models\City;
+use App\Models\FeaturedProductPricing;
+use App\Models\Seller;
+use App\Models\State;
+use Illuminate\Http\Request;
 
 class BasicController extends Controller
 {
@@ -43,6 +45,17 @@ class BasicController extends Controller
                 'seller_id' => $data->id,
             ]);
         }
+    }
+
+    public function getBannerPricing()
+    {
+        $data = BannerPricing::all();
+        return response($data, 200);
+    }
+    public function getFeaturedProductPricing()
+    {
+        $data = FeaturedProductPricing::all();
+        return response($data, 200);
     }
 
 }
