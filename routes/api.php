@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\API\v1\Auth\AuthController;
+use App\Http\Controllers\API\v1\BannerAdsTransactionController;
 use App\Http\Controllers\API\v1\BasicController;
+use App\Http\Controllers\API\v1\FeaturedProductTransactionController;
 use App\Http\Controllers\API\v1\Post\FavouriteController;
 use App\Http\Controllers\API\v1\ProductController;
 use App\Http\Controllers\API\v1\SellerController;
@@ -54,7 +56,14 @@ Route::prefix('v1')->group(function () {
         Route::post('checkreferralcode', 'checkReferralCode')->name('checkreferralcode');
         Route::get('getBannerPricing', 'getBannerPricing')->name('getBannerPricing');
         Route::get('getFeaturedProductPricing', 'getFeaturedProductPricing')->name('getFeaturedProductPricing');
+    });
 
+    Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {
+        Route::post('store', 'store')->name('store');
+    });
+
+    Route::prefix('banner-ads')->name('banner-ads.')->controller(BannerAdsTransactionController::class)->group(function () {
+        Route::post('store', 'store')->name('store');
     });
 
 });
