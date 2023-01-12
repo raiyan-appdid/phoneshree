@@ -26,7 +26,7 @@
     },
     {
       "url": "admin/referscheme",
-      "name": "Refer Scheme SetUP",
+      "name": "Refer and Bonus Scheme SetUP",
       "icon": "<i data-feather='git-merge'></i>",
       "slug": "admin.referscheme.index"
     },

@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReferScheme;
+use App\Models\WelcomeBonus;
 use Illuminate\Http\Request;
 
 class ReferSchemeController extends Controller
 {
     public function index()
     {
+        $welcomeBonus = WelcomeBonus::where('id', 1)->first();
         $data = ReferScheme::where('id', 1)->first();
-        return view('content.forms.refer-scheme', compact('data'));
+        return view('content.forms.refer-scheme', compact('data', 'welcomeBonus'));
     }
 
     public function store(Request $request)
@@ -28,6 +30,8 @@ class ReferSchemeController extends Controller
                 'referred_by_reward_amount' => $request->referred_by_reward_amount,
             ]
         );
-        return back();
+        return response([
+            'header' => 'Refer Scheme Updated',
+        ]);
     }
 }

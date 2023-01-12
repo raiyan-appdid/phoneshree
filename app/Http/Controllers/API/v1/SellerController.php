@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\FreeTrialPeriod;
 use App\Models\Seller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -45,7 +46,10 @@ class SellerController extends Controller
             $data->shop_name = $request->shop_name;
             $data->referred_by = $request->referred_by;
             $data->short_description = $request->short_description;
-            $data->membership_expiry_date = Carbon::now()->addDays(7);
+
+            //free trail period data
+            $freeTrailPeriod = FreeTrialPeriod::first();
+            $data->membership_expiry_date = Carbon::now()->addDays($freeTrailPeriod->free_trial_period);
             if (isset($request->shop_image)) {
                 $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
             } else {

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\MembershipDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\FreeTrialPeriod;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class MembershipController extends Controller
 {
     public function index(MembershipDataTable $table)
     {
+        $freeTrial = FreeTrialPeriod::where('id', 1)->first();
         $pageConfigs = ['has_table' => true];
         // $table->with('id', 1);
-        return $table->render('content.tables.memberships', compact('pageConfigs'));
+        return $table->render('content.tables.memberships', compact('pageConfigs', 'freeTrial'));
     }
     public function store(Request $request)
     {

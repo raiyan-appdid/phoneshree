@@ -151,7 +151,7 @@ class ProductController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Product::where('status', 'sold')->where('seller_id', $request->seller_id)->with(['productImage', 'document'])->get();
+        $data = Product::where('status', 'sold')->where('seller_id', $request->seller_id)->with(['productImage', 'document'])->orderBy('created_at', 'desc')->get();
         return response($data, 200);
     }
 

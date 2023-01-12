@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Controllers\Admin\BannerPricingController;
+use App\Http\Controllers\Admin\BasicController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedProductPricingController;
 use App\Http\Controllers\Admin\MembershipController;
@@ -113,5 +114,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
+    });
+    Route::name('others.')->prefix('others')->controller(BasicController::class)->group(function () {
+        Route::post('free-trial', 'storeFreeTrialPeriod')->name('free-trial');
+        Route::post('welcome-bonus', 'storeWelcomeBonus')->name('welcome-bonus');
     });
 });

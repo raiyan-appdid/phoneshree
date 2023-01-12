@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActiveBannerAd;
 use App\Models\BannerPricing;
 use App\Models\City;
 use App\Models\FeaturedProductPricing;
 use App\Models\Seller;
 use App\Models\State;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 
 class BasicController extends Controller
@@ -56,6 +58,36 @@ class BasicController extends Controller
     {
         $data = FeaturedProductPricing::all();
         return response($data, 200);
+    }
+
+    public function getBalanceAndTransactionList(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+
+        $balance = Seller::where('id', $request->seller_id)->first();
+        $transactionList = WalletTransaction::where('seller_id', $request->seller_id)->get();
+        return response([
+            'balance' => $balance->current_wallet_balance,
+            'transactionList' => $transactionList,
+        ], 200);
+    }
+
+    public function getSellerFromActiveBannerList(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+        ]);
+        $data = ActiveBannerAd::where('city_id', $request->city_id)->with(['bannerAdsTransaction.seller'])->get()->pluck('bannerAdsTransaction')->pluck('seller');
+        return response([
+            'SellerList' => $data,
+        ]);
+    }
+
+    public function getMembershipList(Request $request)
+    {
+
     }
 
 }

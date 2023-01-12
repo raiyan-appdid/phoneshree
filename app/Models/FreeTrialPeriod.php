@@ -5,14 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActiveBannerAd extends Model
+class FreeTrialPeriod extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function bannerAdsTransaction()
-    {
-        return $this->belongsTo(BannerAdsTransaction::class);
-    }
-
 }

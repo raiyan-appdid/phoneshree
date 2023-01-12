@@ -9,4 +9,9 @@ class BannerAdsTransaction extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
 }

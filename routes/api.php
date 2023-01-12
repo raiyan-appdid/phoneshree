@@ -54,8 +54,10 @@ Route::prefix('v1')->group(function () {
 
     Route::controller(BasicController::class)->group(function () {
         Route::post('checkreferralcode', 'checkReferralCode')->name('checkreferralcode');
-        Route::get('getBannerPricing', 'getBannerPricing')->name('getBannerPricing');
-        Route::get('getFeaturedProductPricing', 'getFeaturedProductPricing')->name('getFeaturedProductPricing');
+        Route::get('getbannerpricing', 'getBannerPricing')->name('getbannerpricing');
+        Route::get('getfeaturedproductpricing', 'getFeaturedProductPricing')->name('getfeaturedproductpricing');
+        Route::post('getbalanceandtransactionlist', 'getBalanceAndTransactionList')->name('getbalanceandtransactionlist');
+        Route::post('getsellerfromactivebannerlist', 'getSellerFromActiveBannerList')->name('getsellerfromactivebannerlist');
     });
 
     Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {
