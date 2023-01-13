@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
 use App\Models\BannerAdsTransaction;
+use App\Services\ActiveBannerAdsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,7 @@ class BannerAdsTransactionController extends Controller
         $data->number_of_days = $request->number_of_days;
         $data->expiry_date = Carbon::now()->addDays($request->number_of_days);
         $data->save();
+        ActiveBannerAdsService::storeActiveBannerAds();
         return response([
             'message' => 'Banner Ads Transaction Successfully Created',
             'data' => $data,

@@ -88,6 +88,7 @@ class BasicController extends Controller
     public function getMembershipList(Request $request)
     {
 
+        
     }
 
 }
