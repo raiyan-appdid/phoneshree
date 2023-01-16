@@ -7,6 +7,7 @@ use App\Http\Controllers\API\v1\BasicController;
 use App\Http\Controllers\API\v1\FeaturedProductTransactionController;
 use App\Http\Controllers\API\v1\Post\FavouriteController;
 use App\Http\Controllers\API\v1\ProductController;
+use App\Http\Controllers\API\v1\RazorpayOrderController;
 use App\Http\Controllers\API\v1\SellerController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,5 +73,10 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('buyer')->name('buyer.')->group(function () {
         Route::post('getbuyerdashboard', [BasicController::class, 'getBuyerDashboard'])->name('getbuyerdashboard');
+    });
+
+    Route::prefix('razorpay')->name('razorpay.')->controller(RazorpayOrderController::class)->group(function () {
+        Route::post('create', 'create')->name('create');
+        Route::post('fetch_order', 'fetch_order')->name('fetch_order');
     });
 });
