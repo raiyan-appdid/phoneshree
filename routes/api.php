@@ -58,6 +58,8 @@ Route::prefix('v1')->group(function () {
         Route::get('getfeaturedproductpricing', 'getFeaturedProductPricing')->name('getfeaturedproductpricing');
         Route::post('getbalanceandtransactionlist', 'getBalanceAndTransactionList')->name('getbalanceandtransactionlist');
         Route::post('getsellerfromactivebannerlist', 'getSellerFromActiveBannerList')->name('getsellerfromactivebannerlist');
+        Route::post('loadwallet', 'loadWallet')->name('loadwallet');
+        Route::post('getmembershiplist', 'getMembershipList')->name('getmembershiplist');
     });
 
     Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {
@@ -68,4 +70,7 @@ Route::prefix('v1')->group(function () {
         Route::post('store', 'store')->name('store');
     });
 
+    Route::prefix('buyer')->name('buyer.')->group(function () {
+        Route::post('getbuyerdashboard', [BasicController::class, 'getBuyerDashboard'])->name('getbuyerdashboard');
+    });
 });

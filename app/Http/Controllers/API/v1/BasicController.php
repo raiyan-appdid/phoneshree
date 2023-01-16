@@ -4,12 +4,15 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActiveBannerAd;
+use App\Models\ActiveFeaturedProduct;
 use App\Models\BannerPricing;
 use App\Models\City;
 use App\Models\FeaturedProductPricing;
+use App\Models\Membership;
 use App\Models\Seller;
 use App\Models\State;
 use App\Models\WalletTransaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BasicController extends Controller
@@ -85,10 +88,70 @@ class BasicController extends Controller
         ]);
     }
 
+    public function getBuyerDashboard(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+        ]);
+        $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->inRandomOrder()
+            ->limit(5)
+            ->get();
+        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->inRandomOrder()
+            ->limit(10)
+            ->get();
+        $sellerList = Seller::where('city_id', $request->city_id)->simplePaginate(20);
+        return response([
+            'ActiveBanner' => $activeBanner,
+            'FeaturedProduct' => $featuredProduct,
+            'sellerList' => $sellerList,
+        ], 200);
+    }
+
     public function getMembershipList(Request $request)
     {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+        $expiryDate = Seller::where('id', $request->seller_id)->first();
 
-        
+        if (Carbon::parse($expiryDate->membership_expiry_date) >= Carbon::today()) {
+            $membershipStatus = "active";
+        } else {
+            $membershipStatus = "expired";
+        }
+
+        $data = Membership::all();
+        return response([
+            'membership' => $data,
+            'expiryDate' => $expiryDate->membership_expiry_date,
+            'membershipStatus' => $membershipStatus,
+        ]);
+    }
+
+    public function loadWallet(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+            'amount' => 'required',
+        ]);
+        $data = Seller::where('id', $request->seller_id)->first();
+
+        $loadWallet = new WalletTransaction;
+        $loadWallet->seller_id = $request->seller_id;
+        $loadWallet->type = "credit";
+        $loadWallet->amount = $request->amount;
+        $loadWallet->remark = "added from bank";
+        $loadWallet->previous_wallet_balance = $data->current_wallet_balance;
+        $loadWallet->updated_wallet_balance = $data->current_wallet_balance + $request->amount;
+        $loadWallet->save();
+
+        $data->current_wallet_balance = $data->current_wallet_balance + $request->amount;
+        $data->save();
+
+        return response([
+            'message' => 'Balance Updated Successfully',
+        ], 200);
+
     }
 
 }

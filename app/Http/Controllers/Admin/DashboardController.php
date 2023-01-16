@@ -10,7 +10,7 @@ class DashboardController extends Controller
 
     public function home()
     {
-        ActiveBannerAdsService::storeActiveBannerAds();
+        ActiveBannerAdsService::activateBannerAds();
         return view('content.dashboard');
     }
 }

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class ActiveBannerAdsService
 {
-    public static function storeActiveBannerAds()
+    public static function activateBannerAds()
     {
         ActiveBannerAd::truncate();
         $data = BannerAdsTransaction::all();
@@ -22,6 +22,18 @@ class ActiveBannerAdsService
                 $data->expiry_date = $item->expiry_date;
                 $data->save();
             }
+        }
+    }
+
+    public static function storeActiveBannerAds($data)
+    {
+        if (Carbon::parse($data->expiry_date) >= Carbon::today()) {
+            $addData = new ActiveBannerAd;
+            $addData->city_id = $data->city_id;
+            $addData->image = $data->banner_image;
+            $addData->banner_ads_transaction_id = $data->id;
+            $addData->expiry_date = $data->expiry_date;
+            $addData->save();
         }
     }
 }
