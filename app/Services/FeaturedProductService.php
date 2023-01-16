@@ -24,10 +24,10 @@ class FeaturedProductService
                 ];
             }
         }
-        DB::beginTransaction();
+        // DB::beginTransaction();
         $activeFeaturedData::truncate();
         $activeFeaturedData::insert($data);
-        DB::commit();
+        // DB::commit();
     }
 
     public static function storeFeaturedProduct($data)
