@@ -40,7 +40,7 @@
           "name": "Banner Pricing",
           "icon": "circle",
           "slug": "admin.banner-pricing.index"
-        },  
+        },
         {
           "url": "admin/featuredproduct-pricing",
           "name": "Featured Product Pricing",
@@ -48,6 +48,12 @@
           "slug": "admin.featuredproduct-pricing.index"
         }
       ]
+    },
+    {
+      "url": "admin/extras/extrasPage",
+      "name": "Extras",
+      "icon": "<i data-feather='git-merge'></i>",
+      "slug": "admin.extras.extrasPage"
     }
   ]
 }

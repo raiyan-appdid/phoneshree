@@ -49,6 +49,7 @@ class BannerAdsTransactionController extends Controller
             $checkTheBalanceInSeller->save();
             return response([
                 'message' => 'Banner Ads Transaction Successfully Created',
+                'bannerAdsId' => $data->id,
                 'data' => $data,
             ], 200);
         } else {
@@ -56,5 +57,19 @@ class BannerAdsTransactionController extends Controller
                 'message' => 'Not Enough Amount',
             ], 200);
         }
+    }
+
+    public function transactionList(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+
+        $data = BannerAdsTransaction::where('seller_id', $request->seller_id)->get();
+        return response([
+            'transactionList' => $data,
+            'currentDate' => Carbon::today()->format('d m Y'),
+        ]);
+
     }
 }

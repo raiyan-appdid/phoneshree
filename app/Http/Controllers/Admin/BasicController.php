@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Extra;
 use App\Models\FreeTrialPeriod;
 use App\Models\WelcomeBonus;
 use Illuminate\Http\Request;
@@ -33,6 +34,29 @@ class BasicController extends Controller
         );
         return response([
             'header' => 'Welcome Bonus Updated',
+        ]);
+    }
+
+    public function extrasPage()
+    {
+        $extrasData = Extra::first();
+        return view('content.forms.extras', compact('extrasData'));
+    }
+
+    public function storeOrUpdate(Request $request)
+    {
+        Extra::updateOrCreate(
+            ['id' => '1'],
+            [
+                'phone1' => $request->phone1,
+                'phone2' => $request->phone2,
+                'email' => $request->email,
+                'privacy_policy' => $request->privacy_policy,
+                'terms_and_conditions' => $request->terms_and_conditions,
+            ]);
+        return response([
+            'header' => 'Success',
+            'message' => 'My message',
         ]);
     }
 }

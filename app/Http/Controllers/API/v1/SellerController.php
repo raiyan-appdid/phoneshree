@@ -99,8 +99,15 @@ class SellerController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Seller::where('id', $request->seller_id)->with(['city', 'state'])->first();
-        return response($data, 200);
+        $data = Seller::where('id', $request->seller_id)->with(['city', 'state', 'product'])->first();
+        $myReferralCode = $data->my_referral_code;
+        return response([
+            'sellerDetail' => $data,
+            // 'referral_share_message' => "Hello Brother this is my Referral code '" . $myReferralCode . "' .Please use this wisely",
+            'referral_share_message' => "🎉GOOD NEWS 😃🎉 
+            Please download Phone Shree App from Google play store. Use My referral code - '" . $myReferralCode . "'  while Signup to get Rs. 500  Instant Referral Bonus in your wallet.
+            Android App : https://bit.ly/3tGDsKf",
+        ], 200);
     }
 
     public function sellerEdit(Request $request)

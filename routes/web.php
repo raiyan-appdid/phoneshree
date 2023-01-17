@@ -119,4 +119,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::post('free-trial', 'storeFreeTrialPeriod')->name('free-trial');
         Route::post('welcome-bonus', 'storeWelcomeBonus')->name('welcome-bonus');
     });
+
+    Route::name('extras.')->prefix('extras')->controller(BasicController::class)->group(function () {
+        Route::post('storeOrUpdate', 'storeOrUpdate')->name('storeOrUpdate');
+        Route::get('extrasPage', 'extrasPage')->name('extrasPage');
+    });
 });

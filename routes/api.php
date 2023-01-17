@@ -61,14 +61,19 @@ Route::prefix('v1')->group(function () {
         Route::post('getsellerfromactivebannerlist', 'getSellerFromActiveBannerList')->name('getsellerfromactivebannerlist');
         Route::post('loadwallet', 'loadWallet')->name('loadwallet');
         Route::post('getmembershiplist', 'getMembershipList')->name('getmembershiplist');
+        Route::post('getmembershiptransactionlist', 'getMembershipTransactionList')->name('getmembershiptransactionlist');
+        Route::get('referralschemesetup', 'referralSchemeSetup')->name('referralschemesetup');
+        Route::get('extras', 'extras')->name('extras');
     });
 
     Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {
         Route::post('store', 'store')->name('store');
+        Route::post('transactionlist', 'transactionList')->name('transactionlist');
     });
 
     Route::prefix('banner-ads')->name('banner-ads.')->controller(BannerAdsTransactionController::class)->group(function () {
         Route::post('store', 'store')->name('store');
+        Route::post('transactionlist', 'transactionList')->name('transactionlist');
     });
 
     Route::prefix('buyer')->name('buyer.')->group(function () {

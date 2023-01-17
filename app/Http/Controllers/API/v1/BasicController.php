@@ -7,8 +7,11 @@ use App\Models\ActiveBannerAd;
 use App\Models\ActiveFeaturedProduct;
 use App\Models\BannerPricing;
 use App\Models\City;
+use App\Models\Extra;
 use App\Models\FeaturedProductPricing;
 use App\Models\Membership;
+use App\Models\MembershipTransaction;
+use App\Models\ReferScheme;
 use App\Models\Seller;
 use App\Models\State;
 use App\Models\WalletTransaction;
@@ -70,7 +73,7 @@ class BasicController extends Controller
         ]);
 
         $balance = Seller::where('id', $request->seller_id)->first();
-        $transactionList = WalletTransaction::where('seller_id', $request->seller_id)->get();
+        $transactionList = WalletTransaction::where('seller_id', $request->seller_id)->orderBy('created_at', 'desc')->get();
         return response([
             'balance' => $balance->current_wallet_balance,
             'transactionList' => $transactionList,
@@ -154,4 +157,32 @@ class BasicController extends Controller
 
     }
 
+    public function getMembershipTransactionList(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+
+        $data = MembershipTransaction::where('seller_id', $request->seller_id)->get();
+        return response([
+            'membershipTransactionList' => $data,
+        ], 200);
+    }
+
+    public function referralSchemeSetup()
+    {
+        $data = ReferScheme::first();
+        return response([
+            'referredBy' => $data->referred_by_reward_amount,
+            'referredPerson' => $data->referred_person_reward_amount,
+        ], 200);
+    }
+
+    public function extras()
+    {
+        $data = Extra::first();
+        return response([
+            'extras' => $data,
+        ], 200);
+    }
 }

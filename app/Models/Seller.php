@@ -20,4 +20,9 @@ class Seller extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

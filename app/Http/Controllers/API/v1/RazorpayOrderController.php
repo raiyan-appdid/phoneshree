@@ -80,6 +80,11 @@ class RazorpayOrderController extends Controller
 
         $razorpayOrder = RazorpayOrder::where('seller_id', $request->seller_id)->where('status', 'created')->get();
 
+        if (count($razorpayOrder) == 0) {
+            return response([
+                'message' => 'Seller Id not found',
+            ], 200);
+        }
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
 
         foreach ($razorpayOrder as $item) {
@@ -100,37 +105,43 @@ class RazorpayOrderController extends Controller
 
                         $seller->current_wallet_balance = $seller->current_wallet_balance + $item->amount;
                         $seller->save();
+                        $item->status = "inserted";
+                        $item->save();
                     }
 
                     if ($item->type == "membership") {
                         //bonus
                         $seller = Seller::where('id', $item->seller_id)->first();
+                        //checking if the membership is for first time
 
-                        $transaction = new WalletTransaction;
-                        $transaction->seller_id = $item->seller_id;
-                        $transaction->type = "credit";
-                        $transaction->amount = $item->amount;
-                        $transaction->remark = "welcome bonus";
-                        $transaction->previous_wallet_balance = $seller->current_wallet_balance;
-                        $transaction->updated_wallet_balance = $seller->current_wallet_balance + $item->amount;
-                        $transaction->save();
+                        $checkInMembership = MembershipTransaction::where('seller_id', $item->seller_id)->first();
+                        if (!isset($checkInMembership)) {
+                            $transaction = new WalletTransaction;
+                            $transaction->seller_id = $item->seller_id;
+                            $transaction->type = "credit";
+                            $transaction->amount = $item->amount;
+                            $transaction->remark = "welcome bonus";
+                            $transaction->previous_wallet_balance = $seller->current_wallet_balance;
+                            $transaction->updated_wallet_balance = $seller->current_wallet_balance + $item->amount;
+                            $transaction->save();
 
-                        $seller->current_wallet_balance = $seller->current_wallet_balance + $item->amount;
-                        $seller->save();
-
-                        // $membershipTransaction = MembershipTransaction
-
+                            $seller->current_wallet_balance = $seller->current_wallet_balance + $item->amount;
+                            $seller->save();
+                        }
                         //membership expiry date update
                         $sellerUpdate = Seller::where('id', $seller->id)->first();
-
                         $orderData = RazorpayOrder::where('order_id', $item->order_id)->first();
                         $orderData->membership_data;
 
                         $jsonData = json_decode($orderData->membership_data);
-                        // return $jsonData->validity;
-                        // return $orderData->membership_data;
-                        // foreach ($jsonData as $days) {
-                        $sellerUpdate->membership_expiry_date = Carbon::parse($sellerUpdate->membership_expiry_date)->addDays($jsonData->validity);
+
+                        if (Carbon::parse($sellerUpdate->membership_expiry_date) >= Carbon::today()) {
+                            $sellerUpdate->membership_expiry_date = Carbon::parse($sellerUpdate->membership_expiry_date)->addDays($jsonData->validity);
+                        } else {
+                            $sellerUpdate->membership_expiry_date = Carbon::today()->addDays($jsonData->validity);
+                        }
+
+                        $sellerUpdate->current_wallet_balance = $sellerUpdate->current_wallet_balance - $jsonData->amount;
                         $sellerUpdate->save();
 
                         //membership transaction entry
@@ -144,45 +155,42 @@ class RazorpayOrderController extends Controller
                         $membershipTransaction->expiry_date = $sellerUpdate->membership_expiry_date;
                         $membershipTransaction->save();
 
-                        // }
-
                         //referal scheme
-                        $checkReferal = Seller::where('id', $request->seller_id)->first();
+                        if (!isset($checkInMembership)) {
+                            $checkReferal = Seller::where('id', $request->seller_id)->first();
+                            if ($checkReferal->referred_by != "") {
+                                $refferedBySellerId = $checkReferal->referred_by;
+                                $referScheme = ReferScheme::first();
+                                //referred by person
+                                $seller = Seller::where('id', $refferedBySellerId)->first();
+                                $transaction = new WalletTransaction;
+                                $transaction->seller_id = $seller->id;
+                                $transaction->type = "credit";
+                                $transaction->amount = $referScheme->referred_by_reward_amount;
+                                $transaction->remark = "referral bonus";
+                                $transaction->previous_wallet_balance = $seller->current_wallet_balance;
+                                $transaction->updated_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_by_reward_amount;
+                                $transaction->save();
 
-                        if ($checkReferal->referred_by != "") {
-                            $refferedBySellerId = $checkReferal->referred_by;
+                                $seller->current_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_by_reward_amount;
+                                $seller->save();
 
-                            $referScheme = ReferScheme::first();
+                                $item->status = "inserted";
+                                $item->save();
 
-                            //referred by person
-                            $seller = Seller::where('id', $refferedBySellerId)->first();
-                            $transaction = new WalletTransaction;
-                            $transaction->seller_id = $seller->id;
-                            $transaction->type = "credit";
-                            $transaction->amount = $referScheme->referred_by_reward_amount;
-                            $transaction->remark = "referral bonus";
-                            $transaction->previous_wallet_balance = $seller->current_wallet_balance;
-                            $transaction->updated_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_by_reward_amount;
-                            $transaction->save();
-
-                            $seller->current_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_by_reward_amount;
-                            $seller->save();
-
-                            //referred person
-                            $transaction = new WalletTransaction;
-                            $transaction->seller_id = $checkReferal->id;
-                            $transaction->type = "credit";
-                            $transaction->amount = $referScheme->referred_person_reward_amount;
-                            $transaction->remark = "referral bonus";
-                            $transaction->previous_wallet_balance = $seller->current_wallet_balance;
-                            $transaction->updated_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_person_reward_amount;
-                            $transaction->save();
-
-                            $seller->current_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_person_reward_amount;
-                            $seller->save();
-
+                                //referred person
+                                $transaction = new WalletTransaction;
+                                $transaction->seller_id = $checkReferal->id;
+                                $transaction->type = "credit";
+                                $transaction->amount = $referScheme->referred_person_reward_amount;
+                                $transaction->remark = "referral bonus";
+                                $transaction->previous_wallet_balance = $seller->current_wallet_balance;
+                                $transaction->updated_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_person_reward_amount;
+                                $transaction->save();
+                                $seller->current_wallet_balance = $seller->current_wallet_balance + $referScheme->referred_person_reward_amount;
+                                $seller->save();
+                            }
                         }
-
                     }
                 }
             }
@@ -191,6 +199,6 @@ class RazorpayOrderController extends Controller
 
         return response([
             'message' => 'success',
-        ]);
+        ], 200);
     }
 }

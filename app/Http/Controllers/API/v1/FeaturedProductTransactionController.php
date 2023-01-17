@@ -47,6 +47,7 @@ class FeaturedProductTransactionController extends Controller
             $checkTheBalanceInSeller->save();
             return response([
                 'message' => 'Featured Product Transaction Successfully Created',
+                'featuredProductId' => $data->id,
                 'data' => $data,
             ], 200);
         } else {
@@ -54,6 +55,23 @@ class FeaturedProductTransactionController extends Controller
                 'message' => 'Not Enough Amount',
             ], 200);
         }
+
+    }
+
+    public function transactionList(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+        ]);
+
+        $data = FeaturedProductTransaction::where('seller_id', $request->seller_id)->with(['product'])->get();
+
+        // return Carbon::today()->format('d m Y : h:m');
+
+        return response([
+            'transactionList' => $data,
+            'currentDate' => Carbon::today()->format('d m Y'),
+        ]);
 
     }
 }
