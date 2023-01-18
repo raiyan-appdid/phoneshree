@@ -147,6 +147,7 @@ class RazorpayOrderController extends Controller
                         $membershipTransaction->membership_name = $jsonData->name;
                         $membershipTransaction->validity = $jsonData->validity;
                         $membershipTransaction->amount = $jsonData->amount;
+                        $membershipTransaction->transaction_id = $item->order_id;
                         $membershipTransaction->purchase_date = now();
                         $membershipTransaction->expiry_date = $sellerUpdate->membership_expiry_date;
                         $membershipTransaction->save();
