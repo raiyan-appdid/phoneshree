@@ -45,6 +45,7 @@ class RazorpayOrderController extends Controller
             $razorpayOrder->type = $request->type;
             $razorpayOrder->save();
         }
+
         if ($request->type == "membership") {
             $request->validate([
                 'membership_id' => 'required',
@@ -113,7 +114,6 @@ class RazorpayOrderController extends Controller
                         //bonus
                         $seller = Seller::where('id', $item->seller_id)->first();
                         //checking if the membership is for first time
-
                         $checkInMembership = MembershipTransaction::where('seller_id', $item->seller_id)->first();
                         if (!isset($checkInMembership)) {
                             $transaction = new WalletTransaction;
@@ -132,16 +132,12 @@ class RazorpayOrderController extends Controller
                         $sellerUpdate = Seller::where('id', $seller->id)->first();
                         $orderData = RazorpayOrder::where('order_id', $item->order_id)->first();
                         $orderData->membership_data;
-
                         $jsonData = json_decode($orderData->membership_data);
-
                         if (Carbon::parse($sellerUpdate->membership_expiry_date) >= Carbon::today()) {
                             $sellerUpdate->membership_expiry_date = Carbon::parse($sellerUpdate->membership_expiry_date)->addDays($jsonData->validity);
                         } else {
                             $sellerUpdate->membership_expiry_date = Carbon::today()->addDays($jsonData->validity);
                         }
-
-                        $sellerUpdate->current_wallet_balance = $sellerUpdate->current_wallet_balance - $jsonData->amount;
                         $sellerUpdate->save();
 
                         //membership transaction entry
@@ -154,6 +150,9 @@ class RazorpayOrderController extends Controller
                         $membershipTransaction->purchase_date = now();
                         $membershipTransaction->expiry_date = $sellerUpdate->membership_expiry_date;
                         $membershipTransaction->save();
+
+                        $item->status = "inserted";
+                        $item->save();
 
                         //referal scheme
                         if (!isset($checkInMembership)) {

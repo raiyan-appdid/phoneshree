@@ -64,7 +64,7 @@ class FeaturedProductTransactionController extends Controller
             'seller_id' => 'required',
         ]);
 
-        $data = FeaturedProductTransaction::where('seller_id', $request->seller_id)->with(['product'])->get();
+        $data = FeaturedProductTransaction::where('seller_id', $request->seller_id)->with(['product.productImage'])->with(['product.document'])->get();
 
         // return Carbon::today()->format('d m Y : h:m');
 

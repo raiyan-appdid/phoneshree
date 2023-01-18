@@ -52,7 +52,7 @@
     {
       "url": "admin/extras/extrasPage",
       "name": "Extras",
-      "icon": "<i data-feather='git-merge'></i>",
+      "icon": "<i data-feather='archive'></i>",
       "slug": "admin.extras.extrasPage"
     }
   ]
