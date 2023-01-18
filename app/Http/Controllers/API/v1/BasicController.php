@@ -96,10 +96,10 @@ class BasicController extends Controller
         $request->validate([
             'city_id' => 'required',
         ]);
-        $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->inRandomOrder()
+        $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->with(['bannerAdsTransaction.seller'])->inRandomOrder()
             ->limit(5)
             ->get();
-        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->inRandomOrder()
+        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
             ->limit(10)
             ->get();
         $sellerList = Seller::where('city_id', $request->city_id)->simplePaginate(20);

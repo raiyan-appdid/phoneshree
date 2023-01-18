@@ -18,4 +18,14 @@ class Product extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function scopeLive($query)
+    {
+        return $query->where('status', 'livesell');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
 }
