@@ -127,6 +127,7 @@ class BasicController extends Controller
         return response([
             'membership' => $data,
             'expiryDate' => $expiryDate->membership_expiry_date,
+            'currentDate' => Carbon::today()->format('Y-m-d'),
             'membershipStatus' => $membershipStatus,
         ]);
     }
