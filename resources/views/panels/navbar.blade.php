@@ -86,8 +86,8 @@
                     <span class="user-status">Admin</span>
                 </div>
                 <span class="avatar">
-                    <img class="round" src="{{ asset('images/logo/maryamlogo-dark.png') }}" alt="avatar"
-                        height="40" width="40">
+                    <img class="round" src="{{ asset('images/logo/logo.png') }}" alt="avatar" height="40"
+                        width="40">
                     <span class="avatar-status-online"></span>
                 </span>
             </a>

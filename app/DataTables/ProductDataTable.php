@@ -84,7 +84,7 @@ class ProductDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'), Column::make(''),
+            Column::make('id'), Column::make('product_title'),
             Column::make('created_at'),
             Column::computed('status')
                 ->exportable(false)

@@ -65,13 +65,13 @@ class ProductController extends Controller
         $data->save();
 
         //storing multiple images
-        foreach ($request->document as $item) {
+        foreach ($request->product as $item) {
             $productImage = new ProductImage;
             $productImage->product_id = $data->id;
             $productImage->image = FileUploader::uploadFile($item, 'images/product-image');
             $productImage->save();
         }
-        foreach ($request->product as $item) {
+        foreach ($request->document as $item) {
             $documentImage = new Document;
             $documentImage->product_id = $data->id;
             $documentImage->image = FileUploader::uploadFile($item, 'images/document');

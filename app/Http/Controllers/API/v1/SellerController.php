@@ -99,7 +99,7 @@ class SellerController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Seller::where('id', $request->seller_id)->with(['city', 'state', 'product' => fn($q) => $q->live()])->first();
+        $data = Seller::where('id', $request->seller_id)->with(['city', 'state', 'product' => fn($q) => $q->with(['productImage', 'document'])->live()])->first();
         $myReferralCode = $data->my_referral_code;
         return response([
             'sellerDetail' => $data,
