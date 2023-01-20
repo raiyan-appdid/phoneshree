@@ -86,8 +86,21 @@ class BasicController extends Controller
             'city_id' => 'required',
         ]);
         $data = ActiveBannerAd::where('city_id', $request->city_id)->with(['bannerAdsTransaction.seller'])->get()->pluck('bannerAdsTransaction')->pluck('seller');
+
+        if ($data->count() == 0) {
+            return "No Data Found";
+        }
+
+        // Check for multiple sellers
+        $checkid = 0;
+        foreach ($data as $dataitem) {
+            if ($checkid != $dataitem->id) {
+                $item[] = $dataitem;
+            }
+            $checkid = $dataitem->id;
+        }
         return response([
-            'SellerList' => $data,
+            'SellerList' => $item,
         ]);
     }
 
