@@ -19,19 +19,35 @@ class ProductDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($value) {
-                $edit_route = route('admin.products.edit', $value->id);
-                $edit_callback = 'setValue';
-                $modal = '#edit-product-modal';
-                $delete_route = route('admin.products.destroy', $value->id);
-                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
-            })
+            // ->addColumn('action', function ($value) {
+            //     $edit_route = route('admin.products.edit', $value->id);
+            //     $edit_callback = 'setValue';
+            //     $modal = '#edit-product-modal';
+            //     $delete_route = route('admin.products.destroy', $value->id);
+            //     return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            // })
             ->editColumn('created_at', function ($data) {
                 return '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })->addColumn('status', function ($data) {
-            $route = route('admin.products.status');
-            return view('content.table-component.switch', compact('data', 'route'));
-        })
+            })
+            ->editColumn('seller_id', function ($data) {
+                return $data->seller;
+            })
+            //     ->addColumn('status', function ($data) {
+            //     $route = route('admin.products.status');
+            //     return view('content.table-component.switch', compact('data', 'route'));
+            // })
+            ->editColumn('status', function ($data) {
+                if ($data->status == "livesell") {
+                    return '<span class="badge badge-light-success">' . $data->status . '</span>';
+                }
+                if ($data->status == "sold") {
+                    return '<span class="badge badge-light-danger">' . $data->status . '</span>';
+                }
+                if ($data->status == "inventory") {
+                    return '<span class="badge badge-light-secondary">' . $data->status . '</span>';
+                }
+            })
+
             ->escapeColumns('created_at', 'action');
     }
 
@@ -43,7 +59,9 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model)
     {
-        return $model->newQuery();
+        $model = $model->newQuery();
+        $model->with(['seller']);
+        return $model;
     }
 
     /**
@@ -84,18 +102,19 @@ class ProductDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'), Column::make('product_title'),
+            Column::make('id'),
+            Column::make('seller_id')
+                ->title('seller')
+                ->data('seller.name'),
+            Column::make('product_title'),
+            Column::make('product_selling_price'),
+            Column::make('status'),
             Column::make('created_at'),
-            Column::computed('status')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
 
         ];
     }

@@ -10,28 +10,22 @@
         <form action="{{ route('admin.extras.storeOrUpdate') }}" id="extras-store" method="post">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="">Contact 1</label>
-                    <input type="number" name="phone1" value="{{ $extrasData->phone1 ?? '' }}" class="form-control">
+                    <x-input name="phone1" label="Contact 1" value="{{ $extrasData->phone1 ?? '' }}" />
                 </div>
                 <div class="col-md-6">
-                    <label for="">Contact 2</label>
-                    <input type="number" name="phone2" value="{{ $extrasData->phone2 ?? '' }}" class="form-control">
+                    <x-input name="phone2" label="Contact 2" value="{{ $extrasData->phone2 ?? '' }}" />
+
                 </div>
                 <div class="col-md-6">
-                    <label for="">Email</label>
-                    <input type="email" value="{{ $extrasData->email ?? '' }}" name="email" class="form-control">
+                    <x-input name="email" label="Email" value="{{ $extrasData->email ?? '' }}" />
                 </div>
                 <div class="col-md-6 col-6">
-                    <label for="">Privacy Policy</label>
-                    <input type="url" name="privacy_policy" value="{{ $extrasData->privacy_policy ?? '' }}"
-                        id="" class="form-control">
+                    <x-input name="privacy_policy" type="url" value="{{ $extrasData->privacy_policy ?? '' }}" />
                 </div>
                 <div class="col-md-6 col-6">
-                    <label for="">Terms and Conditions</label>
-                    <input type="url" name="terms_and_conditions" value="{{ $extrasData->terms_and_conditions ?? '' }}"
-                        id="" class="form-control">
+                    <x-input name="terms_and_conditions" type="url" value="{{ $extrasData->terms_and_conditions ?? '' }}" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </div>

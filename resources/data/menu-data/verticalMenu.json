@@ -8,7 +8,7 @@
     },
     {
       "url": "admin/sellers",
-      "name": "Seller Management",
+      "name": "Merchants Management",
       "icon": "<i data-feather='log-in'></i>",
       "slug": "admin.sellers.index"
     },

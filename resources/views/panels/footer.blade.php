@@ -1,7 +1,7 @@
 <!-- BEGIN: Footer-->
 <footer class="footer {{ $configData['footerType'] === 'footer-hidden' ? 'd-none' : '' }} footer-light">
     <p class="clearfix mb-0">
-        {{ date('Y') }}<a class="ml-25" href="{{ url('admin') }}" target="_blank">Maryam</a>
+        {{ date('Y') }}<a class="ml-25" href="{{ url('admin') }}" target="_blank">PhoneShree</a>
         <span class="d-none d-sm-inline-block">, All rights Reserved</span>
         </span>
         <span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span>

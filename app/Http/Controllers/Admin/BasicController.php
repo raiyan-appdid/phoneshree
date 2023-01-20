@@ -56,7 +56,7 @@ class BasicController extends Controller
             ]);
         return response([
             'header' => 'Success',
-            'message' => 'My message',
+            'message' => 'Extra Detais Updated',
         ]);
     }
 }

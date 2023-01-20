@@ -39,10 +39,11 @@ class SellerDataTable extends DataTable
 
             ->editColumn('created_at', function ($data) {
                 return '<span class="badge badge-light-info">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })->addColumn('status', function ($data) {
-            $route = route('admin.sellers.status');
-            return view('content.table-component.switch', compact('data', 'route'));
-        })
+            })
+        //     ->addColumn('status', function ($data) {
+        //     $route = route('admin.sellers.status');
+        //     return view('content.table-component.switch', compact('data', 'route'));
+        // })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -105,16 +106,16 @@ class SellerDataTable extends DataTable
             Column::make('address'),
             Column::make('membership_expiry_date'),
             Column::make('created_at'),
-            Column::computed('status')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('status')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
 
         ];
     }
