@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\FreeTrialPeriod;
 use App\Models\Seller;
+use App\Models\State;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -38,13 +40,15 @@ class SellerController extends Controller
                 $myRefferedCode = strtoupper(bin2hex($bytes));
                 $data->my_referral_code = $myRefferedCode;
             }
+            $cityData = $this->citySelectOrAdd($request->city_id, $request->state_id);
             $data->name = $request->name;
             $data->number = $request->number;
             $data->email = $request->email;
-            $data->city_id = $request->city_id;
+            $data->city_id = $cityData;
             $data->state_id = $request->state_id;
             $data->shop_name = $request->shop_name;
             $data->referred_by = $request->referred_by;
+            $data->gst_no = $request->gst_no;
             $data->short_description = $request->short_description;
 
             //free trail period data
@@ -63,6 +67,24 @@ class SellerController extends Controller
             ], 200);
         } else {
             return response("Seller is already registered", 200);
+        }
+    }
+
+    public function citySelectOrAdd($city, $state)
+    {
+        if (is_numeric($city)) {
+            return $city;
+        } else {
+            $stateData = State::where('id', $state)->first();
+            $addCity = new City;
+            $addCity->name = $city;
+            $addCity->state_id = $stateData->id;
+            $addCity->state_code = $stateData->iso2;
+            $addCity->country_id = $stateData->country_id;
+            $addCity->country_code = $stateData->country_code;
+            $addCity->flag = $stateData->flag;
+            $addCity->save();
+            return $addCity->id;
         }
     }
 
@@ -118,15 +140,18 @@ class SellerController extends Controller
             // 'shop_name' => 'required',
             // 'short_description' => 'required',
             // 'shop_image' => 'required',
-            // 'address' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
         ]);
         $data = Seller::findOrFail($request->seller_id);
+        $cityData = $this->citySelectOrAdd($request->city_id, $request->state_id);
         $data->name = $request->name;
         $data->number = $request->number;
         $data->email = $request->email;
-        $data->city_id = $request->city_id;
+        $data->city_id = $cityData;
         $data->state_id = $request->state_id;
         $data->shop_name = $request->shop_name;
+        $data->gst_no = $request->gst_no;
         $data->short_description = $request->short_description;
         if (isset($request->shop_image)) {
             $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');

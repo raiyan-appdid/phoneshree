@@ -31,6 +31,12 @@
       "slug": "admin.referscheme.index"
     },
     {
+      "url": "admin/popup",
+      "name": "Pop Up Management",
+      "icon": "<i data-feather='git-merge'></i>",
+      "slug": "admin.popup.index"
+    },
+    {
       "name": "Advertise Management",
       "icon": "<i data-feather='package'></i>",
       "slug": "",

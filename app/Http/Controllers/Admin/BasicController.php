@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Extra;
 use App\Models\FreeTrialPeriod;
 use App\Models\WelcomeBonus;
@@ -58,5 +59,14 @@ class BasicController extends Controller
             'header' => 'Success',
             'message' => 'Extra Detais Updated',
         ]);
+    }
+
+    public function get_cities(Request $request)
+    {
+        $request->validate([
+            'state_id' => 'required',
+        ]);
+        $cities = City::india()->where('state_id', $request->state_id)->orderBy('name', 'ASC')->get(['id', 'name']);
+        return response($cities);
     }
 }

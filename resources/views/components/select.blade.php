@@ -15,7 +15,7 @@
         @else
             name="{{ $name }}" @endif>
         @if (!$multiple)
-            <option selected disabled>Select {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</option>
+            <option selected disabled>Select {{ $label ?? Str::ucfirst(Str::replace('_', ' ', $name)) }}</option>
         @endif
 
         @forelse ($options as $option)

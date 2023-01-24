@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BasicController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedProductPricingController;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\Admin\PopUpController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReferSchemeController as AdminReferSchemeController;
 use App\Http\Controllers\Admin\SellerController;
@@ -118,10 +119,25 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     Route::name('others.')->prefix('others')->controller(BasicController::class)->group(function () {
         Route::post('free-trial', 'storeFreeTrialPeriod')->name('free-trial');
         Route::post('welcome-bonus', 'storeWelcomeBonus')->name('welcome-bonus');
+        Route::post('get-city', 'get_cities')->name('get-city');
     });
 
     Route::name('extras.')->prefix('extras')->controller(BasicController::class)->group(function () {
         Route::post('storeOrUpdate', 'storeOrUpdate')->name('storeOrUpdate');
         Route::get('extrasPage', 'extrasPage')->name('extrasPage');
     });
+
+    Route::name('popup.')
+        ->prefix('popup')
+        ->controller(PopUpController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('blocked', 'index')->name('blocked');
+        Route::get('deleted', 'index')->name('deleted');
+        Route::post('store', 'store')->name('store');
+        Route::get('{id}/edit', "edit")->name('edit');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::post('update', 'update')->name('update');
+        Route::put('status', 'status')->name('status');
+    });
+
 });

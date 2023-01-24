@@ -17,18 +17,20 @@ class Select extends Component
     public $optionValue;
     public $array;
     public $id;
+    public $placeholder;
     public function __construct(
         string $name,
-        array|object $options = [],
+        array | object $options = [],
         bool $multiple = false,
         string $class = "",
         $attrs = "",
         bool $required = true,
         array $additionalOptionText = [],
-        string|bool $label = false,
+        string | bool $label = false,
         string $optionValue = null,
         bool $array = false,
-        $id = null
+        $id = null,
+        $placeholder = null,
     ) {
         $this->name = $name;
         $this->options = $options;
@@ -41,6 +43,7 @@ class Select extends Component
         $this->optionValue = $optionValue;
         $this->array = $array;
         $this->id = $id;
+        $this->placeholder = $placeholder;
     }
 
     /**
