@@ -64,6 +64,7 @@ Route::prefix('v1')->group(function () {
         Route::post('getmembershiptransactionlist', 'getMembershipTransactionList')->name('getmembershiptransactionlist');
         Route::get('referralschemesetup', 'referralSchemeSetup')->name('referralschemesetup');
         Route::get('extras', 'extras')->name('extras');
+        Route::post('getpopup', 'getPopUp')->name('getpopup');
     });
 
     Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {

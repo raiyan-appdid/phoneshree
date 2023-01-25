@@ -120,6 +120,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::post('free-trial', 'storeFreeTrialPeriod')->name('free-trial');
         Route::post('welcome-bonus', 'storeWelcomeBonus')->name('welcome-bonus');
         Route::post('get-city', 'get_cities')->name('get-city');
+        Route::get('wallet', 'walletIndex')->name('wallet');
+        Route::post('getWalletData', 'getWalletData')->name('getWalletData');
+        Route::post('storeWalletData', 'storeWalletData')->name('storeWalletData');
     });
 
     Route::name('extras.')->prefix('extras')->controller(BasicController::class)->group(function () {

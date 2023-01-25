@@ -37,6 +37,12 @@
       "slug": "admin.popup.index"
     },
     {
+      "url": "admin/others/wallet",
+      "name": "Wallet Management",
+      "icon": "<i data-feather='git-merge'></i>",
+      "slug": "admin.others.wallet"
+    },
+    {
       "name": "Advertise Management",
       "icon": "<i data-feather='package'></i>",
       "slug": "",

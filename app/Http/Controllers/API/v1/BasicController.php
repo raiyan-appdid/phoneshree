@@ -11,6 +11,7 @@ use App\Models\Extra;
 use App\Models\FeaturedProductPricing;
 use App\Models\Membership;
 use App\Models\MembershipTransaction;
+use App\Models\PopUp;
 use App\Models\ReferScheme;
 use App\Models\Seller;
 use App\Models\State;
@@ -88,7 +89,9 @@ class BasicController extends Controller
         $data = ActiveBannerAd::where('city_id', $request->city_id)->with(['bannerAdsTransaction.seller'])->get()->pluck('bannerAdsTransaction')->pluck('seller');
 
         if ($data->count() == 0) {
-            return "No Data Found";
+            return response([
+                'message' => "no data found",
+            ], 200);
         }
 
         // Check for multiple sellers
@@ -197,6 +200,17 @@ class BasicController extends Controller
         $data = Extra::first();
         return response([
             'extras' => $data,
+        ], 200);
+    }
+
+    public function getPopUp(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+        ]);
+        $data = PopUp::where('type', $request->type)->inRandomOrder()->first();
+        return response([
+            'popup' => $data,
         ], 200);
     }
 }

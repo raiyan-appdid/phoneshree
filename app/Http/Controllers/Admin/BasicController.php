@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Extra;
 use App\Models\FreeTrialPeriod;
+use App\Models\Seller;
+use App\Models\WalletTransaction;
 use App\Models\WelcomeBonus;
 use Illuminate\Http\Request;
 
@@ -68,5 +70,51 @@ class BasicController extends Controller
         ]);
         $cities = City::india()->where('state_id', $request->state_id)->orderBy('name', 'ASC')->get(['id', 'name']);
         return response($cities);
+    }
+
+    public function walletIndex()
+    {
+        $sellerData = Seller::all();
+        return view('content.pages.wallet', compact('sellerData'));
+    }
+
+    public function getWalletData(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+        ]);
+        $data = Seller::where('id', $request->id)->first();
+        return response($data);
+    }
+
+    public function storeWalletData(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required',
+            'seller' => 'required',
+            'type' => 'required',
+        ]);
+        $data = Seller::where('id', $request->seller)->first();
+        $wallet = new WalletTransaction;
+        $wallet->seller_id = $request->seller;
+        $wallet->type = $request->type;
+        $wallet->amount = $request->amount;
+        $wallet->previous_wallet_balance = $data->current_wallet_balance;
+        if ($request->type == "credit") {
+            $wallet->remark = "credited by admin";
+            $wallet->updated_wallet_balance = $data->current_wallet_balance + $request->amount;
+            $data->current_wallet_balance = $data->current_wallet_balance + $request->amount;
+        } else if ($request->type == "debit") {
+            $wallet->remark = "debited by admin";
+            $wallet->updated_wallet_balance = $data->current_wallet_balance - $request->amount;
+            $data->current_wallet_balance = $data->current_wallet_balance - $request->amount;
+        }
+        $wallet->save();
+        $data->save();
+
+        return response([
+            'header' => 'Updated',
+            'message' => 'Merchant Wallet Updated',
+        ]);
     }
 }

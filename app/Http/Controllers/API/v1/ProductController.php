@@ -16,11 +16,11 @@ class ProductController extends Controller
         \Log::info($request->all());
         $request->validate([
             'seller_id' => 'required',
-            'customer_name' => 'required',
-            'customer_number' => 'required',
-            'customer_pic' => 'required',
+            // 'customer_name' => 'required',
+            // 'customer_number' => 'required',
+            // 'customer_pic' => 'required',
             'imei_number' => 'required',
-            'customer_buy_price' => 'required',
+            // 'customer_buy_price' => 'required',
             'product_title' => 'required',
             'product_description' => 'required',
             'document' => 'required',

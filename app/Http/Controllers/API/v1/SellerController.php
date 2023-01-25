@@ -127,7 +127,7 @@ class SellerController extends Controller
             'sellerDetail' => $data,
             'referral_share_message' => "🎉GOOD NEWS 😃🎉
             Please download Phone Shree App from Google play store. Use My referral code - '" . $myReferralCode . "'  while Signup to get Rs. 500  Instant Referral Bonus in your wallet.
-            Android App : https://bit.ly/3tGDsKf",
+            Android App : https://bit.ly/3Jb6r0v",
         ], 200);
     }
 
