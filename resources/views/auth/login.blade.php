@@ -22,7 +22,7 @@
                         <h2 class="brand-text text-primary ">{{ Str::ucfirst(env('APP_NAME')) }}</h2>
                     </a>
 
-                    <h4 class="card-title mb-1">Welcome to {{ Str::ucfirst(env('APP_NAME')) }}! 👋</h4>
+                    <h4 class="card-title mb-1">Welcome to {{ Str::ucfirst(env('APP_NAME')) }}! - new 👋</h4>
                     <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
 
                     <form class="auth-login-form mt-2" method="post" action="{{ route('login') }}">
