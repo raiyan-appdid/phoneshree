@@ -77,13 +77,13 @@ class BannerAdsTransactionController extends Controller
     public function imageUpdate(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:active_banner_ads,id',
+            'id' => 'required|exists:banner_ads_transactions,id',
             'image' => 'required',
         ]);
-        $active = ActiveBannerAd::where('id', $request->id)->first();
-        $active->image = FileUploader::uploadFile($request->image, 'images/banner-image');
-        $active->save();
-        $bannerTransaction = BannerAdsTransaction::where('id', $active->banner_ads_transaction_id)->first();
+        // $active = ActiveBannerAd::where('id', $request->id)->first();
+        // $active->image = FileUploader::uploadFile($request->image, 'images/banner-image');
+        // $active->save();
+        $bannerTransaction = BannerAdsTransaction::where('id', $request->id)->first();
         $bannerTransaction->banner_image = FileUploader::uploadFile($request->image, 'images/banner-image');
         $bannerTransaction->save();
         return response([
