@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sellers', function (Blueprint $table) {
-            $table->string('current_wallet_balance')->nullable();
+            $table->string('current_wallet_balance')->nullable()->default(0);
         });
     }
 

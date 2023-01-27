@@ -29,8 +29,8 @@ class ProductDataTable extends DataTable
             ->editColumn('created_at', function ($data) {
                 return '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
-            ->editColumn('seller_id', function ($data) {
-                return $data->seller;
+            ->editColumn('seller', function ($data) {
+                return $data->seller->name ?? '<span class="badge badge-light-danger">Seller Deleted</span>';
             })
             //     ->addColumn('status', function ($data) {
             //     $route = route('admin.products.status');
@@ -61,6 +61,7 @@ class ProductDataTable extends DataTable
     {
         $model = $model->newQuery();
         $model->with(['seller']);
+        // $model->where('seller_id', '!=',null);
         return $model;
     }
 
@@ -105,7 +106,7 @@ class ProductDataTable extends DataTable
             Column::make('id'),
             Column::make('seller_id')
                 ->title('seller')
-                ->data('seller.name'),
+                ->data('seller'),
             Column::make('product_title'),
             Column::make('product_selling_price'),
             Column::make('status'),
