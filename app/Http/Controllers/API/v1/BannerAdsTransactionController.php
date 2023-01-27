@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\ActiveBannerAd;
 use App\Models\BannerAdsTransaction;
 use App\Models\Seller;
 use App\Models\WalletTransaction;
@@ -71,5 +72,22 @@ class BannerAdsTransactionController extends Controller
             'currentDate' => Carbon::today()->format('d m Y'),
         ]);
 
+    }
+
+    public function imageUpdate(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:active_banner_ads,id',
+            'image' => 'required',
+        ]);
+        $active = ActiveBannerAd::where('id', $request->id)->first();
+        $active->image = FileUploader::uploadFile($request->image, 'images/banner-image');
+        $active->save();
+        $bannerTransaction = BannerAdsTransaction::where('id', $active->banner_ads_transaction_id)->first();
+        $bannerTransaction->banner_image = FileUploader::uploadFile($request->image, 'images/banner-image');
+        $bannerTransaction->save();
+        return response([
+            'message' => 'Updated'
+        ]);
     }
 }

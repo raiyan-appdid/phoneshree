@@ -78,6 +78,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::get('{id}/edit', "edit")->name('edit');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
+        Route::post('assignMembership', 'assignMembership')->name('assignMembership');
         Route::put('status', 'status')->name('status');
     });
     Route::name('referscheme.')

@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{ $body ?? '' }}
+                {{ $slot ?? '' }}
             </div>
             @if ($footer)
                 <div class="modal-footer">

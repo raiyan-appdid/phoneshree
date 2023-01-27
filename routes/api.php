@@ -75,6 +75,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('banner-ads')->name('banner-ads.')->controller(BannerAdsTransactionController::class)->group(function () {
         Route::post('store', 'store')->name('store');
         Route::post('transactionlist', 'transactionList')->name('transactionlist');
+        Route::post('update-image', 'imageUpdate')->name('update-image');
     });
 
     Route::prefix('buyer')->name('buyer.')->group(function () {

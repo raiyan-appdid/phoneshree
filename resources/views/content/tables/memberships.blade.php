@@ -15,21 +15,28 @@
                         <div class="col-md-12">
                             <h2 class="text-center">Trial Period</h2>
                         </div>
-                    </div>
-                    <form action="" method="POST" id="free-trial">
-                        @csrf
-                        <label for="free_trial_period" class="form-label">Free Trial Period (In days)</label>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" name="free_trial_period"
-                                    value="{{ $freeTrial->free_trial_period ?? '' }}" class="form-control"
-                                    id="free_trial_period">
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-primary waves-effect" type="submit">Submit</button>
-                            </div>
+
+                        <div class="col-md-12">
+                            <form action="" method="POST" id="free-trial">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <x-input type="text" label="Free Trial Period (In days)" name="free_trial_period"
+                                            value="{{ $freeTrial->free_trial_period ?? '' }}" id="free_trial_period" />
+                                    </div>
+                                    <div class="col-md-4 my-auto">
+                                        <button class="btn btn-primary waves-effect btn-sm" type="submit">Submit</button>
+                                    </div>
+                                    <div class="col-md-4 my-auto">
+                                        <button data-target="assign-membership" type="button"
+                                            class="btn btn-primary waves-effect btn-sm">Assign Membership
+                                            To
+                                            Merchant</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </x-card>
 
                 <x-card>
@@ -44,6 +51,14 @@
         </div>
     </section>
 
+    <x-modal id="assign-membership" title="Assign Membership">
+        <x-form id="assign-membership" method="POST" class="" :route="route('admin.memberships.assignMembership')">
+            <div class="col-md-12 col-12 ">
+                <x-select name="seller_id" :options="$seller" />
+                <x-select name="membership_id" :options="$membership" />
+            </div>
+        </x-form>
+    </x-modal>
 
     <x-side-modal title="Add membership" id="add-membership-modal">
         <x-form id="add-membership" method="POST" class="" :route="route('admin.memberships.store')">
@@ -75,6 +90,11 @@
                 const modal = $(this).data('show');
                 $(`#${modal}`).modal('show');
             });
+            $(document).on('click', '[data-target]', function() {
+                $('#' + $(this).data('target')).modal('show');
+            });
+
+
         });
 
         $('#free-trial').on('submit', function(e) {
