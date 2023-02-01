@@ -4,13 +4,11 @@ namespace App\Jobs;
 
 use Berkayk\OneSignal\OneSignalFacade;
 use Exception;
-use OneSignal;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SendNotificationJob implements ShouldQueue
 {
@@ -38,8 +36,6 @@ class SendNotificationJob implements ShouldQueue
         $this->big_picture = $big_picture;
     }
 
-
-
     /**
      * Execute the job.
      *
@@ -48,7 +44,7 @@ class SendNotificationJob implements ShouldQueue
     public function handle()
     {
         $params = [];
-        $contents = ["en" => $this->message,];
+        $contents = ["en" => $this->message];
 
         if (!empty($this->device_ids)) {
             $params['include_player_ids'] = $this->device_ids;
@@ -56,8 +52,8 @@ class SendNotificationJob implements ShouldQueue
             $params['included_segments'] = ['All'];
         }
         $params['contents'] = $contents;
-        $params['headings'] = ["en" => $this->title,];
-        $params['data'] =  ['msg' => 'hello there'];
+        $params['headings'] = ["en" => $this->title];
+        $params['data'] = ['msg' => 'hello there'];
         $params['large_icon'] = $this->small_picture ?? asset('images/logo/logo.png');
         if ($this->channel) {
             $params['android_channel_id'] = $this->channel;
@@ -67,7 +63,7 @@ class SendNotificationJob implements ShouldQueue
             // $params['ios_attachments'] = ['id' => asset($img)];
         }
         try {
-            $signal =   OneSignalFacade::sendNotificationCustom($params);
+            $signal = OneSignalFacade::sendNotificationCustom($params);
             return $signal;
         } catch (Exception $e) {
             throw $e;

@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Http\Controllers\Admin\ActiveBannerAdsController;
 use App\Http\Controllers\Admin\BannerPricingController;
 use App\Http\Controllers\Admin\BasicController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FeaturedProductController;
 use App\Http\Controllers\Admin\FeaturedProductPricingController;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PopUpController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReferSchemeController as AdminReferSchemeController;
@@ -28,6 +31,14 @@ Route::prefix('admin')->middleware(['web'])->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->group(function () {
     Route::name('home.')->controller(DashboardController::class)->group(function () {
         Route::get('/', 'home')->name('index');
+    });
+
+    Route::get('banner-ads', [ActiveBannerAdsController::class, 'index'])->name('banner-ads');
+    Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured-product');
+
+    Route::prefix('notification')->name('notification.')->controller(NotificationController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('store', 'store')->name('store');
     });
 
     //for references

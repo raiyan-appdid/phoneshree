@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use App\Models\City;
 use App\Models\FreeTrialPeriod;
 use App\Models\Seller;
@@ -41,6 +42,10 @@ class SellerController extends Controller
                 $data->my_referral_code = $myRefferedCode;
             }
             $cityData = $this->citySelectOrAdd($request->city_id, $request->state_id);
+            if (isset($request->area_id)) {
+                $areaData = $this->areaSelectOrAdd($request->area_id, $request->city_id);
+                $data->area_id = $areaData;
+            }
             $data->name = $request->name;
             $data->number = $request->number;
             $data->email = $request->email;
@@ -83,6 +88,19 @@ class SellerController extends Controller
             $addCity->country_id = $stateData->country_id;
             $addCity->country_code = $stateData->country_code;
             $addCity->flag = $stateData->flag;
+            $addCity->save();
+            return $addCity->id;
+        }
+    }
+    public function areaSelectOrAdd($area, $city)
+    {
+        if (is_numeric($area)) {
+            return $area;
+        } else {
+            $cityData = City::where('id', $city)->first();
+            $addCity = new Area;
+            $addCity->name = $area;
+            $addCity->city_id = $cityData->id;
             $addCity->save();
             return $addCity->id;
         }

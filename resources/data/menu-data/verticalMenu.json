@@ -25,6 +25,18 @@
       "slug": "admin.products.index"
     },
     {
+      "url": "admin/banner-ads",
+      "name": "Banner Ads List",
+      "icon": "<i data-feather='cast'></i>",
+      "slug": "admin.banner-ads"
+    },
+    {
+      "url": "admin/featured-product",
+      "name": "Featured Product List",
+      "icon": "<i data-feather='cast'></i>",
+      "slug": "admin.featured-product"
+    },
+    {
       "url": "admin/referscheme",
       "name": "Refer and Bonus Scheme SetUP",
       "icon": "<i data-feather='git-merge'></i>",
@@ -60,6 +72,12 @@
           "slug": "admin.featuredproduct-pricing.index"
         }
       ]
+    },
+    {
+      "url": "admin/notification",
+      "name": "Notification Management",
+      "icon": "<i data-feather='git-merge'></i>",
+      "slug": "admin.notification.index"
     },
     {
       "url": "admin/extras/extrasPage",

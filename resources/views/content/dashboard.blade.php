@@ -70,7 +70,8 @@
                     </p>
                 </x-card>
             </div>
-            <div style="cursor: pointer;" class="col-lg-3 col-md-3 col-sm-3 ">
+            <div style="cursor: pointer;" onclick="location.href='{{ route('admin.featured-product') }}';"
+                class="col-lg-3 col-md-3 col-sm-3 ">
                 <x-card>
                     <h2 class="text-center">{{ $featuredProductCount }}</h2>
                     <p>
@@ -78,7 +79,8 @@
                     </p>
                 </x-card>
             </div>
-            <div style="cursor: pointer;" class="col-lg-3 col-md-3 col-sm-3 ">
+            <div style="cursor: pointer;" onclick="location.href='{{ route('admin.banner-ads') }}';"
+                class="col-lg-3 col-md-3 col-sm-3 ">
                 <x-card>
                     <h2 class="text-center">{{ $activeBannersCount }}</h2>
                     <p>

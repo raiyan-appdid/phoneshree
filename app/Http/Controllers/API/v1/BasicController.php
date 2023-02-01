@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveBannerAd;
 use App\Models\ActiveFeaturedProduct;
+use App\Models\Area;
 use App\Models\BannerPricing;
 use App\Models\City;
 use App\Models\Extra;
@@ -35,6 +36,15 @@ class BasicController extends Controller
         ]);
         $cities = City::india()->where('state_id', $request->state_id)->orderBy('name', 'ASC')->get(['id', 'name']);
         return response($cities, 200);
+    }
+
+    public function get_areas(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+        ]);
+        $areas = Area::where('city_id', $request->city_id)->orderBy('name', 'ASC')->get(['id', 'name']);
+        return response($areas, 200);
     }
 
     public function checkReferralCode(Request $request)
@@ -118,7 +128,7 @@ class BasicController extends Controller
         $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
             ->limit(10)
             ->get();
-        $sellerList = Seller::where('city_id', $request->city_id)->simplePaginate(20);
+        $sellerList = Seller::where('city_id', $request->city_id)->inRandomOrder()->simplePaginate(20);
         return response([
             'ActiveBanner' => $activeBanner,
             'FeaturedProduct' => $featuredProduct,

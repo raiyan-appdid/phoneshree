@@ -16,6 +16,7 @@ Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'get'], function () {
         Route::get('states', [BasicController::class, 'get_states']);
         Route::post('cities', [BasicController::class, 'get_cities']);
+        Route::post('areas', [BasicController::class, 'get_areas']);
     });
     Route::controller(AuthController::class)->prefix('user')->group(function () {
         Route::post('register', 'register');
@@ -50,6 +51,8 @@ Route::prefix('v1')->group(function () {
             Route::post('getproduct', 'getProduct')->name('getproduct');
             Route::post('getinventoryproducts', 'getInventoryProducts')->name('getinventoryproducts');
             Route::post('getsoldproducts', 'getsoldproducts')->name('getsoldproducts');
+            Route::post('editProduct', 'editProduct')->name('editProduct');
+            Route::post('deleteImage', 'deleteImage')->name('deleteImage');
         });
     });
 

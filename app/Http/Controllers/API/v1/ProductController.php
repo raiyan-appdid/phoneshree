@@ -13,18 +13,8 @@ class ProductController extends Controller
 {
     public function addProducts(Request $request)
     {
-        \Log::info($request->all());
         $request->validate([
             'seller_id' => 'required',
-            // 'customer_name' => 'required',
-            // 'customer_number' => 'required',
-            // 'customer_pic' => 'required',
-            'imei_number' => 'required',
-            // 'customer_buy_price' => 'required',
-            'product_title' => 'required',
-            'product_description' => 'required',
-            'document' => 'required',
-            'product' => 'required',
         ]);
         $data = new Product;
         $data->seller_id = $request->seller_id;
@@ -35,24 +25,6 @@ class ProductController extends Controller
         } else {
             $data->customer_pic = "N/A";
         }
-        // if (isset($request->documents)) {
-        //     foreach ($request->documents as $documents) {
-        //         $image[] = FileUploader::uploadFile($documents, 'images/documents');
-        //     }
-        //     $storeImage = implode(",", $image);
-        //     $data->documents = $storeImage;
-        // } else {
-        //     $data->documents = "N/A";
-        // }
-        // if (isset($request->product_image)) {
-        //     foreach ($request->product_image as $product_image) {
-        //         $image[] = FileUploader::uploadFile($product_image, 'images/product-image');
-        //     }
-        //     $storeImage = implode(",", $image);
-        //     $data->product_image = $storeImage;
-        // } else {
-        //     $data->product_image = "N/A";
-        // }
         $data->imei_number = $request->imei_number;
         $data->customer_buy_price = $request->customer_buy_price;
         // $data->product_image = $request->product_image;
@@ -65,17 +37,21 @@ class ProductController extends Controller
         $data->save();
 
         //storing multiple images
-        foreach ($request->product as $item) {
-            $productImage = new ProductImage;
-            $productImage->product_id = $data->id;
-            $productImage->image = FileUploader::uploadFile($item, 'images/product-image');
-            $productImage->save();
+        if (isset($request->product)) {
+            foreach ($request->product as $item) {
+                $productImage = new ProductImage;
+                $productImage->product_id = $data->id;
+                $productImage->image = FileUploader::uploadFile($item, 'images/product-image');
+                $productImage->save();
+            }
         }
-        foreach ($request->document as $item) {
-            $documentImage = new Document;
-            $documentImage->product_id = $data->id;
-            $documentImage->image = FileUploader::uploadFile($item, 'images/document');
-            $documentImage->save();
+        if (isset($request->document)) {
+            foreach ($request->document as $item) {
+                $documentImage = new Document;
+                $documentImage->product_id = $data->id;
+                $documentImage->image = FileUploader::uploadFile($item, 'images/document');
+                $documentImage->save();
+            }
         }
         return response('Products added Successfully', 200);
     }
@@ -155,4 +131,72 @@ class ProductController extends Controller
         return response($data, 200);
     }
 
+    public function editProduct(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+        ]);
+        $data = Product::where('id', $request->product_id)->with(['productImage', 'document'])->first();
+        $data->customer_name = $request->customer_name;
+        $data->customer_number = $request->customer_number;
+        if (isset($request->customer_pic)) {
+            $data->customer_pic = FileUploader::uploadFile($request->customer_pic, 'images/customer');
+        }
+        $data->imei_number = $request->imei_number;
+        $data->customer_buy_price = $request->customer_buy_price;
+        $data->product_title = $request->product_title;
+        $data->product_description = $request->product_description;
+        $data->product_selling_price = $request->product_selling_price;
+        $data->sold_to_customer_name = $request->sold_to_customer_name;
+        $data->sold_to_customer_number = $request->sold_to_customer_number;
+        $data->product_sold_price = $request->product_sold_price;
+        $data->save();
+
+        if (isset($request->product)) {
+            foreach ($request->product as $item) {
+                $productImage = new ProductImage;
+                $productImage->product_id = $data->id;
+                $productImage->image = FileUploader::uploadFile($item, 'images/product-image');
+                $productImage->save();
+            }
+        }
+        if (isset($request->document)) {
+            foreach ($request->document as $item) {
+                $documentImage = new Document;
+                $documentImage->product_id = $data->id;
+                $documentImage->image = FileUploader::uploadFile($item, 'images/document');
+                $documentImage->save();
+            }
+        }
+        return response([
+            'message' => "Successfully Updated",
+            'data' => $data,
+        ], 200);
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'type' => 'required|in:product_image,document',
+        ]);
+        if ($request->type == "product_image") {
+            $request->validate([
+                'id' => 'required|exists:product_images,id',
+            ]);
+            $data = ProductImage::where('id', $request->id)->delete();
+        } else if ($request->type == "document") {
+            $request->validate([
+                'id' => 'required|exists:documents,id',
+            ]);
+            $data = Document::where('id', $request->id)->delete();
+        } else {
+            return response([
+                'message' => "Incorrect Type",
+            ], 200);
+        }
+        return response([
+            'message' => 'Deleted',
+        ], 200);
+    }
 }
