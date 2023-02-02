@@ -80,14 +80,16 @@ class BannerAdsTransactionController extends Controller
             'id' => 'required|exists:banner_ads_transactions,id',
             'image' => 'required',
         ]);
-        // $active = ActiveBannerAd::where('id', $request->id)->first();
-        // $active->image = FileUploader::uploadFile($request->image, 'images/banner-image');
-        // $active->save();
+        $active = ActiveBannerAd::where('banner_ads_transaction_id', $request->id)->first();
+        if (isset($active)) {
+            $active->image = FileUploader::uploadFile($request->image, 'images/banner-image');
+            $active->save();
+        }
         $bannerTransaction = BannerAdsTransaction::where('id', $request->id)->first();
-        $bannerTransaction->banner_image = FileUploader::uploadFile($request->image, 'images/banner-image');
+        $bannerTransaction->banner_image = $active->image;
         $bannerTransaction->save();
         return response([
-            'message' => 'Updated'
+            'message' => 'Updated',
         ]);
     }
 }

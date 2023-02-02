@@ -236,13 +236,12 @@ class BasicController extends Controller
             'city_id' => 'required',
             'title' => 'required',
         ]);
-        if (isset($request->area_id)) {
+        if (is_numeric($request->area_id)) {
             $data = Seller::where('area_id', $request->area_id)->where(function ($q) use ($request) {
                 $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
             })->get();
         } else {
-            $data = Seller::where('city_id
-            ', $request->city_id
+            $data = Seller::where('city_id', $request->city_id
             )->where(function ($q) use ($request) {
                 $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
             })->get();
