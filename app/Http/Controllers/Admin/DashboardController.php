@@ -7,16 +7,14 @@ use App\Models\ActiveBannerAd;
 use App\Models\ActiveFeaturedProduct;
 use App\Models\Product;
 use App\Models\Seller;
-use App\Services\ActiveBannerAdsService;
-use App\Services\FeaturedProductService;
 
 class DashboardController extends Controller
 {
 
     public function home()
     {
-        ActiveBannerAdsService::activateBannerAds();
-        FeaturedProductService::activateFeaturedProduct();
+        // ActiveBannerAdsService::activateBannerAds();
+        // FeaturedProductService::activateFeaturedProduct();
 
         $sellerCount = Seller::all()->count();
         $productCount = Product::all()->count();
@@ -26,6 +24,6 @@ class DashboardController extends Controller
         $featuredProductCount = ActiveFeaturedProduct::all()->count();
         $activeBannersCount = ActiveBannerAd::all()->count();
 
-        return view('content.dashboard', compact('sellerCount', 'productCount', 'soldProductCount', 'liveProductCount', 'inventoryProductCount','featuredProductCount', 'activeBannersCount'));
+        return view('content.dashboard', compact('sellerCount', 'productCount', 'soldProductCount', 'liveProductCount', 'inventoryProductCount', 'featuredProductCount', 'activeBannersCount'));
     }
 }

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use App\Models\City;
 use App\Models\Extra;
 use App\Models\FreeTrialPeriod;
@@ -70,6 +71,14 @@ class BasicController extends Controller
         ]);
         $cities = City::india()->where('state_id', $request->state_id)->orderBy('name', 'ASC')->get(['id', 'name']);
         return response($cities);
+    }
+    public function get_areas(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+        ]);
+        $areas = Area::where('city_id', $request->city_id)->orderBy('name', 'ASC')->get();
+        return response($areas);
     }
 
     public function walletIndex()

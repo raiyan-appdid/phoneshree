@@ -128,7 +128,13 @@ class BasicController extends Controller
         $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
             ->limit(10)
             ->get();
-        $sellerList = Seller::where('city_id', $request->city_id)->inRandomOrder()->simplePaginate(20);
+
+        if ($request->area_id != 'null') {
+            $sellerList = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->inRandomOrder()->simplePaginate(20);
+        } else {
+            $sellerList = Seller::where('city_id', $request->city_id)->inRandomOrder()->simplePaginate(20);
+        }
+
         return response([
             'ActiveBanner' => $activeBanner,
             'FeaturedProduct' => $featuredProduct,
@@ -222,5 +228,28 @@ class BasicController extends Controller
         return response([
             'popup' => $data,
         ], 200);
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+            'title' => 'required',
+        ]);
+        if (isset($request->area_id)) {
+            $data = Seller::where('area_id', $request->area_id)->where(function ($q) use ($request) {
+                $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
+            })->get();
+        } else {
+            $data = Seller::where('city_id
+            ', $request->city_id
+            )->where(function ($q) use ($request) {
+                $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
+            })->get();
+        }
+        return response([
+            'message' => 'success',
+            'data' => $data,
+        ]);
     }
 }

@@ -33,6 +33,10 @@
                 <select class="select2" name="city_id" id="city_id">
                     <option value="">Select City</option>
                 </select>
+                <label for="">Area</label>
+                <select class="select2" name="area_id" id="area_id">
+                    <option value="">Select Area</option>
+                </select>
                 <x-select :required="false" name="referred_by" :options="$sellerData" />
             </div>
         </x-form>
@@ -53,6 +57,10 @@
                 <select class="select2" name="city_id" id="city_id-edit">
                     <option value="">Select City</option>
                 </select>
+                <label for="">Area</label>
+                <select class="select2" name="area_id" id="area_id-edit">
+                    <option value="">Select Area</option>
+                </select>
                 <x-input name="id" type="hidden" />
                 <x-select :required="false" name="referred_by" id="referred_by-edit" :options="$sellerData" />
             </div>
@@ -64,6 +72,9 @@
         $(document).ready(function() {
 
             $("#city_id").select2("destroy").select2({
+                tags: true
+            });
+            $("#area_id").select2("destroy").select2({
                 tags: true
             });
 
@@ -97,6 +108,22 @@
                 }
             });
         })
+        $('#city_id').on('change', function() {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.others.get-area') }}",
+                data: {
+                    'city_id': $(this).val()
+                },
+                success: function(response) {
+                    console.log(response);
+                    response.forEach(element => {
+                        $('#area_id').append(
+                            `<option value="${element.id}">${element.name}</option>`)
+                    });
+                }
+            });
+        })
 
         $('#state_id-edit').on('change', function() {
             $.ajax({
@@ -109,6 +136,22 @@
                     console.log(response);
                     response.forEach(element => {
                         $('#city_id-edit').append(
+                            `<option value="${element.id}">${element.name}</option>`)
+                    });
+                }
+            });
+        })
+        $('#city_id-edit').on('change', function() {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.others.get-area') }}",
+                data: {
+                    'city_id': $(this).val()
+                },
+                success: function(response) {
+                    console.log(response);
+                    response.forEach(element => {
+                        $('#area_id-edit').append(
                             `<option value="${element.id}">${element.name}</option>`)
                     });
                 }

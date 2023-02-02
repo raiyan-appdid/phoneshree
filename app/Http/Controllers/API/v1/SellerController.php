@@ -139,7 +139,7 @@ class SellerController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Seller::where('id', $request->seller_id)->with(['city', 'state', 'product' => fn($q) => $q->with(['productImage', 'document'])->live()])->first();
+        $data = Seller::where('id', $request->seller_id)->with(['city', 'state', 'area', 'product' => fn($q) => $q->with(['productImage', 'document'])->live()])->first();
         $myReferralCode = $data->my_referral_code;
         return response([
             'sellerDetail' => $data,
@@ -163,6 +163,10 @@ class SellerController extends Controller
         ]);
         $data = Seller::findOrFail($request->seller_id);
         $cityData = $this->citySelectOrAdd($request->city_id, $request->state_id);
+        if (isset($request->area_id)) {
+            $areaData = $this->areaSelectOrAdd($request->area_id, $request->city_id);
+            $data->area_id = $areaData;
+        }
         $data->name = $request->name;
         $data->number = $request->number;
         $data->email = $request->email;
