@@ -57,6 +57,10 @@ class BasicController extends Controller
                 'email' => $request->email,
                 'privacy_policy' => $request->privacy_policy,
                 'terms_and_conditions' => $request->terms_and_conditions,
+                'android_version' => $request->android_version,
+                'android_force_update' => $request->android_force_update == 'on' ? "active" : 'inactive',
+                'ios_force_update' => $request->ios_force_update == 'on' ? "active" : 'inactive',
+                'maintenance' => $request->maintenance == 'on' ? "active" : 'inactive',
             ]);
         return response([
             'header' => 'Success',
