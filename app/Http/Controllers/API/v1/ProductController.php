@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\ActiveFeaturedProduct;
 use App\Models\Document;
+use App\Models\FeaturedProductTransaction;
 use App\Models\Product;
 use App\Models\ProductImage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -95,13 +98,31 @@ class ProductController extends Controller
         $data->product_selling_price = $request->product_selling_price;
         $data->status = "livesell";
         $data->save();
+        $productTransaction = FeaturedProductTransaction::where('product_id', $request->product_id)->first();
+        if (isset($productTransaction)) {
+            if (Carbon::parse($productTransaction->expiry_date) >= Carbon::today()) {
+                $data = new ActiveFeaturedProduct;
+                $data->city_id = $productTransaction->city_id;
+                $data->product_id = $productTransaction->product_id;
+                $data->featured_product_transaction_id = $productTransaction->id;
+                $data->expiry_date = $productTransaction->expiry_date;
+                $data->save();
+            }
+        }
         return response('Product ' . $data->product_title . 'is now live', 200);
     }
     public function productToInvetory(Request $request)
     {
+        $request->validate([
+            'product_id' => 'required',
+        ]);
         $data = Product::with(['productImage', 'document'])->find($request->product_id);
         $data->status = "inventory";
         $data->save();
+        $activeProduct = ActiveFeaturedProduct::where('product_id', $request->product_id)->first();
+        if (isset($activeProduct)) {
+            $activeProduct->delete();
+        }
         return response('Product ' . $data->product_title . 'is shifted to inventory');
     }
     public function getLiveProducts(Request $request)
