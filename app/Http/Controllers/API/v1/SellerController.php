@@ -80,6 +80,10 @@ class SellerController extends Controller
         if (is_numeric($city)) {
             return $city;
         } else {
+            $city = City::where('name', 'like', '%' . $city . '%')->where('state_id', $state)->first();
+            if (isset($city)) {
+                return $city->id;
+            }
             $stateData = State::where('id', $state)->first();
             $addCity = new City;
             $addCity->name = $city;
@@ -97,6 +101,10 @@ class SellerController extends Controller
         if (is_numeric($area)) {
             return $area;
         } else {
+            $area = Area::where('name', 'like', '%' . $area . '%')->where('city_id', $city)->first();
+            if (isset($area)) {
+                return $area->id;
+            }
             $cityData = City::where('id', $city)->first();
             $addCity = new Area;
             $addCity->name = $area;
