@@ -28,13 +28,13 @@
       "url": "admin/banner-ads",
       "name": "Banner Ads List",
       "icon": "<i data-feather='cast'></i>",
-      "slug": "admin.banner-ads"
+      "slug": "admin.banner-ads.index"
     },
     {
       "url": "admin/featured-product",
       "name": "Featured Product List",
       "icon": "<i data-feather='cast'></i>",
-      "slug": "admin.featured-product"
+      "slug": "admin.featured-product.index"
     },
     {
       "url": "admin/referscheme",
