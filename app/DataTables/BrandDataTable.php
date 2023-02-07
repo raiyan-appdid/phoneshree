@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Membership;
+use App\Models\Brand;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class MembershipDataTable extends DataTable
+class BrandDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,29 +19,39 @@ class MembershipDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('action', function ($value) {
-            //     $edit_route = route('admin.memberships.edit', $value->id);
-            //     $edit_callback = 'setValue';
-            //     $modal = '#edit-membership-modal';
-            //     $delete_route = route('admin.memberships.destroy', $value->id);
-            //     return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
-            // })
+            ->addColumn('action', function ($value) {
+                $edit_route = route('admin.brands.edit', $value->id);
+                $edit_callback = 'setValue';
+                $modal = '#edit-brand-modal';
+                $delete_route = route('admin.brands.destroy', $value->id);
+                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            })
             ->editColumn('created_at', function ($data) {
                 return '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })->addColumn('status', function ($data) {
-            $route = route('admin.memberships.status');
-            return view('content.table-component.switch', compact('data', 'route'));
-        })
+            })
+            ->editColumn('logo', function ($data) {
+                if ($data->logo != "N/A") {
+                    $no_image = 'images\placeholder.jpg';
+                    $image = ($data->logo) ? $data->logo : $no_image;
+                    return view('content.table-component.avatar', compact('image'));
+                } else {
+                    return $data->logo;
+                }
+            })
+            ->addColumn('status', function ($data) {
+                $route = route('admin.brands.status');
+                return view('content.table-component.switch', compact('data', 'route'));
+            })
             ->escapeColumns('created_at', 'action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Membership $model
+     * @param \App\Models\Brand $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Membership $model)
+    public function query(Brand $model)
     {
         return $model->newQuery();
     }
@@ -54,7 +64,7 @@ class MembershipDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('membership-table')
+            ->setTableId('brand-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -85,20 +95,19 @@ class MembershipDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
-            Column::make('validity'),
-            Column::make('amount'),
+            Column::make('title'),
+            Column::make('logo'),
             Column::make('created_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::computed('status')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
 
         ];
     }
@@ -110,6 +119,6 @@ class MembershipDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Membership._' . date('YmdHis');
+        return 'Brand._' . date('YmdHis');
     }
 }

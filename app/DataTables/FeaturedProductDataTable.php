@@ -38,10 +38,10 @@ class FeaturedProductDataTable extends DataTable
             ->editColumn('city_id', function ($data) {
                 return $data->city->name;
             })
-            //     ->addColumn('status', function ($data) {
-            //     $route = route('admin.featuredproducts.status');
-            //     return view('content.table-component.switch', compact('data', 'route'));
-            // })
+                ->addColumn('status', function ($data) {
+                $route = route('admin.featuredproducts.status');
+                return view('content.table-component.switch', compact('data', 'route'));
+            })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -110,11 +110,11 @@ class FeaturedProductDataTable extends DataTable
             //     ->printable(false)
             //     ->width(60)
             //     ->addClass('text-center'),
-            // Column::computed('status')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('status')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
 
         ];
     }

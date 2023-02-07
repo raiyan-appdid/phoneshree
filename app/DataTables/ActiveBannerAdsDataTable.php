@@ -44,10 +44,10 @@ class ActiveBannerAdsDataTable extends DataTable
                     return $data->image;
                 }
             })
-            //     ->addColumn('status', function ($data) {
-            //     $route = route('admin.activebanneradss.status');
-            //     return view('content.table-component.switch', compact('data', 'route'));
-            // })
+                ->addColumn('status', function ($data) {
+                $route = route('admin.banner-ads.status');
+                return view('content.table-component.switch', compact('data', 'route'));
+            })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -115,11 +115,11 @@ class ActiveBannerAdsDataTable extends DataTable
             //     ->printable(false)
             //     ->width(60)
             //     ->addClass('text-center'),
-            // Column::computed('status')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('status')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
 
         ];
     }

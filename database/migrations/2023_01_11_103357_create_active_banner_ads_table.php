@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('banner_ads_transaction_id')->nullable()->constrained()->nullOnDelete();
             $table->string('image')->nullable();
             $table->date('expiry_date')->nullable();
+            $table->enum('status', ['active', 'blocked'])->default('active');
             $table->timestamps();
         });
     }

@@ -7,12 +7,14 @@ use App\Models\ActiveBannerAd;
 use App\Models\ActiveFeaturedProduct;
 use App\Models\Area;
 use App\Models\BannerPricing;
+use App\Models\Brand;
 use App\Models\City;
 use App\Models\Extra;
 use App\Models\FeaturedProductPricing;
 use App\Models\Membership;
 use App\Models\MembershipTransaction;
 use App\Models\PopUp;
+use App\Models\Product;
 use App\Models\ReferScheme;
 use App\Models\Seller;
 use App\Models\State;
@@ -122,10 +124,10 @@ class BasicController extends Controller
         $request->validate([
             'city_id' => 'required',
         ]);
-        $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->with(['bannerAdsTransaction.seller'])->inRandomOrder()
+        $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->where('status', 'active')->with(['bannerAdsTransaction.seller'])->inRandomOrder()
             ->limit(5)
             ->get();
-        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
+        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->where('status', 'active')->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
             ->limit(10)
             ->get();
 
@@ -155,7 +157,7 @@ class BasicController extends Controller
             $membershipStatus = "expired";
         }
 
-        $data = Membership::all();
+        $data = Membership::where('status', 'active')->get();
         return response([
             'membership' => $data,
             'expiryDate' => $expiryDate->membership_expiry_date,
@@ -224,7 +226,7 @@ class BasicController extends Controller
         $request->validate([
             'type' => 'required',
         ]);
-        $data = PopUp::where('type', $request->type)->inRandomOrder()->first();
+        $data = PopUp::where('type', $request->type)->where('status', 'active')->inRandomOrder()->first();
         return response([
             'popup' => $data,
         ], 200);
@@ -250,5 +252,25 @@ class BasicController extends Controller
             'message' => 'success',
             'data' => $data,
         ]);
+    }
+
+    public function brandList(Request $request)
+    {
+        $brand = Brand::all();
+        return response([
+            'data' => $brand,
+        ], 200);
+    }
+
+    public function getProductsByBrand(Request $request)
+    {
+        $request->validate([
+            'brand_id' => 'required|exists:brands,id',
+        ]);
+        $data = Product::where('status', 'livesell')->where('brand_id', $request->brand_id)->get();
+        return response([
+            'success' => true,
+            'data' => $data,
+        ], 200);
     }
 }

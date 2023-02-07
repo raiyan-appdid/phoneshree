@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Controllers\Admin\ActiveBannerAdsController;
 use App\Http\Controllers\Admin\BannerPricingController;
 use App\Http\Controllers\Admin\BasicController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedProductController;
 use App\Http\Controllers\Admin\FeaturedProductPricingController;
@@ -33,8 +34,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::get('/', 'home')->name('index');
     });
 
-    Route::get('banner-ads', [ActiveBannerAdsController::class, 'index'])->name('banner-ads');
-    Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured-product');
+    Route::name('banner-ads.')
+        ->prefix('banner-ads')
+        ->controller(ActiveBannerAdsController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::put('status', 'status')->name('status');
+    });
+
+    Route::name('featured-product.')
+        ->prefix('featured-product')
+        ->controller(FeaturedProductController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::put('status', 'status')->name('status');
+    });
 
     Route::prefix('notification')->name('notification.')->controller(NotificationController::class)->group(function () {
         Route::get('/', 'index')->name('index');
@@ -146,6 +158,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     Route::name('popup.')
         ->prefix('popup')
         ->controller(PopUpController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('blocked', 'index')->name('blocked');
+        Route::get('deleted', 'index')->name('deleted');
+        Route::post('store', 'store')->name('store');
+        Route::get('{id}/edit', "edit")->name('edit');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::post('update', 'update')->name('update');
+        Route::put('status', 'status')->name('status');
+    });
+    Route::name('brands.')
+        ->prefix('brands')
+        ->controller(BrandController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('blocked', 'index')->name('blocked');
         Route::get('deleted', 'index')->name('deleted');

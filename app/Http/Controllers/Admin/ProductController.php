@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\ProductDataTable;
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class ProductController extends Controller
     public function index(ProductDataTable $table)
     {
         $pageConfigs = ['has_table' => true];
+        $brands = Brand::all();
         // $table->with('id', 1);
-        return $table->render('content.tables.products', compact('pageConfigs'));
+        return $table->render('content.tables.products', compact('pageConfigs', 'brands'));
     }
     public function store(Request $request)
     {
@@ -56,6 +58,7 @@ class ProductController extends Controller
         $data->sold_to_customer_name = $request->sold_to_customer_name;
         $data->sold_to_customer_number = $request->sold_to_customer_number;
         $data->product_sold_price = $request->product_sold_price;
+        $data->brand_id = $request->brand_id;
         $data->save();
         return response([
             'header' => 'Added!',
@@ -107,6 +110,7 @@ class ProductController extends Controller
         $data->sold_to_customer_name = $request->sold_to_customer_name;
         $data->sold_to_customer_number = $request->sold_to_customer_number;
         $data->product_sold_price = $request->product_sold_price;
+        $data->brand_id = $request->brand_id;
         $data->save();
         return response([
             'header' => 'Updated!',

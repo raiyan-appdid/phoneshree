@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('featured_product_transaction_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->date('expiry_date')->nullable();
+            $table->enum('status', ['active', 'blocked'])->default('active');
             $table->timestamps();
         });
     }

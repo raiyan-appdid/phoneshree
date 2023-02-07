@@ -33,6 +33,7 @@
                 <x-input name="sold_to_customer_name" />
                 <x-input name="sold_to_customer_number" />
                 <x-input name="product_sold_price" />
+                <x-select name="brand_id" label="Brand" :options="$brands" />
             </div>
         </x-form>
     </x-side-modal>
@@ -52,6 +53,7 @@
                 <x-input name="sold_to_customer_name" />
                 <x-input name="sold_to_customer_number" />
                 <x-input name="product_sold_price" />
+                <x-select name="brand_id" label="Brand" :options="$brands" />
                 <x-input name="id" type="hidden" />
             </div>
         </x-form>

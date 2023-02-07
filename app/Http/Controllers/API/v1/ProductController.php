@@ -18,6 +18,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'seller_id' => 'required',
+            'brand_id' => 'required',
         ]);
         $data = new Product;
         $data->seller_id = $request->seller_id;
@@ -37,6 +38,7 @@ class ProductController extends Controller
         $data->sold_to_customer_name = $request->sold_to_customer_name;
         $data->sold_to_customer_number = $request->sold_to_customer_number;
         $data->product_sold_price = $request->product_sold_price;
+        $data->brand_id = $request->brand_id;
         $data->save();
 
         //storing multiple images
@@ -156,6 +158,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
+            'brand_id' => 'required',
         ]);
         $data = Product::where('id', $request->product_id)->with(['productImage', 'document'])->first();
         $data->customer_name = $request->customer_name;
@@ -171,6 +174,7 @@ class ProductController extends Controller
         $data->sold_to_customer_name = $request->sold_to_customer_name;
         $data->sold_to_customer_number = $request->sold_to_customer_number;
         $data->product_sold_price = $request->product_sold_price;
+        $data->brand_id = $request->brand_id;
         $data->save();
 
         if (isset($request->product)) {

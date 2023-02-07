@@ -69,6 +69,8 @@ Route::prefix('v1')->group(function () {
         Route::get('extras', 'extras')->name('extras');
         Route::post('getpopup', 'getPopUp')->name('getpopup');
         Route::post('search', 'search')->name('search');
+        Route::get('brandList', 'brandList')->name('brandList');
+        Route::post('getProductsByBrand', 'getProductsByBrand')->name('getProductsByBrand');
     });
 
     Route::prefix('featured-products')->name('featured-products.')->controller(FeaturedProductTransactionController::class)->group(function () {
