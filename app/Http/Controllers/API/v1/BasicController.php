@@ -242,11 +242,20 @@ class BasicController extends Controller
             $data = Seller::where('area_id', $request->area_id)->where(function ($q) use ($request) {
                 $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
             })->get();
+
+            if (count($data) == 0) {
+                $data = Product::where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['productImage', 'document', 'seller', 'brand'])->get();
+            }
+
         } else {
             $data = Seller::where('city_id', $request->city_id
             )->where(function ($q) use ($request) {
                 $q->Where('address', 'like', '%' . $request->title . '%')->orWhere('name', 'like', '%' . $request->title . '%')->orWhere('shop_name', 'like', '%' . $request->title . '%');
             })->get();
+
+            if (count($data) == 0) {
+                $data = Product::where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['productImage', 'document', 'seller', 'brand'])->get();
+            }
         }
         return response([
             'message' => 'success',
@@ -272,5 +281,17 @@ class BasicController extends Controller
             'success' => true,
             'data' => $data,
         ], 200);
+    }
+
+    public function getProductsByCity(Request $request)
+    {
+        $request->validate([
+            'city_id' => 'required',
+        ]);
+        $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand'])->get()->pluck('product');
+        return response([
+            'success' => true,
+            'data' => collect($data)->filter()->flatten()->all(),
+        ]);
     }
 }
