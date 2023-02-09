@@ -66,7 +66,7 @@ class ProductController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Product::where('seller_id', $request->seller_id)->with(['productImage', 'document'])->get();
+        $data = Product::where('seller_id', $request->seller_id)->with(['productImage', 'document', 'brand'])->get();
         return response($data, 200);
     }
 
@@ -78,7 +78,7 @@ class ProductController extends Controller
             'sold_to_customer_number' => 'required',
             'product_sold_price' => 'required',
         ]);
-        $data = Product::with(['productImage', 'document'])->find($request->product_id);
+        $data = Product::with(['productImage', 'document', 'brand'])->find($request->product_id);
         $data->sold_to_customer_name = $request->sold_to_customer_name;
         $data->sold_to_customer_number = $request->sold_to_customer_number;
         $data->product_sold_price = $request->product_sold_price;
@@ -118,7 +118,7 @@ class ProductController extends Controller
         $request->validate([
             'product_id' => 'required',
         ]);
-        $data = Product::with(['productImage', 'document'])->find($request->product_id);
+        $data = Product::with(['productImage', 'document', 'brand'])->find($request->product_id);
         $data->status = "inventory";
         $data->save();
         $activeProduct = ActiveFeaturedProduct::where('product_id', $request->product_id)->first();
@@ -132,7 +132,7 @@ class ProductController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Product::where('status', 'livesell')->where('seller_id', $request->seller_id)->with(['productImage', 'document'])->get();
+        $data = Product::where('status', 'livesell')->where('seller_id', $request->seller_id)->with(['productImage', 'document', 'brand'])->get();
         return response($data, 200);
     }
 
@@ -141,7 +141,7 @@ class ProductController extends Controller
         $request->validate([
             'seller_id' => 'required',
         ]);
-        $data = Product::where('status', 'inventory')->where('seller_id', $request->seller_id)->with(['productImage', 'document'])->get();
+        $data = Product::where('status', 'inventory')->where('seller_id', $request->seller_id)->with(['productImage', 'document', 'brand'])->get();
         return response($data, 200);
     }
 
@@ -160,7 +160,7 @@ class ProductController extends Controller
             'product_id' => 'required|exists:products,id',
             'brand_id' => 'required',
         ]);
-        $data = Product::where('id', $request->product_id)->with(['productImage', 'document'])->first();
+        $data = Product::where('id', $request->product_id)->with(['productImage', 'document', 'brand'])->first();
         $data->customer_name = $request->customer_name;
         $data->customer_number = $request->customer_number;
         if (isset($request->customer_pic)) {

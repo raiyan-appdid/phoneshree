@@ -127,7 +127,7 @@ class BasicController extends Controller
         $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->where('status', 'active')->with(['bannerAdsTransaction.seller'])->inRandomOrder()
             ->limit(5)
             ->get();
-        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->where('status', 'active')->with(['product.productImage'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
+        $featuredProduct = ActiveFeaturedProduct::where('city_id', $request->city_id)->where('status', 'active')->with(['product.productImage', 'brand'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
             ->limit(10)
             ->get();
 
@@ -267,7 +267,7 @@ class BasicController extends Controller
         $request->validate([
             'brand_id' => 'required|exists:brands,id',
         ]);
-        $data = Product::where('status', 'livesell')->where('brand_id', $request->brand_id)->get();
+        $data = Product::where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['productImage', 'document', 'seller', 'brand'])->get();
         return response([
             'success' => true,
             'data' => $data,
