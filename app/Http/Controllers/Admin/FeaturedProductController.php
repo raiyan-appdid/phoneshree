@@ -32,7 +32,7 @@
         public function status(Request $request)
         {
         $request->validate([
-            'id' => 'required|numeric|exists:featuredproducts,id',
+            'id' => 'required|numeric|exists:active_featured_products,id',
             'status' => 'required|in:active,blocked',
         ]);
         

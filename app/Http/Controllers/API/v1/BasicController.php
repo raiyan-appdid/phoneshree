@@ -288,7 +288,10 @@ class BasicController extends Controller
         $request->validate([
             'city_id' => 'required',
         ]);
-        $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand'])->get()->pluck('product');
+        $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+        if (isset($request->area_id)) {
+            $data = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+        }
         return response([
             'success' => true,
             'data' => collect($data)->filter()->flatten()->all(),

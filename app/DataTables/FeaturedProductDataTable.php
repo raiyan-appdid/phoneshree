@@ -38,8 +38,8 @@ class FeaturedProductDataTable extends DataTable
             ->editColumn('city_id', function ($data) {
                 return $data->city->name;
             })
-                ->addColumn('status', function ($data) {
-                $route = route('admin.featuredproducts.status');
+            ->addColumn('status', function ($data) {
+                $route = route('admin.featured-product.status');
                 return view('content.table-component.switch', compact('data', 'route'));
             })
             ->escapeColumns('created_at', 'action');
@@ -98,7 +98,7 @@ class FeaturedProductDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('city_id')
-            ->title('city'),
+                ->title('city'),
             Column::make('featured_product_transaction_id')
                 ->title('seller'),
             Column::make('product_id')

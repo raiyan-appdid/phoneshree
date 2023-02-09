@@ -31,7 +31,7 @@ class ActiveBannerAdsController extends Controller
     public function status(Request $request)
     {
         $request->validate([
-            'id' => 'required|numeric|exists:activebanneradss,id',
+            'id' => 'required|numeric|exists:active_banner_ads,id',
             'status' => 'required|in:active,blocked',
         ]);
 
