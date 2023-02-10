@@ -331,6 +331,13 @@ class BasicController extends Controller
             'title' => 'required',
             'city_id' => 'required',
         ]);
+
+        // $sellerData = Seller::where('city_id', $request->city_id)->get();
+        // foreach ($sellerData as $item) {
+        //     $id[] = $item->id;
+        // }
+        // $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
         $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.productImage', 'product.brand', 'product.seller'])->get()->pluck('product');
         $mydata = collect($data)->filter()->flatten()->all();
         foreach ($mydata as $item) {
