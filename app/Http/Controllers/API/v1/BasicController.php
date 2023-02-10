@@ -331,7 +331,7 @@ class BasicController extends Controller
             'title' => 'required',
             'city_id' => 'required',
         ]);
-        $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+        $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.productImage', 'product.brand', 'product.seller'])->get()->pluck('product');
         $mydata = collect($data)->filter()->flatten()->all();
         foreach ($mydata as $item) {
             if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
@@ -356,27 +356,25 @@ class BasicController extends Controller
                 foreach ($mydata as $item) {
                     if ($item->brand_id == $request->brand_id) {
                         if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                            $data1[] = $item;
+                            $data3[] = $item;
                         }
                     }
                 }
                 return response([
                     'success' => true,
-                    'data' => $data1 ?? [],
+                    'data' => $data3 ?? [],
                 ]);
             } else {
                 $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
                 $mydata = collect($data)->filter()->flatten()->all();
                 foreach ($mydata as $item) {
-                    if ($item->brand_id == $request->brand_id) {
-                        if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                            $data1[] = $item;
-                        }
+                    if ($item->brand_id == $request->brand_id && str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                        $data2[] = $item;
                     }
                 }
                 return response([
                     'success' => true,
-                    'data' => $data1 ?? [],
+                    'data' => $data2 ?? [],
                 ]);
             }
         }
