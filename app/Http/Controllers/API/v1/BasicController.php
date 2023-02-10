@@ -292,9 +292,97 @@ class BasicController extends Controller
         if (isset($request->area_id)) {
             $data = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
         }
+        if (isset($request->brand_id)) {
+            if (isset($request->area_id)) {
+                $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                $mydata = collect($data)->filter()->flatten()->all();
+                foreach ($mydata as $item) {
+                    if ($item->brand_id == $request->brand_id) {
+                        $data1[] = $item;
+                    }
+                }
+                return response([
+                    'success' => true,
+                    'data' => $data1 ?? [],
+                ]);
+            } else {
+                $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                $mydata = collect($data)->filter()->flatten()->all();
+                foreach ($mydata as $item) {
+                    if ($item->brand_id == $request->brand_id) {
+                        $data1[] = $item;
+                    }
+                }
+                return response([
+                    'success' => true,
+                    'data' => $data1 ?? [],
+                ]);
+            }
+        }
         return response([
             'success' => true,
             'data' => collect($data)->filter()->flatten()->all(),
+        ]);
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'city_id' => 'required',
+        ]);
+        $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+        $mydata = collect($data)->filter()->flatten()->all();
+        foreach ($mydata as $item) {
+            if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                $data1[] = $item;
+            }
+        }
+
+        if (isset($request->area_id)) {
+            $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+            $mydata = collect($data)->filter()->flatten()->all();
+            foreach ($mydata as $item) {
+                if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                    $data1[] = $item;
+                }
+            }
+        }
+
+        if (isset($request->brand_id)) {
+            if (isset($request->area_id)) {
+                $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                $mydata = collect($data)->filter()->flatten()->all();
+                foreach ($mydata as $item) {
+                    if ($item->brand_id == $request->brand_id) {
+                        if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                            $data1[] = $item;
+                        }
+                    }
+                }
+                return response([
+                    'success' => true,
+                    'data' => $data1 ?? [],
+                ]);
+            } else {
+                $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                $mydata = collect($data)->filter()->flatten()->all();
+                foreach ($mydata as $item) {
+                    if ($item->brand_id == $request->brand_id) {
+                        if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                            $data1[] = $item;
+                        }
+                    }
+                }
+                return response([
+                    'success' => true,
+                    'data' => $data1 ?? [],
+                ]);
+            }
+        }
+        return response([
+            'success' => true,
+            'data' => $data1 ?? [],
         ]);
     }
 }
