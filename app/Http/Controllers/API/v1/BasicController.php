@@ -288,41 +288,60 @@ class BasicController extends Controller
         $request->validate([
             'city_id' => 'required',
         ]);
-        $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+        // $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+
+        $sellerData = Seller::where('city_id', $request->city_id)->get();
+        foreach ($sellerData as $item) {
+            $id[] = $item->id;
+        }
+        $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
         if (isset($request->area_id)) {
-            $data = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+            // $data = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+
+            $sellerData = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->get();
+            foreach ($sellerData as $item) {
+                $id[] = $item->id;
+            }
+            $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
         }
         if (isset($request->brand_id)) {
             if (isset($request->area_id)) {
-                $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
-                $mydata = collect($data)->filter()->flatten()->all();
-                foreach ($mydata as $item) {
-                    if ($item->brand_id == $request->brand_id) {
-                        $data1[] = $item;
-                    }
+                // $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                // $mydata = collect($data)->filter()->flatten()->all();
+                // foreach ($mydata as $item) {
+                //     if ($item->brand_id == $request->brand_id) {
+                //         $data1[] = $item;
+                //     }
+                // }
+
+                $sellerData = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->get();
+                foreach ($sellerData as $item) {
+                    $id[] = $item->id;
                 }
-                return response([
-                    'success' => true,
-                    'data' => $data1 ?? [],
-                ]);
+                $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
+                return response($data1 ?? [], 200);
             } else {
-                $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
-                $mydata = collect($data)->filter()->flatten()->all();
-                foreach ($mydata as $item) {
-                    if ($item->brand_id == $request->brand_id) {
-                        $data1[] = $item;
-                    }
+                // $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                // $mydata = collect($data)->filter()->flatten()->all();
+                // foreach ($mydata as $item) {
+                //     if ($item->brand_id == $request->brand_id) {
+                //         $data1[] = $item;
+                //     }
+                // }
+
+                $sellerData = Seller::where('city_id', $request->city_id)->get();
+                foreach ($sellerData as $item) {
+                    $id[] = $item->id;
                 }
-                return response([
-                    'success' => true,
-                    'data' => $data1 ?? [],
-                ]);
+                $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
+                return response($data1 ?? [], 200);
             }
         }
-        return response([
-            'success' => true,
-            'data' => collect($data)->filter()->flatten()->all(),
-        ]);
+        return response($data, 200);
     }
 
     public function searchProduct(Request $request)
@@ -332,62 +351,73 @@ class BasicController extends Controller
             'city_id' => 'required',
         ]);
 
-        // $sellerData = Seller::where('city_id', $request->city_id)->get();
-        // foreach ($sellerData as $item) {
-        //     $id[] = $item->id;
-        // }
-        // $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
-
-        $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.productImage', 'product.brand', 'product.seller'])->get()->pluck('product');
-        $mydata = collect($data)->filter()->flatten()->all();
-        foreach ($mydata as $item) {
-            if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                $data1[] = $item;
-            }
+        $sellerData = Seller::where('city_id', $request->city_id)->get();
+        foreach ($sellerData as $item) {
+            $id[] = $item->id;
         }
+        $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
+        // $data = Seller::where('city_id', $request->city_id)->with(['product.document', 'product.productImage', 'product.brand', 'product.seller'])->get()->pluck('product');
+        // $mydata = collect($data)->filter()->flatten()->all();
+        // foreach ($mydata as $item) {
+        //     if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+        //         $data1[] = $item;
+        //     }
+        // }
 
         if (isset($request->area_id)) {
-            $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
-            $mydata = collect($data)->filter()->flatten()->all();
-            foreach ($mydata as $item) {
-                if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                    $data1[] = $item;
-                }
+
+            $sellerData = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->get();
+            foreach ($sellerData as $item) {
+                $id[] = $item->id;
             }
+            $data1 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
+            // $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+            // $mydata = collect($data)->filter()->flatten()->all();
+            // foreach ($mydata as $item) {
+            //     if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+            //         $data1[] = $item;
+            //     }
+            // }
         }
 
         if (isset($request->brand_id)) {
             if (isset($request->area_id)) {
-                $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
-                $mydata = collect($data)->filter()->flatten()->all();
-                foreach ($mydata as $item) {
-                    if ($item->brand_id == $request->brand_id) {
-                        if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                            $data3[] = $item;
-                        }
-                    }
+                // $data = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                // $mydata = collect($data)->filter()->flatten()->all();
+                // foreach ($mydata as $item) {
+                //     if ($item->brand_id == $request->brand_id) {
+                //         if (str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                //             $data3[] = $item;
+                //         }
+                //     }
+                // }
+
+                $sellerData = Seller::where('city_id', $request->city_id)->where('area_id', $request->area_id)->get();
+                foreach ($sellerData as $item) {
+                    $id[] = $item->id;
                 }
-                return response([
-                    'success' => true,
-                    'data' => $data3 ?? [],
-                ]);
+                $data3 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+                return response($data3 ?? [], 200);
             } else {
-                $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
-                $mydata = collect($data)->filter()->flatten()->all();
-                foreach ($mydata as $item) {
-                    if ($item->brand_id == $request->brand_id && str_contains(strtolower($item->product_title), strtolower($request->title))) {
-                        $data2[] = $item;
-                    }
+                // $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
+                // $mydata = collect($data)->filter()->flatten()->all();
+                // foreach ($mydata as $item) {
+                //     if ($item->brand_id == $request->brand_id && str_contains(strtolower($item->product_title), strtolower($request->title))) {
+                //         $data2[] = $item;
+                //     }
+                // }
+
+                $sellerData = Seller::where('city_id', $request->city_id)->get();
+                foreach ($sellerData as $item) {
+                    $id[] = $item->id;
                 }
-                return response([
-                    'success' => true,
-                    'data' => $data2 ?? [],
-                ]);
+                $data2 = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('product_title', 'like', '%' . $request->title . '%')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+
+                return response($data2 ?? [], 200);
             }
         }
-        return response([
-            'success' => true,
-            'data' => $data1 ?? [],
-        ]);
+        return response($data1 ?? [], 200);
     }
 }
