@@ -16,7 +16,6 @@
         </div>
     </section>
 
-
     <x-side-modal title="Add product" id="add-product-modal">
         <x-form id="add-product" method="POST" class="" :route="route('admin.products.store')">
             <div class="col-md-12 col-12 ">
@@ -62,9 +61,6 @@
 @section('page-script')
     <script>
         $(document).ready(function() {
-            $('#product-table_wrapper .dt-buttons').append(
-                `<button type="button" data-show="add-product-modal" class="btn btn-flat-success waves-effect float-md-right">Add</button>`
-            );
             $(document).on('click', '[data-show]', function() {
                 const modal = $(this).data('show');
                 $(`#${modal}`).modal('show');

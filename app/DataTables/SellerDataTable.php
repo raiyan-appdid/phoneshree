@@ -20,11 +20,11 @@ class SellerDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($value) {
-                $edit_route = route('admin.sellers.edit', $value->id);
-                $edit_callback = 'setValue';
-                $modal = '#edit-seller-modal';
+                // $edit_route = route('admin.sellers.edit', $value->id);
+                // $edit_callback = 'setValue';
+                // $modal = '#edit-seller-modal';
                 $delete_route = route('admin.sellers.destroy', $value->id);
-                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+                return view('content.table-component.action', compact('delete_route'));
             })
 
             ->editColumn('shop_image', function ($data) {
@@ -111,11 +111,11 @@ class SellerDataTable extends DataTable
             //     ->printable(false)
             //     ->width(60)
             //     ->addClass('text-center'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
 
         ];
     }

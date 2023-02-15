@@ -177,10 +177,12 @@ class SellerController extends Controller
 
     public function destroy($id)
     {
-        Seller::findOrFail($id)->delete();
+        $delete = Seller::findOrFail($id);
+        $delete->product()->delete();
+        $delete->delete();
         return response([
             'header' => 'Deleted!',
-            'message' => 'seller deleted successfully',
+            'message' => 'seller Deleted successfully',
             'table' => 'seller-table',
         ]);
     }
