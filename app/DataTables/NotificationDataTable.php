@@ -33,6 +33,11 @@ class NotificationDataTable extends DataTable
             //     $route = route('admin.notifications.status');
             //     return view('content.table-component.switch', compact('data', 'route'));
             // })
+            ->editColumn('image', function ($data) {
+                $no_image = 'images\placeholder.jpg';
+                $image = ($data->image) ? $data->image : $no_image;
+                return view('content.table-component.avatar', compact('image'));
+            })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -88,6 +93,7 @@ class NotificationDataTable extends DataTable
             Column::make('id'),
             Column::make('title'),
             Column::make('description'),
+            Column::make('image'),
             Column::make('created_at'),
             // Column::computed('action')
             //     ->exportable(false)

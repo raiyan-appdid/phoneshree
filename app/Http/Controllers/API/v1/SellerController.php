@@ -75,6 +75,67 @@ class SellerController extends Controller
         }
     }
 
+    public function sellerRegisterChanged(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'number' => 'required|unique:sellers,number',
+            'email' => 'required',
+            'shop_name' => 'required',
+            'short_description' => 'required',
+            'city_id' => 'required',
+            'state_id' => 'required',
+        ]);
+
+        $returnValue = $this->CheckIFTheSellerIsAlreadyRegistered($request->number);
+        if ($returnValue == "empty") {
+            $data = new Seller;
+
+            $bytes = random_bytes(3);
+            $myRefferedCode = strtoupper(bin2hex($bytes));
+
+            $checkReferredCode = Seller::where('my_referral_code', $myRefferedCode)->first();
+            if (empty($checkReferredCode)) {
+                $data->my_referral_code = $myRefferedCode;
+            } else {
+                $bytes = random_bytes(3);
+                $myRefferedCode = strtoupper(bin2hex($bytes));
+                $data->my_referral_code = $myRefferedCode;
+            }
+            $cityData = $this->citySelectOrAdd($request->city_id, $request->state_id);
+            if (isset($request->area_id)) {
+                $areaData = $this->areaSelectOrAdd($request->area_id, $request->city_id);
+                $data->area_id = $areaData;
+            }
+            $data->name = $request->name;
+            $data->number = $request->number;
+            $data->email = $request->email;
+            $data->city_id = $cityData;
+            $data->state_id = $request->state_id;
+            $data->shop_name = $request->shop_name;
+            $data->referred_by = $request->referred_by;
+            $data->gst_no = $request->gst_no;
+            $data->short_description = $request->short_description;
+
+            //free trail period data
+            $freeTrailPeriod = FreeTrialPeriod::first();
+            $data->membership_expiry_date = Carbon::now()->addDays($freeTrailPeriod->free_trial_period);
+            if (isset($request->shop_image)) {
+                $data->shop_image = FileUploader::uploadFile($request->shop_image, 'images/seller');
+            } else {
+                $data->shop_image = "N/A";
+            }
+            $data->address = $request->address;
+            $data->save();
+            return response([
+                'message' => "Seller Registered Successfully",
+                'seller_id' => $data->id,
+            ], 200);
+        } else {
+            return response("Seller is already registered", 200);
+        }
+    }
+
     public function citySelectOrAdd($city, $state)
     {
         if (is_numeric($city)) {

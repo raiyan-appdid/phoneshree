@@ -22,6 +22,7 @@
             <div class="col-md-12 col-12 ">
                 <x-input name="title" />
                 <x-input name="description" />
+                <x-input-file name="image" />
             </div>
         </x-form>
     </x-side-modal>

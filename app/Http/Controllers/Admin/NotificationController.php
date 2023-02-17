@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\NotificationDataTable;
+use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendNotificationJob;
 use App\Models\Notification;
@@ -20,11 +21,15 @@ class NotificationController extends Controller
         $data = new Notification;
         $data->title = $request->title;
         $data->description = $request->description;
+        if (isset($request->image)) {
+            $data->image = FileUploader::uploadFile($request->image, 'images/notifications');
+        }
         $data->save();
 
         dispatch(new SendNotificationJob(
             title:$data->title,
             message:$data->description,
+            small_picture:$data->image ?? ''
         ));
 
         return response([

@@ -34,6 +34,7 @@ Route::prefix('v1')->group(function () {
     Route::controller(SellerController::class)->group(function () {
         Route::prefix('sellers')->name('sellers.')->group(function () {
             Route::post('register', 'sellerRegister')->name('register');
+            Route::post('sellerRegister', 'sellerRegisterChanged')->name('sellerRegister');
             Route::post('login', 'sellerLogIn')->name('login');
             Route::post('details', 'sellerDetails')->name('details');
             Route::post('edit', 'sellerEdit')->name('edit');
