@@ -285,9 +285,22 @@ class BasicController extends Controller
 
     public function getProductsByCity(Request $request)
     {
-        $request->validate([
-            'city_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'city_id' => 'required',
+        // ]);
+
+        if (!isset($request->city_id)) {
+            $data = Product::where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+            if (isset($request->brand_id)) {
+                $sellerData = Seller::all();
+                foreach ($sellerData as $item) {
+                    $id[] = $item->id;
+                }
+                $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+            }
+            return response($data ?? [], 200);
+        }
+
         // $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
 
         $sellerData = Seller::where('city_id', $request->city_id)->get();
