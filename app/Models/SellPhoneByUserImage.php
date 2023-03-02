@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SellPhoneByUser extends Model
+class SellPhoneByUserImage extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function sellPhoneByUserImage()
+    public function sellPhoneByUser()
     {
-        return $this->hasMany(SellPhoneByUserImage::class);
+        return $this->belongsTo(SellPhoneByUser::class);
     }
 }

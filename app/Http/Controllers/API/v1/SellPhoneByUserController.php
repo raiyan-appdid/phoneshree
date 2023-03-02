@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\API\v1;
 
 use App\DataTables\SellPhoneByUserDataTable;
+use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
 use App\Models\SellPhoneByUser;
+use App\Models\SellPhoneByUserImage;
 use Illuminate\Http\Request;
 
 class SellPhoneByUserController extends Controller
@@ -21,6 +24,7 @@ class SellPhoneByUserController extends Controller
             'mobile' => 'required',
             'mobile_name' => 'required',
             'offer_price' => 'required',
+            'image' => 'required',
         ]);
         $data = new SellPhoneByUser;
         $data->name = $request->name;
@@ -32,6 +36,17 @@ class SellPhoneByUserController extends Controller
         $data->description = $request->description;
         $data->offer_price = $request->offer_price;
         $data->save();
+
+        //storing multiple images
+        if (isset($request->image)) {
+            foreach ($request->product as $item) {
+                $productImage = new SellPhoneByUserImage;
+                $productImage->sell_phone_by_user_id = $data->id;
+                $productImage->image = FileUploader::uploadFile($item, 'images/sellPhoneByUserImages');
+                $productImage->save();
+            }
+        }
+
         return response([
             'success' => true,
         ], 200);
@@ -44,7 +59,6 @@ class SellPhoneByUserController extends Controller
 
     public function update(Request $request)
     {
-
     }
 
     public function status(Request $request)
@@ -73,7 +87,21 @@ class SellPhoneByUserController extends Controller
     }
 
     function list(Request $request) {
-        $data = SellPhoneByUser::all();
+
+        if ($request->city_id != 'null') {
+            $data = SellPhoneByUser::where('city_id', $request->city_id)->with(['sellPhoneByUserImage'])->get();
+            return response([
+                'success' => true,
+                'data' => $data,
+            ]);
+        } elseif ($request->state_id != 'null') {
+            $data = SellPhoneByUser::where('state_id', $request->city_id)->with(['sellPhoneByUserImage'])->get();
+            return response([
+                'success' => true,
+                'data' => $data,
+            ]);
+        }
+        $data = SellPhoneByUser::with(['sellPhoneByUserImage'])->all();
         return response([
             'data' => $data,
         ]);
