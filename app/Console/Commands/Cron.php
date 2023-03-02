@@ -30,6 +30,7 @@ class Cron extends Command
     public function handle()
     {
         ActiveBannerAdsService::activateBannerAds();
+        ActiveBannerAdsService::deleteBuyerPhoneOnExpiry();
         FeaturedProductService::activateFeaturedProduct();
         \Log::info('Cron ran at: ' . now()->toString());
         return $this->info('Command run successfully');

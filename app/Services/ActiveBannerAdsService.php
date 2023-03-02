@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\ActiveBannerAd;
 use App\Models\BannerAdsTransaction;
+use App\Models\SellPhoneByUser;
 use Carbon\Carbon;
 
 class ActiveBannerAdsService
@@ -34,6 +35,16 @@ class ActiveBannerAdsService
             $addData->banner_ads_transaction_id = $data->id;
             $addData->expiry_date = $data->expiry_date;
             $addData->save();
+        }
+    }
+
+    public static function deleteBuyerPhoneOnExpiry()
+    {
+        $data = SellPhoneByUser::all();
+        foreach ($data as $item) {
+            if ($item->expiry_date <= Carbon::today()) {
+                $item->delete();
+            }
         }
     }
 }
