@@ -50,7 +50,7 @@ class SellPhoneByUserController extends Controller
     public function status(Request $request)
     {
         $request->validate([
-            'id' => 'required|numeric|exists:sellphonebyusers,id',
+            'id' => 'required|numeric|exists:sell_phone_by_users,id',
             'status' => 'required|in:active,blocked',
         ]);
 
