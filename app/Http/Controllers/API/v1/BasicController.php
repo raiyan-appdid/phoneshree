@@ -121,9 +121,19 @@ class BasicController extends Controller
 
     public function getBuyerDashboard(Request $request)
     {
-        $request->validate([
-            'city_id' => 'required',
-        ]);
+        if ($request->city_id == 'null') {
+            $activeBanner = ActiveBannerAd::where('status', 'active')->with(['bannerAdsTransaction.seller'])->inRandomOrder()
+                ->limit(5)
+                ->get();
+            $featuredProduct = ActiveFeaturedProduct::where('status', 'active')->with(['product.productImage', 'brand'])->with(['product.document'])->with(['product.seller'])->inRandomOrder()
+                ->limit(10)
+                ->get();
+            return response([
+                'ActiveBanner' => $activeBanner,
+                'FeaturedProduct' => $featuredProduct,
+            ], 200);
+        }
+
         $activeBanner = ActiveBannerAd::where('city_id', $request->city_id)->where('status', 'active')->with(['bannerAdsTransaction.seller'])->inRandomOrder()
             ->limit(5)
             ->get();

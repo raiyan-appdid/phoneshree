@@ -9,6 +9,7 @@ use App\Http\Controllers\API\v1\Post\FavouriteController;
 use App\Http\Controllers\API\v1\ProductController;
 use App\Http\Controllers\API\v1\RazorpayOrderController;
 use App\Http\Controllers\API\v1\SellerController;
+use App\Http\Controllers\API\v1\SellPhoneByUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -94,5 +95,8 @@ Route::prefix('v1')->group(function () {
     Route::prefix('razorpay')->name('razorpay.')->controller(RazorpayOrderController::class)->group(function () {
         Route::post('create', 'create')->name('create');
         Route::post('fetch_order', 'fetch_order')->name('fetch_order');
+    });
+    Route::prefix('sellPhoneByUser')->name('sellPhoneByUser.')->controller(SellPhoneByUserController::class)->group(function () {
+        Route::post('store', 'store')->name('store');
     });
 });
