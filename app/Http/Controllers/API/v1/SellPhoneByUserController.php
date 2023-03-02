@@ -26,7 +26,7 @@ class SellPhoneByUserController extends Controller
         $data->name = $request->name;
         $data->mobile = $request->mobile;
         $data->state = $request->state;
-        $data->city = $request->city;
+        $data->city_id = $request->city_id;
         $data->brand_id = $request->brand_id;
         $data->mobile_name = $request->mobile_name;
         $data->description = $request->description;
