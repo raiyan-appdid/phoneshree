@@ -71,4 +71,11 @@ class SellPhoneByUserController extends Controller
             'table' => 'sellphonebyuser-table',
         ]);
     }
+
+    function list(Request $request) {
+        $data = SellPhoneByUser::all();
+        return response([
+            'data' => $data,
+        ]);
+    }
 }

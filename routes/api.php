@@ -98,5 +98,6 @@ Route::prefix('v1')->group(function () {
     });
     Route::prefix('sellPhoneByUser')->name('sellPhoneByUser.')->controller(SellPhoneByUserController::class)->group(function () {
         Route::post('store', 'store')->name('store');
+        Route::get('list', 'list')->name('list');
     });
 });
