@@ -23,23 +23,23 @@ class SellPhoneByUserController extends Controller
             'name' => 'required',
             'mobile' => 'required',
             'mobile_name' => 'required',
-            'offer_price' => 'required',
+            'price' => 'required',
             'image' => 'required',
         ]);
         $data = new SellPhoneByUser;
         $data->name = $request->name;
         $data->mobile = $request->mobile;
-        $data->state = $request->state;
+        $data->state_id = $request->state_id;
         $data->city_id = $request->city_id;
         $data->brand_id = $request->brand_id;
         $data->mobile_name = $request->mobile_name;
         $data->description = $request->description;
-        $data->offer_price = $request->offer_price;
+        $data->price = $request->price;
         $data->save();
 
         //storing multiple images
         if (isset($request->image)) {
-            foreach ($request->product as $item) {
+            foreach ($request->image as $item) {
                 $productImage = new SellPhoneByUserImage;
                 $productImage->sell_phone_by_user_id = $data->id;
                 $productImage->image = FileUploader::uploadFile($item, 'images/sellPhoneByUserImages');
@@ -95,7 +95,7 @@ class SellPhoneByUserController extends Controller
                 'data' => $data,
             ]);
         } elseif ($request->state_id != 'null') {
-            $data = SellPhoneByUser::where('state_id', $request->city_id)->with(['sellPhoneByUserImage'])->get();
+            $data = SellPhoneByUser::where('state_id', $request->state_id)->with(['sellPhoneByUserImage'])->get();
             return response([
                 'success' => true,
                 'data' => $data,
