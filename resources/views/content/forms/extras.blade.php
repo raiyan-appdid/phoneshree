@@ -29,6 +29,10 @@
                 <div class="col-md-6 col-6">
                     <x-input name="android_version" type="text" value="{{ $extrasData->android_version ?? '' }}" />
                 </div>
+                <div class="col-md-6 col-6">
+                    <x-input name="buyer_phone_expiry" label="Buyer Phone Expiry (In days)" type="number"
+                        value="{{ $extrasData->buyer_phone_expiry ?? '' }}" />
+                </div>
                 <div class="col-2 mb-2 text-center">
                     <x-custom-switch label="Force Update" id="andriod_force" :checked="$extrasData->android_force_update == 'active' ? true : false" type="danger" value="0"
                         name="android_force_update" />

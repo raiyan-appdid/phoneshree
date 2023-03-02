@@ -55,6 +55,7 @@ class BasicController extends Controller
                 'phone1' => $request->phone1,
                 'phone2' => $request->phone2,
                 'email' => $request->email,
+                'buyer_phone_expiry' => $request->buyer_phone_expiry,
                 'privacy_policy' => $request->privacy_policy,
                 'terms_and_conditions' => $request->terms_and_conditions,
                 'android_version' => $request->android_version,

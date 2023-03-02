@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API\v1;
 use App\DataTables\SellPhoneByUserDataTable;
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\Extra;
 use App\Models\SellPhoneByUser;
 use App\Models\SellPhoneByUserImage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SellPhoneByUserController extends Controller
@@ -26,6 +28,10 @@ class SellPhoneByUserController extends Controller
             'price' => 'required',
             'image' => 'required',
         ]);
+
+        //expiry days of buyer phone
+        $days = Extra::first();
+
         $data = new SellPhoneByUser;
         $data->name = $request->name;
         $data->mobile = $request->mobile;
@@ -33,6 +39,7 @@ class SellPhoneByUserController extends Controller
         $data->city_id = $request->city_id;
         $data->brand_id = $request->brand_id;
         $data->mobile_name = $request->mobile_name;
+        $data->expiry_date = Carbon::now()->addDays($days->buyer_phone_expiry);
         $data->description = $request->description;
         $data->price = $request->price;
         $data->save();
