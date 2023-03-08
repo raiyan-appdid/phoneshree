@@ -93,22 +93,22 @@ class SellPhoneByUserController extends Controller
         ]);
     }
 
-    function list(Request $request) {
+  public function list(Request $request) {
 
-        if ($request->city_id != 'null') {
+        if ($request->city_id != null) {
             $data = SellPhoneByUser::where('city_id', $request->city_id)->with(['sellPhoneByUserImage'])->get();
             return response([
-                'success' => true,
+                'succesffs' => true,
                 'data' => $data,
             ]);
-        } elseif ($request->state_id != 'null') {
+        } elseif ($request->state_id != null) {
             $data = SellPhoneByUser::where('state_id', $request->state_id)->with(['sellPhoneByUserImage'])->get();
             return response([
-                'success' => true,
+                'success111' => true,
                 'data' => $data,
             ]);
         }
-        $data = SellPhoneByUser::with(['sellPhoneByUserImage'])->all();
+        $data = SellPhoneByUser::with(['sellPhoneByUserImage'])->get();
         return response([
             'data' => $data,
         ]);
