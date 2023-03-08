@@ -108,7 +108,7 @@ class SellPhoneByUserController extends Controller
                 'data' => $data,
             ]);
         }
-        $data = SellPhoneByUser::with(['sellPhoneByUserImage'])->get();
+        $data = SellPhoneByUser::with(['sellPhoneByUserImage', 'brand', 'state', 'city'])->get();
         return response([
             'data' => $data,
         ]);

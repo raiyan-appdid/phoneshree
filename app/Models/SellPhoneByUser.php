@@ -14,4 +14,14 @@ class SellPhoneByUser extends Model
     {
         return $this->hasMany(SellPhoneByUserImage::class);
     }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
 }
