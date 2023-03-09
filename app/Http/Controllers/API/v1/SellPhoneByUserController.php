@@ -96,13 +96,13 @@ class SellPhoneByUserController extends Controller
   public function list(Request $request) {
 
         if ($request->city_id != null) {
-            $data = SellPhoneByUser::where('city_id', $request->city_id)->with(['sellPhoneByUserImage'])->get();
+            $data = SellPhoneByUser::where('city_id', $request->city_id)->with(['sellPhoneByUserImage' , 'brand', 'state', 'city'])->get();
             return response([
                 'succesffs' => true,
                 'data' => $data,
             ]);
         } elseif ($request->state_id != null) {
-            $data = SellPhoneByUser::where('state_id', $request->state_id)->with(['sellPhoneByUserImage'])->get();
+            $data = SellPhoneByUser::where('state_id', $request->state_id)->with(['sellPhoneByUserImage' , 'brand', 'state', 'city'])->get();
             return response([
                 'success111' => true,
                 'data' => $data,
