@@ -314,6 +314,7 @@ class BasicController extends Controller
         // $data = Seller::where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
 
         $sellerData = Seller::where('city_id', $request->city_id)->get();
+        $id = [];
         foreach ($sellerData as $item) {
             $id[] = $item->id;
         }
