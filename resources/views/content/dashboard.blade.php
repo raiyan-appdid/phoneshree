@@ -88,6 +88,15 @@
                     </p>
                 </x-card>
             </div>
+            <div style="cursor: pointer;" onclick="location.href='{{ route('admin.sellPhoneByUser.index') }}';"
+                class="col-lg-3 col-md-3 col-sm-3 ">
+                <x-card>
+                    <h2 class="text-center">{{ $BuyerPhonesCount }}</h2>
+                    <p>
+                    <h4 class="text-center"><span class="badge badge-light-info">Buyer Phones</span></h4>
+                    </p>
+                </x-card>
+            </div>
             {{-- <div style="cursor: pointer;" onclick="location.href='admin';" class="col-lg-3 col-md-3 col-sm-3 ">
                 <x-card>
                     <h2 class="text-center">{{ 0 }}</h2>

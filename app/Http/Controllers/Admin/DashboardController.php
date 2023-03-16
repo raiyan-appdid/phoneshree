@@ -7,6 +7,7 @@ use App\Models\ActiveBannerAd;
 use App\Models\ActiveFeaturedProduct;
 use App\Models\Product;
 use App\Models\Seller;
+use App\Models\SellPhoneByUser;
 
 class DashboardController extends Controller
 {
@@ -23,7 +24,8 @@ class DashboardController extends Controller
         $inventoryProductCount = Product::where('status', 'inventory')->count();
         $featuredProductCount = ActiveFeaturedProduct::all()->count();
         $activeBannersCount = ActiveBannerAd::all()->count();
+        $BuyerPhonesCount = SellPhoneByUser::all()->count();
 
-        return view('content.dashboard', compact('sellerCount', 'productCount', 'soldProductCount', 'liveProductCount', 'inventoryProductCount', 'featuredProductCount', 'activeBannersCount'));
+        return view('content.dashboard', compact('sellerCount', 'productCount', 'soldProductCount', 'liveProductCount', 'inventoryProductCount', 'featuredProductCount', 'activeBannersCount', 'BuyerPhonesCount'));
     }
 }
