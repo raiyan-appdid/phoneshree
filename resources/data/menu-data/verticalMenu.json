@@ -80,6 +80,12 @@
       "slug": "admin.notification.index"
     },
     {
+      "url": "admin/sellPhoneByUser",
+      "name": "List Management",
+      "icon": "<i data-feather='plus'></i>",
+      "slug": "admin.sellPhoneByUser.index"
+    },
+    {
       "url": "admin/extras/extrasPage",
       "name": "Extras",
       "icon": "<i data-feather='archive'></i>",

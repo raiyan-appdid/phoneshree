@@ -17,14 +17,14 @@
     </section>
 
 
-    <x-side-modal title="Add sellphonebyuser" id="add-sellphonebyuser-modal">
+    {{-- <x-side-modal title="Add sellphonebyuser" id="add-sellphonebyuser-modal">
         <x-form id="add-sellphonebyuser" method="POST" class="" :route="route('admin.sellphonebyusers.store')">
             <div class="col-md-12 col-12 ">
                 <x-input name="name" />
             </div>
         </x-form>
-    </x-side-modal>
-    <x-side-modal title="Update sellphonebyuser" id="edit-sellphonebyuser-modal">
+    </x-side-modal> --}}
+    {{-- <x-side-modal title="Update sellphonebyuser" id="edit-sellphonebyuser-modal">
         <x-form id="edit-sellphonebyuser" method="POST" class="" :route="route('admin.sellphonebyusers.update')">
 
             <div class="col-md-12 col-12 ">
@@ -33,7 +33,7 @@
             </div>
 
         </x-form>
-    </x-side-modal>
+    </x-side-modal> --}}
 @endsection
 @section('page-script')
     <script>

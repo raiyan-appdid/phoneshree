@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PopUpController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReferSchemeController as AdminReferSchemeController;
 use App\Http\Controllers\Admin\SellerController;
+use App\Http\Controllers\Admin\SellPhoneByUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
@@ -178,6 +179,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
+    });
+
+    Route::prefix('sellPhoneByUser')->name('sellPhoneByUser.')->controller(SellPhoneByUserController::class)->group(function () {
+        // Route::post('store', 'store')->name('store');
+        Route::get('/', 'index')->name('index');
     });
 
 });
