@@ -81,7 +81,7 @@
     },
     {
       "url": "admin/sellPhoneByUser",
-      "name": "List Management",
+      "name": "Buyer Phones",
       "icon": "<i data-feather='plus'></i>",
       "slug": "admin.sellPhoneByUser.index"
     },
