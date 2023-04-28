@@ -306,7 +306,7 @@ class BasicController extends Controller
                 foreach ($sellerData as $item) {
                     $id[] = $item->id;
                 }
-                $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+                $data = Product::inRandomOrder()->whereIn('seller_id', $id)->where('status', 'livesell')->where('brand_id', $request->brand_id)->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
             }
             return response($data ?? [], 200);
         }
@@ -318,7 +318,7 @@ class BasicController extends Controller
         foreach ($sellerData as $item) {
             $id[] = $item->id;
         }
-        $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+        $data = Product::inRandomOrder()->whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
 
         if (isset($request->area_id)) {
             // $data = Seller::where('area_id', $request->area_id)->where('city_id', $request->city_id)->with(['product.productImage', 'product.document', 'product.brand', 'product.seller'])->get()->pluck('product');
@@ -327,7 +327,7 @@ class BasicController extends Controller
             foreach ($sellerData as $item) {
                 $id[] = $item->id;
             }
-            $data = Product::whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
+            $data = Product::inRandomOrder()->whereIn('seller_id', $id)->where('status', 'livesell')->with(['document', 'productImage', 'brand', 'seller'])->simplePaginate(20);
 
         }
         if (isset($request->brand_id)) {
